@@ -4,6 +4,8 @@
     xmlns:local="clr-namespace:AccountWork"
     StartupUri="MainWindow.xaml">
     <Application.Resources>
-        
+        <ResourceDictionary>
+            <BitmapImage x:Key="EbmLogo" UriSource="Media/ebm-logo.jpg" />
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

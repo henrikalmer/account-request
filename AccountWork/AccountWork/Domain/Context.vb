@@ -3,7 +3,7 @@ Imports System.Data.Entity.ModelConfiguration.Conventions
 Imports SQLite.CodeFirst
 
 Namespace Domain
-    Public Class Context
+    Public Class AccountWorkDbContext
         Inherits DbContext
 
         Public Property Banks As DbSet(Of Bank)
@@ -17,7 +17,7 @@ Namespace Domain
             MyBase.OnModelCreating(modelBuilder)
 
             modelBuilder.Conventions.Remove(Of PluralizingTableNameConvention)()
-            Dim sqliteConnectionInitializer = New SqliteCreateDatabaseIfNotExists(Of Context)(modelBuilder)
+            Dim sqliteConnectionInitializer = New SqliteCreateDatabaseIfNotExists(Of AccountWorkDbContext)(modelBuilder)
             Database.SetInitializer(sqliteConnectionInitializer)
         End Sub
     End Class

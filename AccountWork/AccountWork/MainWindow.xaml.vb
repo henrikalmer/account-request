@@ -7,7 +7,7 @@ Class MainWindow
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        Using Db = New Context()
+        Using Db = New AccountWorkDbContext()
             Dim B = New Bank With {
                 .Name = "Test Bank",
                 .ClearingNumberIntervalStart = 1201,

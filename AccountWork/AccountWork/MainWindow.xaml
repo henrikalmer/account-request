@@ -5,9 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AccountWork"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="171,115,0,0" VerticalAlignment="Top"/>
-
+        Title="Beställningsformulär kontoutdrag" Height="780" Width="840">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Label x:Name="titleLabel" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Beställning av elektroniska kontoutdrag och engagemang" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+        <Image x:Name="logo" Grid.Row="0" Grid.Column="2" Source="{StaticResource EbmLogo}" HorizontalAlignment="Right" Height="Auto" VerticalAlignment="Top" Width="300" Margin="0,10,10,0"/>
+        <Label x:Name="ebNumberLabel" Grid.Row="0" Grid.Column="0" Content="EB-nummer" HorizontalAlignment="Left" Height="Auto" Width="140" Margin="10,0,0,35" VerticalAlignment="Bottom" />
+        <TextBox x:Name="ebNumberTextBox" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Height="Auto" Width="140" TextWrapping="Wrap" Margin="10,0,0,10" VerticalAlignment="Bottom" />
+        <Label x:Name="aklLabel" Grid.Row="0" Grid.Column="1" Content="Åklagare" HorizontalAlignment="Left" Height="Auto" Width="140" Margin="10,0,0,35" VerticalAlignment="Bottom" />
+        <TextBox x:Name="aklTextBox" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Width="140" Margin="10,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom" />
+        <TabControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="tabControl" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Margin="10" Width="Auto">
+            <TabItem Header="Engagemangsförfrågan">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Kontotecknarförfrågan">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Förenklat kontoutdrag">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Min beställningshistorik">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Administrera bankinfo">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
