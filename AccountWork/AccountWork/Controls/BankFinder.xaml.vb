@@ -22,7 +22,6 @@ Public Class BankFinder
         If (textBox.Text.Length = 4 And Integer.TryParse(textBox.Text, number)) Then
             Using Db = New AccountWorkDbContext()
                 Dim Query = From X In Db.ClearingNumbers
-                            Order By X.Name
                             Select X
                             Where X.ClearingNumberIntervalStart = number _
                                 And X.ClearingNumberIntervalEnd Is Nothing
@@ -30,7 +29,6 @@ Public Class BankFinder
 
                 If (Item Is Nothing) Then
                     Query = From X In Db.ClearingNumbers
-                            Order By X.Name
                             Select X
                             Where number >= X.ClearingNumberIntervalStart _
                                 And number <= X.ClearingNumberIntervalEnd
