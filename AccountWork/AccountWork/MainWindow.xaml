@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AccountWork"
+        xmlns:controls="clr-namespace:AccountWork"
         mc:Ignorable="d"
         Title="Beställningsformulär kontoutdrag" Height="780" Width="840" MinWidth="840">
     <Grid Margin="5">
@@ -48,6 +49,9 @@
                                 <ColumnDefinition Width="Auto" MinWidth="210" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
+
+                            <controls:BankFinder Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" x:Name="bankFinder" Margin="10,0,0,0" />
+
                             <Label x:Name="bankLabel" Grid.Row="2" Grid.Column="0" Content="Specifik Bank" HorizontalAlignment="Left" Height="Auto" Width="200" Margin="0,56,0,-22" VerticalAlignment="Top" />
                             <TextBox x:Name="bankTextBox" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Height="Auto" Width="200" Margin="0,81,0,-43" TextWrapping="Wrap" VerticalAlignment="Top" />
                             <Label x:Name="clearingNumberLabel" Grid.Row="2" Grid.Column="1" Content="Specifikt Clearing-nr" HorizontalAlignment="Left" Height="Auto" Width="200" Margin="0,56,0,-22" VerticalAlignment="Top" />
