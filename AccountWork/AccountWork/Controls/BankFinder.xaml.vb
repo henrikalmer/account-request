@@ -1,4 +1,4 @@
-﻿Imports AccountWork.Domain
+Imports AccountWork.Domain
 
 Public Class BankFinder
     Private Sub clearingTextBox_TextChanged(sender As Object, e As TextChangedEventArgs)
