@@ -19,10 +19,10 @@
             <ColumnDefinition Width="Auto" MinWidth="200" />
         </Grid.ColumnDefinitions>
         <Label x:Name="bankLabel" Grid.Row="0" Grid.Column="0"
-               Content="Bankens namn" HorizontalAlignment="Left"
+               Content="Specifik bank" HorizontalAlignment="Left"
                Margin="0" VerticalAlignment="Top" />
         <Label x:Name="clearingLabel" Grid.Row="0" Grid.Column="1"
-               Content="Clearing-nummer" HorizontalAlignment="Left"
+               Content="Specifikt clearing-nummer" HorizontalAlignment="Left"
                Margin="10,0,0,0" VerticalAlignment="Top" />
         <ComboBox x:Name="bankComboBox" Grid.Row="1" Grid.Column="0"
                   ItemsSource="{Binding BankNames}"
@@ -31,6 +31,7 @@
         <TextBox x:Name="clearingTextBox" Grid.Row="1" Grid.Column="1"
                  HorizontalAlignment="Left" Height="23"
                  Margin="10,0,0,0" TextWrapping="Wrap"
-                 VerticalAlignment="Top" Width="200"/>
+                 VerticalAlignment="Top" Width="200"
+                 TextChanged="clearingTextBox_TextChanged" />
     </Grid>
 </UserControl>

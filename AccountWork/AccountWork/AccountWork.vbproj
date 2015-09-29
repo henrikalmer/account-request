@@ -113,7 +113,7 @@
     <Compile Include="Controls\BankFinder.xaml.vb">
       <DependentUpon>BankFinder.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Domain\Bank.vb" />
+    <Compile Include="Domain\ClearingNumber.vb" />
     <Compile Include="Domain\Context.vb" />
     <Compile Include="Domain\Request.vb" />
     <Compile Include="MainWindow.xaml.vb">
