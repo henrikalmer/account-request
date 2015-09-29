@@ -1,6 +1,20 @@
 Imports AccountWork.Domain
 
 Public Class BankFinder
+    Public Sub Enable()
+        IsEnabled = True
+        bankComboBox.IsEnabled = True
+        clearingTextBox.IsEnabled = True
+    End Sub
+
+    Public Sub Disable()
+        bankComboBox.SelectedIndex = -1
+        clearingTextBox.Text = ""
+        bankComboBox.IsEnabled = False
+        clearingTextBox.IsEnabled = False
+        IsEnabled = False
+    End Sub
+
     Private Sub clearingTextBox_TextChanged(sender As Object, e As TextChangedEventArgs)
         Dim textBox As TextBox = sender
 
