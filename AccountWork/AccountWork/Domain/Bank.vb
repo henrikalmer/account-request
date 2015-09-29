@@ -6,6 +6,11 @@
         Public Property ClearingNumberIntervalStart As Int32
         Public Property ClearingNumberIntervalEnd As Int32
         Public Property Email As String
+        Public Property sPhoneNo As String
+        Public Property sFaxNo As String
+        Public Property sAdress As String
+
+
 
         Public Property Id() As Int32
             Get
