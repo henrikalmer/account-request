@@ -1,18 +1,15 @@
 ﻿Imports System.ComponentModel.DataAnnotations.Schema
 
 Namespace Domain
-    Public Class Bank
+    Public Class ClearingNumber
         Private _Id As Int32
         Public Property Name As String
         Public Property ClearingNumberIntervalStart As Integer
-        Public Property ClearingNumberIntervalEnd As Integer
-        Public Property ClearingNumberDistinct As Integer
+        Public Property ClearingNumberIntervalEnd As Integer?
         Public Property Email As String
-        Public Property sPhoneNo As String
-        Public Property sFaxNo As String
-        Public Property sAdress As String
-
-
+        Public Property PhoneNumber As String
+        Public Property FaxNumber As String
+        Public Property Address As String
 
         <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
         Public Property Id() As Int32

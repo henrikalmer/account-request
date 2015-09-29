@@ -6,7 +6,7 @@ Namespace Domain
     Public Class AccountWorkDbContext
         Inherits DbContext
 
-        Public Property Banks As DbSet(Of Bank)
+        Public Property ClearingNumbers As DbSet(Of ClearingNumber)
         Public Property Requests As DbSet(Of Request)
 
         Public Sub New()
