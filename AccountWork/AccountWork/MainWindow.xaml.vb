@@ -34,7 +34,7 @@ Class MainWindow
                 bankTextBox.IsEnabled = True
                 clearingNumberTextBox.IsEnabled = True
             Case True
-                bankTextBox.Text = ""
+                Banktextbox.Text=""
                 clearingNumberTextBox.Text = ""
                 bankTextBox.IsEnabled = False
                 clearingNumberTextBox.IsEnabled = False
@@ -58,7 +58,7 @@ Class MainWindow
                 Dim Query = From X In Db.Banks
                             Order By X.Name
                             Select X
-                            Where X.ClearingNumber = clearingNumberTextBox.Text Or (clearingNumberTextBox.Text >= X.ClearingNumberIntervalStart And clearingNumberTextBox.Text <= X.ClearingNumberIntervalEnd)
+                            Where X.ClearingNumberDistinct = clearingNumberTextBox.Text Or (clearingNumberTextBox.Text >= X.ClearingNumberIntervalStart And clearingNumberTextBox.Text <= X.ClearingNumberIntervalEnd)
 
                 Try
                     For Each Item As Bank In Query

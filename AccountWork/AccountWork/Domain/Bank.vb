@@ -5,7 +5,8 @@ Namespace Domain
         Private _Id As Int32
         Public Property Name As String
         Public Property ClearingNumberIntervalStart As Integer
-        Public Property ClearingNumberIntervalEnd As Integer?
+        Public Property ClearingNumberIntervalEnd As Integer
+        Public Property ClearingNumberDistinct As Integer
         Public Property Email As String
         Public Property sPhoneNo As String
         Public Property sFaxNo As String
