@@ -101,6 +101,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Domain\OutlookCommunicator.vb" />
     <Compile Include="Domain\WordDocument.vb" />
     <Compile Include="ViewModel.vb" />
     <Page Include="Controls\BankFinder.xaml">
