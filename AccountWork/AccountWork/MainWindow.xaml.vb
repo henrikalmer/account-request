@@ -20,7 +20,7 @@ Class MainWindow
         tmpTabItem = Me.tabControl.SelectedItem
 
         Dim MailOrderAttachment As New WordDocument
-
+        'spara dokumentet någonstans, som ole-obj i en sqlite? inte på G:\ eller H:\ i vart fall
         Select Case tmpTabItem.Header.ToString
             Case "Engagemangsförfrågan"
                 If chkOrderALL.IsChecked = False Then
@@ -35,7 +35,12 @@ Class MainWindow
         End Select
 
         tmpTabItem = Nothing
+        MailOrderAttachment = Nothing
 
+        'email the file to relevant bank(s)
+        'whereTo As String, cc As String, attachment As String, strtype As String, strSubj As String
+        ' Dim sendRequest As New OutlookCommunicator
+        ' sendRequest.MailBanks(whereTo:=banken@banken.se, attachment:=minfil.docx, cc:=regbrevlådan, strSubj:=ebnumret, strtype:=engagemang/konto etc )
     End Sub
 
     Private Sub chkOrderALL_Click(sender As Object, e As RoutedEventArgs) Handles chkOrderALL.Click
