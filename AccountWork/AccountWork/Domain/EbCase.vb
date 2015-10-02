@@ -9,7 +9,7 @@ Namespace Domain
         Public Property EbNumber As String
         Public Property Prosecutor As String
 
-        Private ReadOnly EbRegex As Regex = New Regex("^(EB)[- ]*([\d]+)[- ]*([\d]{2})$")
+        Private ReadOnly EbRegex As Regex = New Regex("^(EB)[- ]*([\d]+)[- ]*([\d]{2})$", RegexOptions.IgnoreCase)
 
         Private Function ValidateEbNumber() As String
             If (String.IsNullOrEmpty(EbNumber)) Then
@@ -32,7 +32,7 @@ Namespace Domain
         ' Parses an EB-number and normalizes the EbNumber property to the form 'EB 1234-56'
         Public Sub NormalizeEbNumber()
             Dim OriginalEbNumber = EbNumber
-            EbNumber = EbRegex.Replace(EbNumber, "$1 $2-$3")
+            EbNumber = UCase(EbRegex.Replace(EbNumber, "$1 $2-$3"))
             If (Not EbNumber = OriginalEbNumber) Then
                 OnPropertyChanged("EbNumber")
             End If
