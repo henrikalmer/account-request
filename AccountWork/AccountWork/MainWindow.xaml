@@ -123,18 +123,38 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Label x:Name="cardNumberLabel" Grid.Row="0" Grid.Column="0" Content="Kortnummer" HorizontalAlignment="Left" Height="Auto" Width="200" Margin="10,10,0,0" VerticalAlignment="Top" />
-                            <TextBox x:Name="cardNumberTextBox" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Height="Auto" Width="200" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" />
-                            <Label x:Name="phoneNumberLabel" Grid.Row="0" Grid.Column="1" Content="Tel till misstänkt" HorizontalAlignment="Left" Height="Auto" Width="200" Margin="10,10,0,0" VerticalAlignment="Top" />
-                            <TextBox x:Name="phoneNumberTextBox" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Width="200" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" />
-                            <Label x:Name="bankCardReaderLabel" Grid.Row="1" Grid.Column="0" Content="Bankdosa (nummer)" HorizontalAlignment="Left" Height="Auto" Width="200" Margin="10,0,0,0" VerticalAlignment="Top" />
-                            <TextBox x:Name="bankCardReaderTextBox" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Height="Auto" Width="200" Margin="10,25,10,10" TextWrapping="Wrap" VerticalAlignment="Top" />
-                            <Label x:Name="phoneNumber2Label" Grid.Row="1" Grid.Column="1" Content="Tel som laddats från konto" HorizontalAlignment="Left" Height="Auto" Width="200" Margin="10,0,0,0" VerticalAlignment="Top" />
-                            <TextBox x:Name="phoneNumber2TextBox" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Width="200" Margin="10,25,10,10" TextWrapping="Wrap" VerticalAlignment="Top" />
+                            <Label x:Name="cardNumberLabel" Grid.Row="0" Grid.Column="0"
+                                   Content="Kortnummer" HorizontalAlignment="Left"
+                                   Height="Auto" Width="200" Margin="10,10,0,0"
+                                   VerticalAlignment="Top" />
+                            <TextBox x:Name="cardNumberTextBox" Grid.Row="0" Grid.Column="0"
+                                     HorizontalAlignment="Left" Height="Auto" Width="200"
+                                     Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" />
+                            <Label x:Name="phoneNumberLabel" Grid.Row="0" Grid.Column="1"
+                                   Content="Tel till misstänkt" HorizontalAlignment="Left"
+                                   Height="Auto" Width="200" Margin="10,10,0,0" VerticalAlignment="Top" />
+                            <TextBox x:Name="phoneNumberTextBox" Grid.Row="0" Grid.Column="1"
+                                     HorizontalAlignment="Left" Height="Auto" Width="200"
+                                     Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" />
+                            <Label x:Name="bankCardReaderLabel" Grid.Row="1" Grid.Column="0"
+                                   Content="Bankdosa (nummer)" HorizontalAlignment="Left"
+                                   Height="Auto" Width="200" Margin="10,0,0,0" VerticalAlignment="Top" />
+                            <TextBox x:Name="bankCardReaderTextBox" Grid.Row="1" Grid.Column="0"
+                                     HorizontalAlignment="Left" Height="Auto" Width="200"
+                                     Margin="10,25,10,10" TextWrapping="Wrap" VerticalAlignment="Top" />
+                            <Label x:Name="phoneNumber2Label" Grid.Row="1" Grid.Column="1"
+                                   Content="Tel som laddats från konto" HorizontalAlignment="Left"
+                                   Height="Auto" Width="200" Margin="10,0,0,0" VerticalAlignment="Top" />
+                            <TextBox x:Name="phoneNumber2TextBox" Grid.Row="1" Grid.Column="1"
+                                     HorizontalAlignment="Left" Height="Auto" Width="200"
+                                     Margin="10,25,10,10" TextWrapping="Wrap" VerticalAlignment="Top" />
                         </Grid>
                     </GroupBox>
 
-                    <Button x:Name="button" Grid.Row="2" Grid.Column="2" Content="Beställ" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" Padding="5" Width="200" />
+                    <Button x:Name="button" Grid.Row="2" Grid.Column="2"
+                            Content="Beställ" VerticalAlignment="Top"
+                            HorizontalAlignment="Right" Margin="10"
+                            Padding="5" Width="200" />
                 </Grid>
             </TabItem>
             <TabItem Header="Kontotecknarförfrågan">
@@ -145,7 +165,9 @@
             </TabItem>
             <TabItem Header="Min beställningshistorik">
                 <Grid >
-                    <Button x:Name="button2" Content="test leta igenom outlook&#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="225" Margin="430,52,0,0"/>
+                    <Button x:Name="button2" Content="Test leta igenom Outlook"
+                            HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Width="225" Margin="430,52,0,0"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Administrera bankinfo">
@@ -153,6 +175,10 @@
             </TabItem>
             <Button x:Name="button1" Content="Button" Height="40" Width="135"/>
         </TabControl>
-        <Label x:Name="bylineLabel" Grid.Row="2" Grid.Column="2" Content="Av Axel Thor och Henrik Almér för EBM" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Bottom" FontStyle="Italic" FontSize="9.333" Height="22" Width="168"/>
+        <Label x:Name="bylineLabel" Grid.Row="2" Grid.Column="2"
+               Content="Av Axel Thor och Henrik Almér för EBM"
+               HorizontalAlignment="Right" Margin="0,0,10,0"
+               VerticalAlignment="Bottom" FontStyle="Italic"
+               FontSize="9.333" Height="22" Width="168"/>
     </Grid>
 </Window>
