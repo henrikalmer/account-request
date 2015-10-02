@@ -51,4 +51,16 @@ Class MainWindow
                 bankFinder.Disable()
         End Select
     End Sub
+
+    Private Sub tabControl_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles tabControl.SelectionChanged
+
+    End Sub
+
+    Private Sub button2_Click(sender As Object, e As RoutedEventArgs) Handles button2.Click
+        Dim test As New OutlookCommunicator
+
+        MsgBox(test.CheckIfNewMailFromBanks("EB 12345-15"))
+
+
+    End Sub
 End Class
