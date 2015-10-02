@@ -44,4 +44,8 @@ Class MainWindow
 
         MsgBox(test.CheckIfNewMailFromBanks("EB 12345-15"))
     End Sub
+
+    Private Sub ebNumberTextBox_LostFocus(sender As Object, e As RoutedEventArgs) Handles ebNumberTextBox.LostFocus
+        DataContext.CurrentCase.NormalizeEbNumber()
+    End Sub
 End Class

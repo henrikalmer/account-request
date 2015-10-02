@@ -7,6 +7,9 @@
         xmlns:controls="clr-namespace:AccountWork"
         mc:Ignorable="d"
         Title="Beställningsformulär kontoutdrag" Height="780" Width="840" MinWidth="840">
+    <Window.DataContext>
+        <local:ViewModel />
+    </Window.DataContext>
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -18,13 +21,26 @@
             <ColumnDefinition Width="Auto" MinWidth="285" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Label x:Name="titleLabel" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Beställning av elektroniska kontoutdrag och engagemang" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Height="31" Width="446"/>
-        <Image x:Name="logo" Grid.Row="0" Grid.Column="2" Source="{StaticResource EbmLogo}" HorizontalAlignment="Right" Height="101" VerticalAlignment="Top" Width="300" Margin="0,10,10,0"/>
-        <Label x:Name="ebNumberLabel" Grid.Row="0" Grid.Column="0" Content="EB-nummer" HorizontalAlignment="Left" Height="Auto" Width="200" Margin="10,0,0,35" VerticalAlignment="Bottom" />
-        <TextBox x:Name="ebNumberTextBox" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Height="Auto" Width="200" TextWrapping="Wrap" Margin="10,0,0,10" VerticalAlignment="Bottom" />
-        <Label x:Name="aklLabel" Grid.Row="0" Grid.Column="1" Content="Åklagare" HorizontalAlignment="Left" Height="Auto" Width="200" Margin="10,0,0,35" VerticalAlignment="Bottom" />
-        <TextBox x:Name="aklTextBox" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Width="200" Margin="10,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom" />
-        <TabControl Grid.Column="0" Grid.ColumnSpan="3" x:Name="tabControl" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Margin="10" Width="Auto" Grid.Row="1">
+        <Label x:Name="titleLabel" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+               Content="Beställning av elektroniska kontoutdrag och engagemang"
+               HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"
+               FontSize="16" FontWeight="Bold" Height="31" Width="446"/>
+        <Image x:Name="logo" Grid.Row="0" Grid.Column="2" Source="{StaticResource EbmLogo}"
+               HorizontalAlignment="Right" Height="101" VerticalAlignment="Top"
+               Width="300" Margin="0,10,10,0"/>
+        <Label x:Name="ebNumberLabel" Grid.Row="0" Grid.Column="0" Content="EB-nummer"
+               HorizontalAlignment="Left" Height="Auto" Width="200" Margin="10,0,0,35"
+               VerticalAlignment="Bottom" />
+        <TextBox x:Name="ebNumberTextBox" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"
+                 Height="Auto" Width="200" TextWrapping="Wrap" Margin="10,0,0,10" VerticalAlignment="Bottom"
+                 Text="{Binding Path=CurrentCase.EbNumber, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
+        <Label x:Name="aklLabel" Grid.Row="0" Grid.Column="1" Content="Åklagare" HorizontalAlignment="Left"
+               Height="Auto" Width="200" Margin="10,0,0,35" VerticalAlignment="Bottom" />
+        <TextBox x:Name="aklTextBox" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left"
+                 Height="Auto" Width="200" Margin="10,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom"
+                 Text="{Binding Path=CurrentCase.Prosecutor, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
+        <TabControl Grid.Column="0" Grid.ColumnSpan="3" x:Name="tabControl" HorizontalAlignment="Stretch"
+                    Height="Auto" VerticalAlignment="Stretch" Margin="10" Width="Auto" Grid.Row="1">
             <TabItem Header="Engagemangsförfrågan">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -38,7 +54,10 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     
-                    <GroupBox x:Name="q1MandatoryGroupBox" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Header="Grundläggande uppgifter" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Top" Height="Auto" Width="Auto">
+                    <GroupBox x:Name="q1MandatoryGroupBox" Grid.Row="0" Grid.Column="0"
+                              Grid.ColumnSpan="3" Header="Grundläggande uppgifter"
+                              HorizontalAlignment="Stretch" Margin="10"
+                              VerticalAlignment="Top" Height="Auto" Width="Auto">
                         <Grid Margin="10">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -53,20 +72,47 @@
                                 <ColumnDefinition Width="Auto" MinWidth="210" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <CheckBox x:Name="chkOrderALL" Grid.Row="0" Grid.Column="0"  Grid.ColumnSpan="3" Content="Fråga samtliga banker (som EBM har avtal med)" HorizontalAlignment="Left" Height="Auto" Margin="0" VerticalAlignment="Top" Width="290"/>
-                            <controls:BankFinder Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="bankFinder" Margin="0" />
-                            <Label x:Name="pnrLabel" Grid.Row="2" Grid.Column="0" Content="Personnummer" HorizontalAlignment="Left" Height="Auto" Width="200" Margin="0" VerticalAlignment="Top" />
-                            <Label x:Name="nameLabel" Grid.Row="2" Grid.Column="1" Content="Namn" HorizontalAlignment="Left" Height="Auto" Width="200" Margin="10,0" VerticalAlignment="Top" />
-                            <TextBox x:Name="pnrTextBox" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Height="Auto" Width="200" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" />
-                            <TextBox x:Name="nameTextBox" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Width="200" Margin="10,0" TextWrapping="Wrap" VerticalAlignment="Top" />
-                            <Label x:Name="dateStartLabel" Grid.Row="4" Grid.Column="0" Content="Startdatum, period" HorizontalAlignment="Left" Height="Auto" Width="200" Margin="0" VerticalAlignment="Top" />
-                            <Label x:Name="dateEndLabel" Grid.Row="4" Grid.Column="1" Content="Slutdatum, period" HorizontalAlignment="Left" Height="Auto" Width="200" Margin="10,0" VerticalAlignment="Top" />
-                            <DatePicker x:Name="dateStartDatePicker" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left"  Margin="0" Width="200" VerticalAlignment="Top" FirstDayOfWeek="Monday" Text="Test" />
-                            <DatePicker x:Name="dateEndDatePicker" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left"  Margin="10,0" Width="200" VerticalAlignment="Top" FirstDayOfWeek="Monday" />
+                            <CheckBox x:Name="chkOrderALL" Grid.Row="0" Grid.Column="0" 
+                                      Grid.ColumnSpan="3"
+                                      Content="Fråga samtliga banker (som EBM har avtal med)"
+                                      HorizontalAlignment="Left" Height="Auto" Margin="0"
+                                      VerticalAlignment="Top" Width="290"/>
+                            <controls:BankFinder Grid.Row="1" Grid.Column="0"
+                                                 Grid.ColumnSpan="2" x:Name="bankFinder"
+                                                 Margin="0" />
+                            <Label x:Name="pnrLabel" Grid.Row="2" Grid.Column="0"
+                                   Content="Personnummer" HorizontalAlignment="Left"
+                                   Height="Auto" Width="200" Margin="0" VerticalAlignment="Top" />
+                            <Label x:Name="nameLabel" Grid.Row="2" Grid.Column="1"
+                                   Content="Namn" HorizontalAlignment="Left"
+                                   Height="Auto" Width="200" Margin="10,0"
+                                   VerticalAlignment="Top" />
+                            <TextBox x:Name="pnrTextBox" Grid.Row="3" Grid.Column="0"
+                                     HorizontalAlignment="Left" Height="Auto" Width="200"
+                                     Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" />
+                            <TextBox x:Name="nameTextBox" Grid.Row="3" Grid.Column="1"
+                                     HorizontalAlignment="Left" Height="Auto" Width="200"
+                                     Margin="10,0" TextWrapping="Wrap" VerticalAlignment="Top" />
+                            <Label x:Name="dateStartLabel" Grid.Row="4" Grid.Column="0"
+                                   Content="Startdatum, period" HorizontalAlignment="Left"
+                                   Height="Auto" Width="200" Margin="0" VerticalAlignment="Top" />
+                            <Label x:Name="dateEndLabel" Grid.Row="4" Grid.Column="1"
+                                   Content="Slutdatum, period" HorizontalAlignment="Left"
+                                   Height="Auto" Width="200" Margin="10,0" VerticalAlignment="Top" />
+                            <DatePicker x:Name="dateStartDatePicker" Grid.Row="5"
+                                        Grid.Column="0" HorizontalAlignment="Left" 
+                                        Margin="0" Width="200" VerticalAlignment="Top"
+                                        FirstDayOfWeek="Monday" Text="Test" />
+                            <DatePicker x:Name="dateEndDatePicker" Grid.Row="5"
+                                        Grid.Column="1" HorizontalAlignment="Left"
+                                        Margin="10,0" Width="200" VerticalAlignment="Top"
+                                        FirstDayOfWeek="Monday" />
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox x:Name="q1ExtraGroupBox" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Header="Övriga uppgifter från beslag, HTM eller annat" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Top">
+                    <GroupBox x:Name="q1ExtraGroupBox" Grid.Row="1" Grid.Column="0"
+                              Grid.ColumnSpan="3" Header="Övriga uppgifter från beslag, HTM eller annat"
+                              HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Top">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
