@@ -1,19 +1,6 @@
 ﻿Imports AccountWork.Domain
 
 Class MainWindow
-    Private Sub checkBox_Click(sender As Object, e As RoutedEventArgs) Handles chkOrderALL.Checked
-        'Select Case chkOrderALL.IsChecked
-        '    Case False
-        '        bankFinder.Enable()
-        '    Case True
-        '        bankFinder.Disable()
-        'End Select
-    End Sub
-
-    Private Sub nameTextBox_TextChanged(sender As Object, e As TextChangedEventArgs) Handles nameTextBox.TextChanged
-
-    End Sub
-
     Private Sub button_Click(sender As Object, e As RoutedEventArgs) Handles button.Click
         'Generate word file for order of type
         Dim tmpTabItem As New TabItem
@@ -52,15 +39,9 @@ Class MainWindow
         End Select
     End Sub
 
-    Private Sub tabControl_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles tabControl.SelectionChanged
-
-    End Sub
-
     Private Sub button2_Click(sender As Object, e As RoutedEventArgs) Handles button2.Click
         Dim test As New OutlookCommunicator
 
         MsgBox(test.CheckIfNewMailFromBanks("EB 12345-15"))
-
-
     End Sub
 End Class

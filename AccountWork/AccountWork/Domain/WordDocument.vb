@@ -23,7 +23,6 @@ Namespace Domain
             'sPhone2 As String -tfn som blivit påladdat från kontot vi frågar på '
             'sType As String -typen av förfrågan, input för besthist
 
-
             With oWord
                 Stop
                 .Visible = True
@@ -68,7 +67,6 @@ Namespace Domain
                     End If
 
                     'period from tom
-
                     If Trim(sPhoneno) <> "" Then
                         .Selection.TypeText("Ett telefonnummer: " & sPhoneno & " , som vi undrar om ni har uppgifter om (eventuell kontohavare, dennes eventuella engagemant hos er etc): ")
                         .Selection.TypeParagraph()
@@ -83,17 +81,12 @@ Namespace Domain
                         .Selection.TypeText("Har följande telefonnummer: " & sPhone2 & " blivit påladdat av ett konto i er bank, önskar vi om möjligt uppgift om kontonr och innehavare för detta konto.")
                         .Selection.TypeParagraph()
                     End If
-
                 End If
-
-
 
                 .Selection.TypeText("På uppdrag av åklagaren: " & sAklname)
                 .Selection.TypeParagraph()
                 .Selection.TypeText("Mvh " & sFullName)
                 'end same for all
-
-
             End With
         End Sub
     End Class

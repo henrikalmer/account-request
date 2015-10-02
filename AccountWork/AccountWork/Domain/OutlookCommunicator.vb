@@ -1,18 +1,12 @@
 ﻿Imports outlookappINTERFACE = Microsoft.Office.Interop.Outlook
 Imports System.Runtime.InteropServices
 
-
 Public Class OutlookCommunicator
     WithEvents Momentary_session As outlookappINTERFACE.Application
     Public Event eBankAnswer()
-    Public Sub New()
-
-    End Sub
 
     Public Sub MailBanks(whereTo As String, cc As String, attachment As String, strtype As String, strSubj As String)
-
         Dim outlookapp As New outlookappINTERFACE.Application
-
         Dim mail As Microsoft.Office.Interop.Outlook.MailItem = Nothing
         Dim mailRecipients As Microsoft.Office.Interop.Outlook.Recipients = Nothing
         Dim mailRecipient As Microsoft.Office.Interop.Outlook.Recipient = Nothing
@@ -20,7 +14,6 @@ Public Class OutlookCommunicator
         Dim omNamespace As Microsoft.Office.Interop.Outlook.NameSpace = outlookapp.GetNamespace("MAPI")
         Dim omDrafts As Microsoft.Office.Interop.Outlook.MAPIFolder = omNamespace.GetDefaultFolder(Microsoft.Office.Interop.Outlook.OlDefaultFolders.olFolderOutbox)
         Try
-
             mail = outlookapp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem)
             mail.Subject = "Beställning av kontoutdrag/engagemang"
             mail.Attachments.Add(attachment)
@@ -38,8 +31,6 @@ Public Class OutlookCommunicator
 
                 mail.Subject = strSubj
             End If
-
-
 
             mail.Move(omDrafts)
             MsgBox("Mail är nu placerat i din utkorg redo att skickas. Ångrar du dig, ta helt enkelt bort mailet från utkorgen.", MsgBoxStyle.OkOnly)
@@ -68,7 +59,6 @@ Public Class OutlookCommunicator
     End Sub
 
     Public Function CheckIfNewMailFromBanks(sEbNr As String) As String
-
         Dim olNS As outlookappINTERFACE.NameSpace
         Dim InputFolder As outlookappINTERFACE.MAPIFolder
         Dim olMail As outlookappINTERFACE.Items
@@ -80,10 +70,8 @@ Public Class OutlookCommunicator
         InputFolder = olNS.Folders("axelthor@live.com").Folders("Inkorgen")
         olMail = InputFolder.Items.Restrict("[UnRead] = True")
 
-
         If olMail.Count > 0 Then
             RaiseEvent eBankAnswer() 'gör nåt ball med den
-
             For Each item In olMail
                 If InStr(LCase(item.Subject.ToString), LCase(sEbNr)) > 0 Then
                     'Stop
@@ -100,9 +88,6 @@ Public Class OutlookCommunicator
         If Not IsNothing(olNS) Then Marshal.ReleaseComObject(olNS)
         If Not IsNothing(item) Then Marshal.ReleaseComObject(item)
 
-
         Return sRetValue
     End Function
-
-
 End Class

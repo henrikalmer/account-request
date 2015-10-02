@@ -6,7 +6,6 @@
         Public Property Timestamp As Date
         Public Property TypeOfRequest As String
 
-
         Public Property Id() As Int32
             Get
                 Return _Id
