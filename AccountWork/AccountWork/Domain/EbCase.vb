@@ -29,7 +29,7 @@ Namespace Domain
             Return ""
         End Function
 
-        ' Parses an EB-number and normalizes the EbNumber property to the form 'EB 1234-56'
+        ' Parses and normalizes the EbNumber property to the form 'EB 1234-56'
         Public Sub NormalizeEbNumber()
             Dim OriginalEbNumber = EbNumber
             EbNumber = UCase(EbRegex.Replace(EbNumber, "$1 $2-$3"))
