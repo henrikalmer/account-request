@@ -167,7 +167,8 @@
                             Content="Beställ" VerticalAlignment="Top"
                             HorizontalAlignment="Right" Margin="10"
                             Padding="5" Width="200"
-                            IsEnabled="{Binding CanSubmit}"/>
+                            IsEnabled="{Binding CurrentCase.IsValid,
+                                        UpdateSourceTrigger=PropertyChanged}"/>
 
                     <TextBlock x:Name="errorMessageTextBlock"
                                Grid.Row="4" Grid.ColumnSpan="3"

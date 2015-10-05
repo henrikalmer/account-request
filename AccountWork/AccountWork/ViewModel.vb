@@ -17,9 +17,9 @@ Public Class ViewModel
         End Using
     End Sub
 
-    Public ReadOnly Property CanSubmit As Boolean
+    Public ReadOnly Property IsValid As Boolean
         Get
-            Return Errors.Count = 0
+            Return Errors.Count = 0 And CurrentCase.IsValid
         End Get
     End Property
 

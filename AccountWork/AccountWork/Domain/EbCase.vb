@@ -12,6 +12,12 @@ Namespace Domain
         Private ReadOnly EbRegex As New Regex("^(EB)[- ]*([\d]+)[- ]*([\d]{2})$", RegexOptions.IgnoreCase)
         Private Errors As New Dictionary(Of String, String)
 
+        Public ReadOnly Property IsValid As Boolean
+            Get
+                Return Errors.Count = 0
+            End Get
+        End Property
+
         Private Function ValidateEbNumber() As String
             If (String.IsNullOrEmpty(EbNumber)) Then
                 Return "Ange ett EB-nummer för ärendet"
@@ -79,6 +85,7 @@ Namespace Domain
                     End If
                 End If
                 OnPropertyChanged("Error")
+                OnPropertyChanged("IsValid")
                 Return validationResult
             End Get
         End Property
