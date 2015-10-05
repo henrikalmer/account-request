@@ -17,7 +17,6 @@ Public Class ViewModel
     End Sub
 
 #Region "IDataErrorInfo"
-
     Default Public ReadOnly Property Item(columnName As String) As String Implements IDataErrorInfo.Item
         Get
             Dim [error] As String = TryCast(CurrentCase, IDataErrorInfo)(columnName)
@@ -31,11 +30,9 @@ Public Class ViewModel
             Return TryCast(CurrentCase, IDataErrorInfo).[Error]
         End Get
     End Property
-
 #End Region
 
 #Region "INotifyPropertyChanged"
-
     Public Event PropertyChanged(ByVal sender As Object, ByVal e As System.ComponentModel.PropertyChangedEventArgs) Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
 
     Protected Sub OnPropertyChanged(ByVal strPropertyName As String)
@@ -43,7 +40,5 @@ Public Class ViewModel
             RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(strPropertyName))
         End If
     End Sub
-
 #End Region
-
 End Class

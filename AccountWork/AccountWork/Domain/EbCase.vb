@@ -64,7 +64,6 @@ Namespace Domain
 #End Region
 
 #Region "INotifyPropertyChanged"
-
         Public Event PropertyChanged(ByVal sender As Object, ByVal e As System.ComponentModel.PropertyChangedEventArgs) Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
 
         Protected Sub OnPropertyChanged(ByVal strPropertyName As String)
@@ -72,7 +71,6 @@ Namespace Domain
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(strPropertyName))
             End If
         End Sub
-
 #End Region
     End Class
 End Namespace
