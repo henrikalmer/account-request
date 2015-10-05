@@ -31,10 +31,12 @@ Namespace Domain
 
         ' Parses and normalizes the EbNumber property to the form 'EB 1234-56'
         Public Sub NormalizeEbNumber()
-            Dim OriginalEbNumber = EbNumber
-            EbNumber = UCase(EbRegex.Replace(EbNumber, "$1 $2-$3"))
-            If (Not EbNumber = OriginalEbNumber) Then
-                OnPropertyChanged("EbNumber")
+            If (Not String.IsNullOrEmpty(EbNumber)) Then
+                Dim OriginalEbNumber = EbNumber
+                EbNumber = UCase(EbRegex.Replace(EbNumber, "$1 $2-$3"))
+                If (Not EbNumber = OriginalEbNumber) Then
+                    OnPropertyChanged("EbNumber")
+                End If
             End If
         End Sub
 
@@ -64,7 +66,7 @@ Namespace Domain
 #End Region
 
 #Region "INotifyPropertyChanged"
-        Public Event PropertyChanged(ByVal sender As Object, ByVal e As System.ComponentModel.PropertyChangedEventArgs) Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+        Public Event PropertyChanged(ByVal sender As Object, ByVal e As PropertyChangedEventArgs) Implements INotifyPropertyChanged.PropertyChanged
 
         Protected Sub OnPropertyChanged(ByVal strPropertyName As String)
             If Me.PropertyChangedEvent IsNot Nothing Then
