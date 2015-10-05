@@ -59,13 +59,13 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    
                     <GroupBox x:Name="q1MandatoryGroupBox" Grid.Row="0" Grid.Column="0"
                               Grid.ColumnSpan="3" Header="Grundläggande uppgifter"
                               HorizontalAlignment="Stretch" Margin="10"
@@ -166,7 +166,15 @@
                     <Button x:Name="button" Grid.Row="2" Grid.Column="2"
                             Content="Beställ" VerticalAlignment="Top"
                             HorizontalAlignment="Right" Margin="10"
-                            Padding="5" Width="200" />
+                            Padding="5" Width="200"
+                            IsEnabled="{Binding CanSubmit}"/>
+
+                    <TextBlock x:Name="errorMessageTextBlock"
+                               Grid.Row="4" Grid.ColumnSpan="3"
+                               Text="{Binding CurrentCase.Error,
+                                      UpdateSourceTrigger=PropertyChanged}"
+                               HorizontalAlignment="Right" Foreground="Gray"
+                               Height="Auto" Width="Auto" Margin="10"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Kontotecknarförfrågan">

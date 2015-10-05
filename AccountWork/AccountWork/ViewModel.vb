@@ -7,6 +7,7 @@ Public Class ViewModel
 
     Public Property BankNames As List(Of String)
     Public Property CurrentCase As EbCase
+    Public Property Errors As New Dictionary(Of String, String)
 
     Public Sub New()
         CurrentCase = New EbCase()
@@ -15,6 +16,12 @@ Public Class ViewModel
             BankNames.Sort()
         End Using
     End Sub
+
+    Public ReadOnly Property CanSubmit As Boolean
+        Get
+            Return Errors.Count = 0
+        End Get
+    End Property
 
 #Region "IDataErrorInfo"
     Default Public ReadOnly Property Item(columnName As String) As String Implements IDataErrorInfo.Item

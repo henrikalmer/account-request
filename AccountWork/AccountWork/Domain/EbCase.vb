@@ -9,24 +9,25 @@ Namespace Domain
         Public Property EbNumber As String
         Public Property Prosecutor As String
 
-        Private ReadOnly EbRegex As Regex = New Regex("^(EB)[- ]*([\d]+)[- ]*([\d]{2})$", RegexOptions.IgnoreCase)
+        Private ReadOnly EbRegex As New Regex("^(EB)[- ]*([\d]+)[- ]*([\d]{2})$", RegexOptions.IgnoreCase)
+        Private Errors As New Dictionary(Of String, String)
 
         Private Function ValidateEbNumber() As String
             If (String.IsNullOrEmpty(EbNumber)) Then
-                Return "Du måste ange ett EB-nummer för ärendet"
+                Return "Ange ett EB-nummer för ärendet"
             End If
             Dim match As Match = EbRegex.Match(EbNumber)
             If Not match.Success Then
                 Return "Angivet EB-nummer verkar inte vara giltigt. Ange numret på formatet ''EB 1234-56''"
             End If
-            Return ""
+            Return String.Empty
         End Function
 
         Private Function ValidateProsecutor() As String
             If (String.IsNullOrEmpty(Prosecutor)) Then
-                Return "Du måste ange åklagarens namn"
+                Return "Ange åklagarens namn"
             End If
-            Return ""
+            Return String.Empty
         End Function
 
         ' Parses and normalizes the EbNumber property to the form 'EB 1234-56'
@@ -43,13 +44,18 @@ Namespace Domain
 #Region "IDataErrorInfo"
         Public ReadOnly Property [Error] As String Implements IDataErrorInfo.Error
             Get
-                Throw New NotImplementedException()
+                Dim ErrorMessage As String = String.Empty
+                For Each err As KeyValuePair(Of String, String) In Errors
+                    ErrorMessage &= err.Value & Environment.NewLine
+                Next
+                Return ErrorMessage
             End Get
         End Property
 
         Default Public ReadOnly Property Item(columnName As String) As String Implements IDataErrorInfo.Item
             Get
-                Dim validationResult As String = Nothing
+                ' Validate input
+                Dim validationResult As String = String.Empty
                 Select Case columnName
                     Case "EbNumber"
                         validationResult = ValidateEbNumber()
@@ -60,6 +66,19 @@ Namespace Domain
                     Case Else
                         Throw New ApplicationException("Unknown Property being validated on EbCase.")
                 End Select
+                ' Update error dictionary
+                If (validationResult = String.Empty) Then
+                    If (Errors.ContainsKey(columnName)) Then
+                        Errors.Remove(columnName)
+                    End If
+                Else
+                    If (Errors.ContainsKey(columnName)) Then
+                        Errors(columnName) = validationResult
+                    Else
+                        Errors.Add(columnName, validationResult)
+                    End If
+                End If
+                OnPropertyChanged("Error")
                 Return validationResult
             End Get
         End Property
