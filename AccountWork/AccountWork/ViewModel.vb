@@ -1,4 +1,5 @@
-﻿Imports System.ComponentModel
+﻿Imports System.Collections.ObjectModel
+Imports System.ComponentModel
 Imports AccountWork.Domain
 
 Public Class ViewModel
@@ -6,6 +7,7 @@ Public Class ViewModel
     Implements IDataErrorInfo
 
     Public Property BankNames As List(Of String)
+    Public Property ClearingNumbers As ObservableCollection(Of ClearingNumber)
     Public Property CurrentCase As EbCase
     Public Property Errors As New Dictionary(Of String, String)
 
@@ -14,6 +16,7 @@ Public Class ViewModel
         Using Db = New AccountWorkDbContext()
             BankNames = Db.ClearingNumbers.Select(Function(x) x.Name).Distinct().ToList()
             BankNames.Sort()
+            ClearingNumbers = New ObservableCollection(Of ClearingNumber)(Db.ClearingNumbers.ToList())
         End Using
     End Sub
 
