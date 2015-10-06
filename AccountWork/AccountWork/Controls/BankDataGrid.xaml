@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="BankDataGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AccountWork"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <local:ViewModel />
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="clearingNumberDataGrid" Grid.Row="0"
+                              Grid.Column="0" Grid.ColumnSpan="3"
+                              Height="Auto" Width="Auto" Margin="10"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              ItemsSource="{Binding ClearingNumbers}"
+                              AutoGenerateColumns="False" IsReadOnly="True"
+                              BorderBrush="{x:Null}" GridLinesVisibility="None"
+                              AlternationCount="2" AlternatingRowBackground="#FFEEEEEE">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Namn" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Clearingnr, start"
+                                                Binding="{Binding ClearingNumberIntervalStart}" />
+                <DataGridTextColumn Header="Clearingnr, slut"
+                                                Binding="{Binding ClearingNumberIntervalEnd}" />
+                <DataGridTextColumn Header="E-post" Binding="{Binding Email}" />
+                <DataGridTextColumn Header="Telefon" Binding="{Binding PhoneNumber}" />
+                <DataGridTextColumn Header="Fax" Binding="{Binding FaxNumber}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="dataGridEditButton"
+                            Grid.Row="1" Grid.Column="1"
+                            Content="Lås upp för redigering"
+                            HorizontalAlignment="Right"
+                            Width="Auto" Margin="10,0,0,10"
+                            Padding="5"/>
+        <Button x:Name="dataGridSaveButton"
+                            Grid.Row="1" Grid.Column="2" IsEnabled="False"
+                            Content="Spara ändringar"
+                            HorizontalAlignment="Right"
+                            Width="Auto" Margin="10,0,10,10"
+                            Padding="5" />
+    </Grid>
+</UserControl>

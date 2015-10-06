@@ -105,10 +105,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\BankDataGrid.xaml.vb">
+      <DependentUpon>BankDataGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Domain\EbCase.vb" />
     <Compile Include="Domain\OutlookCommunicator.vb" />
     <Compile Include="Domain\WordDocument.vb" />
     <Compile Include="ViewModel.vb" />
+    <Page Include="Controls\BankDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\BankFinder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

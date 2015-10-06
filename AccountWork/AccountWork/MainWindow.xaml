@@ -192,35 +192,10 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Administrera bankinfo">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="clearingNumberDataGrid" Grid.Row="0" Grid.Column="0" 
-                              Height="Auto" Width="Auto" Margin="10"
-                              HorizontalAlignment="Stretch"
-                              VerticalAlignment="Stretch"
-                              ItemsSource="{Binding ClearingNumbers}"
-                              AutoGenerateColumns="False" >
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
-                            <DataGridTextColumn Header="Namn" Binding="{Binding Name}" />
-                            <DataGridTextColumn Header="Clearingnr, start"
-                                                Binding="{Binding ClearingNumberIntervalStart}" />
-                            <DataGridTextColumn Header="Clearingnr, slut"
-                                                Binding="{Binding ClearingNumberIntervalEnd}" />
-                            <DataGridTextColumn Header="E-post" Binding="{Binding Email}" />
-                            <DataGridTextColumn Header="Telefon" Binding="{Binding PhoneNumber}" />
-                            <DataGridTextColumn Header="Fax" Binding="{Binding FaxNumber}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
+                <local:BankDataGrid />
             </TabItem>
         </TabControl>
-        
+
         <Label x:Name="bylineLabel" Grid.Row="2" Grid.Column="2"
                Content="Av Axel Thor och Henrik Almér för EBM"
                HorizontalAlignment="Right" Margin="0,0,10,0"
