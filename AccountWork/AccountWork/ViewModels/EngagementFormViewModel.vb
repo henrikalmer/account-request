@@ -1,21 +1,15 @@
-﻿Imports System.Collections.ObjectModel
-Imports System.ComponentModel
+﻿Imports System.ComponentModel
 Imports AccountWork.Domain
 
-Public Class ViewModel
-    Implements INotifyPropertyChanged
+Public Class EngagementFormViewModel
+    Inherits BaseViewModel
     Implements IDataErrorInfo
 
-    Public Property BankNames As List(Of String)
     Public Property CurrentCase As EbCase
     Public Property Errors As New Dictionary(Of String, String)
 
     Public Sub New()
         CurrentCase = New EbCase()
-        Using Db = New AccountWorkDbContext()
-            BankNames = Db.ClearingNumbers.Select(Function(x) x.Name).Distinct().ToList()
-            BankNames.Sort()
-        End Using
     End Sub
 
     Public ReadOnly Property IsValid As Boolean
@@ -38,15 +32,5 @@ Public Class ViewModel
             Return TryCast(CurrentCase, IDataErrorInfo).[Error]
         End Get
     End Property
-#End Region
-
-#Region "INotifyPropertyChanged"
-    Public Event PropertyChanged(ByVal sender As Object, ByVal e As PropertyChangedEventArgs) Implements INotifyPropertyChanged.PropertyChanged
-
-    Protected Sub OnPropertyChanged(ByVal strPropertyName As String)
-        If Me.PropertyChangedEvent IsNot Nothing Then
-            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(strPropertyName))
-        End If
-    End Sub
 #End Region
 End Class

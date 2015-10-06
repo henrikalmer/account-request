@@ -112,7 +112,9 @@
     <Compile Include="Domain\OutlookCommunicator.vb" />
     <Compile Include="Domain\WordDocument.vb" />
     <Compile Include="ViewModels\BankDataGridViewModel.vb" />
-    <Compile Include="ViewModels\ViewModel.vb" />
+    <Compile Include="ViewModels\BankFinderViewModel.vb" />
+    <Compile Include="ViewModels\BaseViewModel.vb" />
+    <Compile Include="ViewModels\EngagementFormViewModel.vb" />
     <Page Include="Controls\BankDataGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Beställningsformulär kontoutdrag" Height="780" Width="840" MinWidth="840">
     <Window.DataContext>
-        <local:ViewModel />
+        <local:EngagementFormViewModel />
     </Window.DataContext>
     <Window.Resources>
         <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBox}">
