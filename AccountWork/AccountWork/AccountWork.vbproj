@@ -111,7 +111,8 @@
     <Compile Include="Domain\EbCase.vb" />
     <Compile Include="Domain\OutlookCommunicator.vb" />
     <Compile Include="Domain\WordDocument.vb" />
-    <Compile Include="ViewModel.vb" />
+    <Compile Include="ViewModels\BankDataGridViewModel.vb" />
+    <Compile Include="ViewModels\ViewModel.vb" />
     <Page Include="Controls\BankDataGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

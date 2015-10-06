@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.DataContext>
-        <local:ViewModel />
+        <local:BankDataGridViewModel />
     </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -29,28 +29,34 @@
                               BorderBrush="{x:Null}" GridLinesVisibility="None"
                               AlternationCount="2" AlternatingRowBackground="#FFEEEEEE">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
-                <DataGridTextColumn Header="Namn" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Namn" Binding="{Binding Name,
+                                                            UpdateSourceTrigger=LostFocus}" />
                 <DataGridTextColumn Header="Clearingnr, start"
-                                                Binding="{Binding ClearingNumberIntervalStart}" />
+                                                Binding="{Binding ClearingNumberIntervalStart,
+                                                          UpdateSourceTrigger=LostFocus}" />
                 <DataGridTextColumn Header="Clearingnr, slut"
-                                                Binding="{Binding ClearingNumberIntervalEnd}" />
-                <DataGridTextColumn Header="E-post" Binding="{Binding Email}" />
-                <DataGridTextColumn Header="Telefon" Binding="{Binding PhoneNumber}" />
-                <DataGridTextColumn Header="Fax" Binding="{Binding FaxNumber}" />
+                                                Binding="{Binding ClearingNumberIntervalEnd,
+                                                          UpdateSourceTrigger=LostFocus}" />
+                <DataGridTextColumn Header="E-post" Binding="{Binding Email,
+                                                              UpdateSourceTrigger=LostFocus}" />
+                <DataGridTextColumn Header="Telefon" Binding="{Binding PhoneNumber,
+                                                               UpdateSourceTrigger=LostFocus}" />
+                <DataGridTextColumn Header="Fax" Binding="{Binding FaxNumber,
+                                                                   UpdateSourceTrigger=LostFocus}" />
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="dataGridEditButton"
                             Grid.Row="1" Grid.Column="1"
                             Content="Lås upp för redigering"
                             HorizontalAlignment="Right"
-                            Width="Auto" Margin="10,0,0,10"
-                            Padding="5"/>
+                            Width="Auto" Margin="10,0,0,10" Padding="5"/>
         <Button x:Name="dataGridSaveButton"
-                            Grid.Row="1" Grid.Column="2" IsEnabled="False"
+                            Grid.Row="1" Grid.Column="2"
+                            IsEnabled="{Binding HasChanges,
+                                        UpdateSourceTrigger=PropertyChanged}"
                             Content="Spara ändringar"
                             HorizontalAlignment="Right"
-                            Width="Auto" Margin="10,0,10,10"
-                            Padding="5" />
+                            Width="Auto" Margin="10,0,10,10" Padding="5" />
     </Grid>
 </UserControl>
