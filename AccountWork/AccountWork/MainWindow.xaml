@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Beställningsformulär kontoutdrag" Height="780" Width="840" MinWidth="840">
     <Window.DataContext>
-        <local:ViewModel />
+        <local:EngagementFormViewModel />
     </Window.DataContext>
     <Window.Resources>
         <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBox}">
@@ -192,10 +192,10 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Administrera bankinfo">
-                <Grid />
+                <local:BankDataGrid />
             </TabItem>
-            <Button x:Name="button1" Content="Button" Height="40" Width="135"/>
         </TabControl>
+
         <Label x:Name="bylineLabel" Grid.Row="2" Grid.Column="2"
                Content="Av Axel Thor och Henrik Almér för EBM"
                HorizontalAlignment="Right" Margin="0,0,10,0"

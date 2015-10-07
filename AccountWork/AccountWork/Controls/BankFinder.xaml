@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="420">
     <UserControl.DataContext>
-        <local:ViewModel />
+        <local:BankFinderViewModel />
     </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
