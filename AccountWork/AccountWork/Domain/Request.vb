@@ -4,9 +4,7 @@
         Public Property UserId As String
         Public Property BankId As Int32
         Public Property Timestamp As Date
-        Public Property sTypeOfRequest As String
-
-
+        Public Property TypeOfRequest As String
 
         Public Property Id() As Int32
             Get
