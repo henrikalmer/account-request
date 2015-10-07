@@ -10,11 +10,33 @@ Class MainWindow
         'spara dokumentet någonstans, som ole-obj i en sqlite? inte på G:\ eller H:\ i vart fall
         Select Case tmpTabItem.Header.ToString
             Case "Engagemangsförfrågan"
-                If chkOrderALL.IsChecked = False Then
-                    MailOrderAttachment.parseGenerateOrder("c:\temp\kontobestmall.dotx", Me.ebNumberTextBox.Text, Me.aklTextBox.Text, Me.pnrTextBox.Text, Me.nameTextBox.Text, bankFinder.bankComboBox.Text, bankFinder.clearingTextBox.Text, Me.dateStartDatePicker.Text.ToString, Me.dateEndDatePicker.Text.ToString, Me.cardNumberTextBox.Text, Me.phoneNumberTextBox.Text, Me.bankCardReaderTextBox.Text, Me.phoneNumber2TextBox.Text, tmpTabItem.Header.ToString)
+                Dim EbNumber = ebNumberTextBox.Text
+                Dim Prosecutor = aklTextBox.Text
+                Dim Pnr = engagementForm.pnrTextBox.Text
+                Dim Name = engagementForm.nameTextBox.Text
+                Dim PeriodStart = engagementForm.dateStartDatePicker.Text.ToString
+                Dim PeriodEnd = engagementForm.dateEndDatePicker.Text.ToString
+                Dim CardNumber = cardNumberTextBox.Text
+                Dim PhoneNumber = phoneNumberTextBox.Text
+                Dim BankCardReader = bankCardReaderTextBox.Text
+                Dim PhoneNumber2 = phoneNumber2TextBox.Text
+                Dim TabHeader = tmpTabItem.Header.ToString
+                Dim BankName = ""
+                Dim BankClearing = ""
+                If engagementForm.allBanksCheckbox.IsChecked = False Then
+                    BankName = engagementForm.bankFinder.bankComboBox.Text
+                    BankClearing = engagementForm.bankFinder.clearingTextBox.Text
                 Else
-                    MailOrderAttachment.parseGenerateOrder("c:\temp\kontobestmall.dotx", Me.ebNumberTextBox.Text, Me.aklTextBox.Text, Me.pnrTextBox.Text, Me.nameTextBox.Text, " ÖPPEN FRÅGA ALLA BANKER", "ÖPPEN FRÅGA ALLA CLEARINGNR", Me.dateStartDatePicker.Text.ToString, Me.dateEndDatePicker.Text.ToString, Me.cardNumberTextBox.Text, Me.phoneNumberTextBox.Text, Me.bankCardReaderTextBox.Text, Me.phoneNumber2TextBox.Text, tmpTabItem.Header.ToString)
+                    BankName = "ÖPPEN FRÅGA ALLA BANKER"
+                    BankClearing = "ÖPPEN FRÅGA ALLA CLEARINGNR"
                 End If
+                MailOrderAttachment.parseGenerateOrder("c:\temp\kontobestmall.dotx",
+                                                       EbNumber, Prosecutor, Pnr,
+                                                       Name, BankName, BankClearing,
+                                                       PeriodStart, PeriodEnd,
+                                                       CardNumber, PhoneNumber,
+                                                       BankCardReader, PhoneNumber2,
+                                                       TabHeader)
             Case "Kontotecknarförfrågan"
                 'todo
             Case "Förenklat kontoutdrag"
@@ -28,15 +50,6 @@ Class MainWindow
         'whereTo As String, cc As String, attachment As String, strtype As String, strSubj As String
         ' Dim sendRequest As New OutlookCommunicator
         ' sendRequest.MailBanks(whereTo:=banken@banken.se, attachment:=minfil.docx, cc:=regbrevlådan, strSubj:=ebnumret, strtype:=engagemang/konto etc )
-    End Sub
-
-    Private Sub chkOrderALL_Click(sender As Object, e As RoutedEventArgs) Handles chkOrderALL.Click
-        Select Case chkOrderALL.IsChecked
-            Case False
-                bankFinder.Enable()
-            Case True
-                bankFinder.Disable()
-        End Select
     End Sub
 
     Private Sub button2_Click(sender As Object, e As RoutedEventArgs) Handles button2.Click

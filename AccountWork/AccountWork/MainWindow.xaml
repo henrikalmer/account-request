@@ -52,7 +52,7 @@
                  Text="{Binding Path=CurrentCase.Prosecutor, ValidatesOnDataErrors=True,
                         NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
         <TabControl Grid.Column="0" Grid.ColumnSpan="3" x:Name="tabControl" HorizontalAlignment="Stretch"
-                    Height="Auto" VerticalAlignment="Stretch" Margin="10,10,10,283" Width="Auto" Grid.Row="1">
+                    Height="Auto" VerticalAlignment="Stretch" Margin="10" Width="Auto" Grid.Row="1">
             <TabItem Header="Engagemangsförfrågan">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -70,58 +70,8 @@
                               Grid.ColumnSpan="3" Header="Grundläggande uppgifter"
                               HorizontalAlignment="Stretch" Margin="10"
                               VerticalAlignment="Top" Height="Auto" Width="Auto">
-                        <Grid Margin="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" MinWidth="210" />
-                                <ColumnDefinition Width="Auto" MinWidth="210" />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <CheckBox x:Name="chkOrderALL" Grid.Row="0" Grid.Column="0" 
-                                      Grid.ColumnSpan="3"
-                                      Content="Fråga samtliga banker (som EBM har avtal med)"
-                                      HorizontalAlignment="Left" Height="Auto" Margin="0"
-                                      VerticalAlignment="Top" Width="290"/>
-                            <controls:BankFinder Grid.Row="1" Grid.Column="0"
-                                                 Grid.ColumnSpan="2" x:Name="bankFinder"
-                                                 Margin="0" />
-                            <Label x:Name="pnrLabel" Grid.Row="2" Grid.Column="0"
-                                   Content="Personnummer" HorizontalAlignment="Left"
-                                   Height="Auto" Width="200" Margin="0" VerticalAlignment="Top" />
-                            <Label x:Name="nameLabel" Grid.Row="2" Grid.Column="1"
-                                   Content="Namn" HorizontalAlignment="Left"
-                                   Height="Auto" Width="200" Margin="10,0"
-                                   VerticalAlignment="Top" />
-                            <TextBox x:Name="pnrTextBox" Grid.Row="3" Grid.Column="0"
-                                     HorizontalAlignment="Left" Height="Auto" Width="200"
-                                     Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" />
-                            <TextBox x:Name="nameTextBox" Grid.Row="3" Grid.Column="1"
-                                     HorizontalAlignment="Left" Height="Auto" Width="200"
-                                     Margin="10,0" TextWrapping="Wrap" VerticalAlignment="Top" />
-                            <Label x:Name="dateStartLabel" Grid.Row="4" Grid.Column="0"
-                                   Content="Startdatum, period" HorizontalAlignment="Left"
-                                   Height="Auto" Width="200" Margin="0" VerticalAlignment="Top" />
-                            <Label x:Name="dateEndLabel" Grid.Row="4" Grid.Column="1"
-                                   Content="Slutdatum, period" HorizontalAlignment="Left"
-                                   Height="Auto" Width="200" Margin="10,0" VerticalAlignment="Top" />
-                            <DatePicker x:Name="dateStartDatePicker" Grid.Row="5"
-                                        Grid.Column="0" HorizontalAlignment="Left" 
-                                        Margin="0" Width="200" VerticalAlignment="Top"
-                                        FirstDayOfWeek="Monday" Text="Test" />
-                            <DatePicker x:Name="dateEndDatePicker" Grid.Row="5"
-                                        Grid.Column="1" HorizontalAlignment="Left"
-                                        Margin="10,0" Width="200" VerticalAlignment="Top"
-                                        FirstDayOfWeek="Monday" />
-                        </Grid>
+                        <controls:IdNumberAndPeriodForm x:Name="engagementForm"/>
                     </GroupBox>
-
                     <GroupBox x:Name="q1ExtraGroupBox" Grid.Row="1" Grid.Column="0"
                               Grid.ColumnSpan="3" Header="Övriga uppgifter från beslag, HTM eller annat"
                               HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Top">
@@ -162,14 +112,12 @@
                                      Margin="10,25,10,10" TextWrapping="Wrap" VerticalAlignment="Top" />
                         </Grid>
                     </GroupBox>
-
                     <Button x:Name="button" Grid.Row="2" Grid.Column="2"
                             Content="Beställ" VerticalAlignment="Top"
                             HorizontalAlignment="Right" Margin="10"
                             Padding="5" Width="200"
                             IsEnabled="{Binding CurrentCase.IsValid,
                                         UpdateSourceTrigger=PropertyChanged}"/>
-
                     <TextBlock x:Name="errorMessageTextBlock"
                                Grid.Row="4" Grid.ColumnSpan="3"
                                Text="{Binding CurrentCase.Error,
@@ -179,47 +127,18 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Kontotecknarförfrågan">
-
-
-                <Grid >
-                    <GroupBox x:Name="groupBox" Header="Ange parametrar" HorizontalAlignment="Left" VerticalAlignment="Top" Height="307" Width="665" Margin="10,45,0,0"/>
-
-                    <Label x:Name="lbl2_1" Content="From" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,156,0,0" Width="85"/>
-                    <Label x:Name="lbl2_2" Content="Tom" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="255,156,0,0"/>
-
-                    <DatePicker x:Name="dateStartDatePicker2"
-                                        Grid.Column="0" HorizontalAlignment="Left" 
-                                        Margin="255,187,0,0" Width="200" VerticalAlignment="Top"
-                                        FirstDayOfWeek="Monday" Text="Test" />
-                    <DatePicker x:Name="dateEndDatePicker2" HorizontalAlignment="Left"
-                                        Margin="25,187,0,0" Width="200" VerticalAlignment="Top"
-                                        FirstDayOfWeek="Monday" />
-                </Grid>
-
-
+                <GroupBox x:Name="groupBoxAccountHolder" Header="Parametrar"
+                          HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                          Height="Auto" Width="Auto" Margin="10">
+                    <controls:AccountAndPeriodForm x:Name="accountHolderForm" />
+                </GroupBox>
             </TabItem>
             <TabItem Header="Förenklat kontoutdrag">
-                <Grid>
-
-                
-                        <GroupBox x:Name="groupBox3" Header="Ange parametrar" HorizontalAlignment="Left" VerticalAlignment="Top" Height="307" Width="665" Margin="10,45,0,0"/>
-
-                        <Label x:Name="lbl3_1" Content="From" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,156,0,0" Width="85"/>
-                        <Label x:Name="lbl3_2" Content="Tom" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="255,156,0,0"/>
-
-                        <DatePicker x:Name="dateStartDatePicker3"
-                                        Grid.Column="0" HorizontalAlignment="Left" 
-                                        Margin="255,187,0,0" Width="200" VerticalAlignment="Top"
-                                        FirstDayOfWeek="Monday" Text="Test" />
-                        <DatePicker x:Name="dateEndDatePicker3" HorizontalAlignment="Left"
-                                        Margin="25,187,0,0" Width="200" VerticalAlignment="Top"
-                                        FirstDayOfWeek="Monday" />
-
-
-
-
-                    </Grid>
-               
+                <GroupBox x:Name="groupBoxTransaction" Header="Parametrar"
+                          HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                          Height="Auto" Width="Auto" Margin="10">
+                    <controls:AccountAndPeriodForm x:Name="transactionForm" />
+                </GroupBox>
             </TabItem>
             <TabItem Header="Min beställningshistorik">
                 <Grid >
@@ -229,12 +148,9 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Administrera bankinfo">
-                <local:BankDataGrid />
+                <local:BankDataGrid x:Name="bankAdminDataGrid" />
             </TabItem>
-
-
         </TabControl>
-
         <Label x:Name="bylineLabel" Grid.Row="2" Grid.Column="2"
                Content="Av Axel Thor och Henrik Almér för EBM"
                HorizontalAlignment="Right" Margin="0,0,10,0"
