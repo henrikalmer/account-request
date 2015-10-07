@@ -45,6 +45,8 @@ Public Class BankFinder
             Else
                 bankComboBox.SelectedIndex = -1
             End If
+        Else
+            bankComboBox.SelectedIndex = -1
         End If
     End Sub
 End Class
