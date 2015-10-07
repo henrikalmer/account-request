@@ -1,10 +1,23 @@
-﻿Public Class BankFinderViewModel
+﻿Imports MediatorLib
+
+Public Class BankFinderViewModel
     Inherits BaseViewModel
 
-    Public Property BankNames As List(Of String)
+    Public ReadOnly Property BankNames As List(Of String)
+        Get
+            Dim Names = Db.ClearingNumbers.Select(Function(x) x.Name).Distinct().ToList()
+            Names.Sort()
+            Return Names
+        End Get
+    End Property
 
     Public Sub New()
-        BankNames = Db.ClearingNumbers.Select(Function(x) x.Name).Distinct().ToList()
-        BankNames.Sort()
+        ' Register all decorated methods to the Mediator
+        VMMediator.Register(Me)
+    End Sub
+
+    <MediatorMessageSink(MediatorMessages.ClearingNumbersUpdated, ParameterType:=GetType(Message))>
+    Public Sub ListenForDbUpdates(m As Message)
+        OnPropertyChanged("BankNames")
     End Sub
 End Class

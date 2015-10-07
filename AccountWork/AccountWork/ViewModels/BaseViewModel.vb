@@ -1,11 +1,13 @@
 ﻿Imports System.ComponentModel
 Imports AccountWork.Domain
+Imports MediatorLib
 
 Public Class BaseViewModel
     Implements INotifyPropertyChanged
     Implements IDisposable
 
     Protected Db As New AccountWorkDbContext()
+    Shared ReadOnly Property VMMediator As New Mediator()
 
 #Region "INotifyPropertyChanged Support"
     Public Event PropertyChanged(ByVal sender As Object, ByVal e As PropertyChangedEventArgs) Implements INotifyPropertyChanged.PropertyChanged
