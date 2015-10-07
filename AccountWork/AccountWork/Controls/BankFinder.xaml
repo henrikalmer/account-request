@@ -22,7 +22,7 @@
                Content="Specifik bank" HorizontalAlignment="Left"
                Margin="0" VerticalAlignment="Top" />
         <Label x:Name="clearingLabel" Grid.Row="0" Grid.Column="1"
-               Content="Specifikt clearing-nummer" HorizontalAlignment="Left"
+               Content="Clearing-/kontonummer" HorizontalAlignment="Left"
                Margin="10,0,0,0" VerticalAlignment="Top" />
         <ComboBox x:Name="bankComboBox" Grid.Row="1" Grid.Column="0"
                   ItemsSource="{Binding BankNames}"
