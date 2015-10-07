@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AccountWork"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="500" d:DesignWidth="500">
     <UserControl.DataContext>
         <local:BankDataGridViewModel />
     </UserControl.DataContext>
@@ -18,12 +18,15 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <DataGrid x:Name="clearingNumberDataGrid" Grid.Row="0"
-                              Grid.Column="0" Grid.ColumnSpan="3"
+                              Grid.Column="0" Grid.ColumnSpan="5"
                               Height="Auto" Width="Auto" Margin="10"
                               HorizontalAlignment="Stretch"
                               VerticalAlignment="Stretch"
+                              CanUserAddRows="False"
                               ItemsSource="{Binding ClearingNumbers}"
                               AutoGenerateColumns="False" IsReadOnly="True"
                               BorderBrush="{x:Null}" GridLinesVisibility="None"
@@ -47,15 +50,35 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="dataGridEditButton"
-                            Grid.Row="1" Grid.Column="1"
+                            Grid.Row="1" Grid.Column="0"
                             Content="Lås upp för redigering"
-                            HorizontalAlignment="Right"
+                            HorizontalAlignment="Left"
                             Width="Auto" Margin="10,0,0,10" Padding="5"/>
-        <Button x:Name="dataGridSaveButton"
+        <Button x:Name="dataGridAddRowButton"
+                            Grid.Row="1" Grid.Column="1"
+                            IsEnabled="False"
+                            Content="Lägg till ny"
+                            HorizontalAlignment="Right"
+                            Width="Auto" Margin="10,0,0,10" Padding="5" />
+        <Button x:Name="dataGridRemoveRowsButton"
                             Grid.Row="1" Grid.Column="2"
+                            IsEnabled="False"
+                            Content="Ta bort markerade"
+                            HorizontalAlignment="Right"
+                            Width="Auto" Margin="10,0,0,10" Padding="5" />
+        <Button x:Name="dataGridSaveButton"
+                            Grid.Row="1" Grid.Column="3"
                             IsEnabled="{Binding HasChanges,
                                         UpdateSourceTrigger=PropertyChanged}"
                             Content="Spara ändringar"
+                            HorizontalAlignment="Right"
+                            Width="Auto" Margin="10,0,0,10" Padding="5" >
+        </Button>
+        <Button x:Name="dataGridResetButton"
+                            Grid.Row="1" Grid.Column="4"
+                            IsEnabled="{Binding HasChanges,
+                                        UpdateSourceTrigger=PropertyChanged}"
+                            Content="Återställ"
                             HorizontalAlignment="Right"
                             Width="Auto" Margin="10,0,10,10" Padding="5" />
     </Grid>
