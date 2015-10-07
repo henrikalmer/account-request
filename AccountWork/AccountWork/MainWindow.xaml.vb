@@ -48,4 +48,8 @@ Class MainWindow
     Private Sub ebNumberTextBox_LostFocus(sender As Object, e As RoutedEventArgs) Handles ebNumberTextBox.LostFocus
         DataContext.CurrentCase.NormalizeEbNumber()
     End Sub
+
+    Private Sub tabControl_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles tabControl.SelectionChanged
+
+    End Sub
 End Class
