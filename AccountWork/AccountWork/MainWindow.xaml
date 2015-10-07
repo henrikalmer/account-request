@@ -112,7 +112,7 @@
                                      Margin="10,25,10,10" TextWrapping="Wrap" VerticalAlignment="Top" />
                         </Grid>
                     </GroupBox>
-                    <Button x:Name="button" Grid.Row="2" Grid.Column="2"
+                    <Button x:Name="engagementButton" Grid.Row="2" Grid.Column="2"
                             Content="Beställ" VerticalAlignment="Top"
                             HorizontalAlignment="Right" Margin="10"
                             Padding="5" Width="200"
@@ -127,18 +127,44 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Kontotecknarförfrågan">
-                <GroupBox x:Name="groupBoxAccountHolder" Header="Parametrar"
-                          HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                          Height="Auto" Width="Auto" Margin="10">
-                    <controls:AccountAndPeriodForm x:Name="accountHolderForm" />
-                </GroupBox>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <GroupBox x:Name="groupBoxAccountHolder"
+                              Grid.Row="0" Header="Parametrar"
+                              HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                              Height="Auto" Width="Auto" Margin="10">
+                        <controls:AccountAndPeriodForm x:Name="accountHolderForm" />
+                    </GroupBox>
+                    <Button x:Name="accountButton"
+                            Grid.Row="1" Content="Beställ"
+                            VerticalAlignment="Top" HorizontalAlignment="Right"
+                            Margin="10" Padding="5" Width="200"
+                            IsEnabled="{Binding CurrentCase.IsValid,
+                                        UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Förenklat kontoutdrag">
-                <GroupBox x:Name="groupBoxTransaction" Header="Parametrar"
-                          HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                          Height="Auto" Width="Auto" Margin="10">
-                    <controls:AccountAndPeriodForm x:Name="transactionForm" />
-                </GroupBox>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <GroupBox x:Name="groupBoxTransaction"
+                              Grid.Row="0" Header="Parametrar"
+                              HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                              Height="Auto" Width="Auto" Margin="10">
+                        <controls:AccountAndPeriodForm x:Name="transactionForm" />
+                    </GroupBox>
+                    <Button x:Name="transactionButton"
+                            Grid.Row="1" Content="Beställ"
+                            VerticalAlignment="Top" HorizontalAlignment="Right"
+                            Margin="10" Padding="5" Width="200"
+                            IsEnabled="{Binding CurrentCase.IsValid,
+                                        UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Min beställningshistorik">
                 <Grid >
