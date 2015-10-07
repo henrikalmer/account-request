@@ -1,6 +1,6 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.Data.Entity
-Imports System.Data.Entity.Core.Objects.DataClasses
+Imports MediatorLib
 Imports AccountWork.Domain
 
 Public Class BankDataGridViewModel
@@ -47,5 +47,7 @@ Public Class BankDataGridViewModel
     Public Sub SaveChanges()
         Db.SaveChanges()
         OnPropertyChanged("HasChanges")
+        VMMediator.NotifyColleagues(MediatorMessages.ClearingNumbersUpdated,
+                                    New Message("Clearing numbers updated from bank data grid."))
     End Sub
 End Class

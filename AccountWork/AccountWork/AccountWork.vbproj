@@ -117,6 +117,8 @@
     <Compile Include="Domain\EbCase.vb" />
     <Compile Include="Domain\OutlookCommunicator.vb" />
     <Compile Include="Domain\WordDocument.vb" />
+    <Compile Include="MediatorMessages.vb" />
+    <Compile Include="Message.vb" />
     <Compile Include="ViewModels\BankDataGridViewModel.vb" />
     <Compile Include="ViewModels\BankFinderViewModel.vb" />
     <Compile Include="ViewModels\BaseViewModel.vb" />
@@ -226,6 +228,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MediatorLib\MediatorLib.csproj">
+      <Project>{4c1f5063-1f00-45ae-ba6d-e506df297ae1}</Project>
+      <Name>MediatorLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.98.1\build\net45\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.98.1\build\net45\System.Data.SQLite.Core.targets')" />
