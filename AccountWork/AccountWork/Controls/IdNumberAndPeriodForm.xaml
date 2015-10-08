@@ -5,8 +5,12 @@
                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                    xmlns:local="clr-namespace:AccountWork"
                    xmlns:controls="clr-namespace:AccountWork"
+                   xmlns:System="clr-namespace:System;assembly=mscorlib"
                    mc:Ignorable="d" 
                    d:DesignHeight="300" d:DesignWidth="450">
+    <UserControl.DataContext>
+        <local:IdNumberAndPeriodFormViewModel />
+    </UserControl.DataContext>
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -25,14 +29,15 @@
                   Grid.Row="0" Grid.Column="0"  Grid.ColumnSpan="3"
                   Content="Fråga samtliga banker (som EBM har avtal med)"
                   HorizontalAlignment="Left" VerticalAlignment="Top"
-                  Height="Auto" Margin="0" Width="290"/>
+                  Height="Auto" Margin="0" Width="290"
+                  IsChecked="{Binding AllBanks}" />
         <controls:BankFinder x:Name="bankFinder"
                              Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                              Margin="0" />
         <Label x:Name="pnrLabel"
-               Grid.Row="2" Grid.Column="0" Content="Personnummer"
+               Grid.Row="2" Grid.Column="0" Content="Person- eller organisationsnummer"
                HorizontalAlignment="Left" VerticalAlignment="Top"
-               Height="Auto" Width="200" Margin="0"  />
+               Height="Auto" Width="200" Margin="0" />
         <Label x:Name="nameLabel"
                Grid.Row="2" Grid.Column="1" Content="Namn"
                HorizontalAlignment="Left" VerticalAlignment="Top"
@@ -40,15 +45,17 @@
         <TextBox x:Name="pnrTextBox"
                  Grid.Row="3" Grid.Column="0" TextWrapping="Wrap"
                  HorizontalAlignment="Left" VerticalAlignment="Top"
-                 Height="Auto" Width="200" Margin="0" />
+                 Height="Auto" Width="200" Margin="0"
+                 Text="{Binding IdNumber}" />
         <TextBox x:Name="nameTextBox"
                  Grid.Row="3" Grid.Column="1" TextWrapping="Wrap"
                  HorizontalAlignment="Left" VerticalAlignment="Top"
-                 Height="Auto" Width="200" Margin="10,0" />
+                 Height="Auto" Width="200" Margin="10,0"
+                 Text="{Binding Name}"/>
         <Label x:Name="dateStartLabel"
                Grid.Row="4" Grid.Column="0" Content="Startdatum, period"
                HorizontalAlignment="Left" VerticalAlignment="Top"
-               Height="Auto" Width="200" Margin="0"  />
+               Height="Auto" Width="200" Margin="0" />
         <Label x:Name="dateEndLabel"
                Grid.Row="4" Grid.Column="1" Content="Slutdatum, period"
                HorizontalAlignment="Left" VerticalAlignment="Top"
@@ -56,10 +63,13 @@
         <DatePicker x:Name="dateStartDatePicker"
                     Grid.Row="5" Grid.Column="0"
                     HorizontalAlignment="Left" VerticalAlignment="Top"
-                    Margin="0" Width="200" FirstDayOfWeek="Monday" />
+                    Margin="0" Width="200" FirstDayOfWeek="Monday"
+                    SelectedDate="{Binding PeriodStartDate}" />
         <DatePicker x:Name="dateEndDatePicker"
                     Grid.Row="5" Grid.Column="1"
                     HorizontalAlignment="Left" VerticalAlignment="Top"
-                    Margin="10,0" Width="200" FirstDayOfWeek="Monday" />
+                    Margin="10,0" Width="200" FirstDayOfWeek="Monday"
+                    SelectedDate="{Binding PeriodEndDate}" />
+        <Label x:Name="Testing12"  Grid.Row="5" Grid.Column="2" Background="Red" />
     </Grid>
 </local:BaseControl>

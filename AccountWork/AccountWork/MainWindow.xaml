@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Beställningsformulär kontoutdrag" Height="780" Width="840" MinWidth="840">
     <Window.DataContext>
-        <local:EngagementFormViewModel />
+        <local:IdNumberAndPeriodFormViewModel />
     </Window.DataContext>
     <Window.Resources>
         <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBox}">
@@ -63,8 +63,8 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <GroupBox x:Name="q1MandatoryGroupBox" Grid.Row="0" Grid.Column="0"
                               Grid.ColumnSpan="3" Header="Grundläggande uppgifter"
@@ -112,18 +112,18 @@
                                      Margin="10,25,10,10" TextWrapping="Wrap" VerticalAlignment="Top" />
                         </Grid>
                     </GroupBox>
+                    <TextBlock x:Name="errorMessageTextBlock"
+                               Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                               Text="{Binding CurrentCase.Error,
+                                      UpdateSourceTrigger=PropertyChanged}"
+                               HorizontalAlignment="Left" Foreground="Gray"
+                               Height="Auto" Width="Auto" Margin="10"/>
                     <Button x:Name="engagementButton" Grid.Row="2" Grid.Column="2"
                             Content="Beställ" VerticalAlignment="Top"
                             HorizontalAlignment="Right" Margin="10"
                             Padding="5" Width="200"
                             IsEnabled="{Binding CurrentCase.IsValid,
                                         UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBlock x:Name="errorMessageTextBlock"
-                               Grid.Row="4" Grid.ColumnSpan="3"
-                               Text="{Binding CurrentCase.Error,
-                                      UpdateSourceTrigger=PropertyChanged}"
-                               HorizontalAlignment="Right" Foreground="Gray"
-                               Height="Auto" Width="Auto" Margin="10"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Kontotecknarförfrågan">

@@ -1,6 +1,5 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.Data.Entity
-Imports MediatorLib
 Imports AccountWork.Domain
 
 Public Class BankDataGridViewModel

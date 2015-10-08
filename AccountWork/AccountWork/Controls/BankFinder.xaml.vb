@@ -1,7 +1,21 @@
+Imports System.ComponentModel
 Imports AccountWork.Domain
 
 Public Class BankFinder
     Inherits BaseControl
+
+    Public Shared ReadOnly BankProperty = DependencyProperty.
+        Register("Bank", GetType(ClearingNumber), GetType(BankFinder),
+                 New UIPropertyMetadata())
+
+    Public Property Bank() As ClearingNumber
+        Get
+            Return TryCast(GetValue(BankProperty), ClearingNumber)
+        End Get
+        Set(value As ClearingNumber)
+            SetValue(BankProperty, value)
+        End Set
+    End Property
 
     Public Sub Enable()
         IsEnabled = True
@@ -42,6 +56,7 @@ Public Class BankFinder
 
                     If (Not Item Is Nothing) Then
                         bankComboBox.SelectedValue = Item.Name
+                        Bank = Item
                     End If
                 End Using
             Else
