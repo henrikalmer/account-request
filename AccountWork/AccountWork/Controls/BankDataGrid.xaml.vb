@@ -1,6 +1,8 @@
 ﻿Imports AccountWork.Domain
 
 Public Class BankDataGrid
+    Inherits BaseControl
+
     Private Sub dataGridEditButton_Click(sender As Object, e As RoutedEventArgs) Handles dataGridEditButton.Click
         Select Case clearingNumberDataGrid.IsReadOnly
             Case True

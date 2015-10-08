@@ -1,6 +1,8 @@
 Imports AccountWork.Domain
 
 Public Class BankFinder
+    Inherits BaseControl
+
     Public Sub Enable()
         IsEnabled = True
         bankComboBox.IsEnabled = True

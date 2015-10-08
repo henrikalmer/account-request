@@ -1,6 +1,16 @@
-﻿Imports AccountWork.Domain
+﻿Imports System.Globalization
+Imports System.Threading
+Imports AccountWork.Domain
 
 Class MainWindow
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        Thread.CurrentThread.CurrentCulture = New CultureInfo("sv-SE")
+    End Sub
+
     Private Sub engagementButton_Click(sender As Object, e As RoutedEventArgs) Handles engagementButton.Click
         'Generate word file for order of type
         Dim tmpTabItem As New TabItem
