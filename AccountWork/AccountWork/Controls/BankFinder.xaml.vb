@@ -17,6 +17,15 @@ Public Class BankFinder
         End Set
     End Property
 
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        Dim test = Me
+        layoutRoot.DataContext = New BankFinderViewModel()
+    End Sub
+
     Public Sub Enable()
         IsEnabled = True
         bankComboBox.IsEnabled = True

@@ -3,12 +3,15 @@ Imports System.Threading
 Imports AccountWork.Domain
 
 Class MainWindow
+    Public Property CurrentCase As New EbCase()
+
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
         Thread.CurrentThread.CurrentCulture = New CultureInfo("sv-SE")
+        layoutRoot.DataContext = Me
     End Sub
 
     Private Sub engagementButton_Click(sender As Object, e As RoutedEventArgs) Handles engagementButton.Click
@@ -119,7 +122,7 @@ Class MainWindow
     End Sub
 
     Private Sub ebNumberTextBox_LostFocus(sender As Object, e As RoutedEventArgs) Handles ebNumberTextBox.LostFocus
-        DataContext.CurrentCase.NormalizeEbNumber()
+        layoutRoot.DataContext.CurrentCase.NormalizeEbNumber()
     End Sub
 
     Private Sub tabControl_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles tabControl.SelectionChanged

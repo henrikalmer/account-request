@@ -6,21 +6,20 @@
         xmlns:local="clr-namespace:AccountWork"
         xmlns:controls="clr-namespace:AccountWork"
         mc:Ignorable="d"
-        Title="Beställningsformulär kontoutdrag" Height="780" Width="840" MinWidth="840">
-    <Window.DataContext>
-        <local:IdNumberAndPeriodFormViewModel />
-    </Window.DataContext>
+        Title="Beställningsformulär kontoutdrag"
+        Height="780" Width="840" MinWidth="840">
     <Window.Resources>
         <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBox}">
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="true">
-                    <Setter Property="ToolTip" Value="{Binding Path=(Validation.Errors).CurrentItem.ErrorContent,
+                    <Setter Property="ToolTip" Value="{Binding
+                        Path=(Validation.Errors).CurrentItem.ErrorContent,
                         RelativeSource={x:Static RelativeSource.Self}}"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Grid Margin="5">
+    <Grid x:Name="layoutRoot" Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />

@@ -6,10 +6,7 @@
                    xmlns:local="clr-namespace:AccountWork"
                    mc:Ignorable="d"
                    d:DesignHeight="50" d:DesignWidth="420">
-    <UserControl.DataContext>
-        <local:BankFinderViewModel />
-    </UserControl.DataContext>
-    <Grid>
+    <Grid x:Name="layoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -32,9 +29,6 @@
                  HorizontalAlignment="Left" Height="23"
                  Margin="10,0,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="200"
-                 DataContext="{Binding RelativeSource={RelativeSource FindAncestor,
-                               AncestorType={x:Type local:BaseControl}}}"
-                 Text="{Binding Path=ClearingNumber}"
                  TextChanged="clearingTextBox_TextChanged" />
     </Grid>
 </local:BaseControl>
