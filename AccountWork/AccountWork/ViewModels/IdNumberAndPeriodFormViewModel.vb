@@ -6,7 +6,17 @@ Public Class IdNumberAndPeriodFormViewModel
     Implements IDataErrorInfo
 
     Public Property BankFinderVM As BankFinderViewModel
-    Public Property AllBanks As Boolean = False
+    Private _AllBanks As Boolean = False
+    Public Property AllBanks As Boolean
+        Get
+            Return _AllBanks
+        End Get
+        Set(value As Boolean)
+            _AllBanks = value
+            OnPropertyChanged("AllBanks")
+            OnPropertyChanged("Bank")
+        End Set
+    End Property
     Public Property Bank As ClearingNumber
     Public Property IdNumber As String
     Public Property Name As String
@@ -45,9 +55,6 @@ Public Class IdNumberAndPeriodFormViewModel
             Dim validationResult As String = String.Empty
             Select Case columnName
                 Case "Bank"
-                    validationResult = ValidateBankChoice()
-                    Exit Select
-                Case "AllBanks"
                     validationResult = ValidateBankChoice()
                     Exit Select
                 Case "IdNumber"

@@ -16,6 +16,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" MinWidth="210" />
@@ -27,9 +28,7 @@
                   Content="Fråga samtliga banker (som EBM har avtal med)"
                   HorizontalAlignment="Left" VerticalAlignment="Top"
                   Height="Auto" Margin="0" Width="290"
-                  IsChecked="{Binding AllBanks,
-                              ValidatesOnDataErrors=True,
-                              NotifyOnValidationError=True}" />
+                  IsChecked="{Binding AllBanks}" />
         <controls:BankFinder x:Name="bankFinder"
                              Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                              Margin="0" Bank="{Binding Path=DataContext.Bank,
@@ -51,7 +50,8 @@
                  Height="Auto" Width="200" Margin="0"
                  Text="{Binding IdNumber,
                         ValidatesOnDataErrors=True,
-                        NotifyOnValidationError=True}" />
+                        NotifyOnValidationError=True,
+                        UpdateSourceTrigger=PropertyChanged}" />
         <TextBox x:Name="nameTextBox"
                  Grid.Row="3" Grid.Column="1" TextWrapping="Wrap"
                  HorizontalAlignment="Left" VerticalAlignment="Top"
@@ -79,5 +79,11 @@
                     SelectedDate="{Binding PeriodEndDate,
                                    ValidatesOnDataErrors=True,
                                    NotifyOnValidationError=True}" />
+        <TextBlock x:Name="errorMessageTextBlock"
+                   Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
+                   Text="{Binding Error,
+                          UpdateSourceTrigger=PropertyChanged}"
+                   HorizontalAlignment="Left" Foreground="Gray"
+                   Height="Auto" Width="Auto" Margin="10"/>
     </Grid>
 </local:BaseControl>
