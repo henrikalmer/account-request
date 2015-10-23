@@ -6,6 +6,60 @@
     <Application.Resources>
         <ResourceDictionary>
             <BitmapImage x:Key="EbmLogo" UriSource="Media/ebm-logo.jpg" />
+            <Style x:Key="Validatable" TargetType="{x:Type Control}">
+                <Setter Property="Validation.ErrorTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <DockPanel LastChildFill="True">
+                                <TextBlock DockPanel.Dock="Right" 
+                                           Foreground="Red"
+                                           FontSize="14pt" 
+                                           Margin="-15,0,0,0"
+                                           FontWeight="Bold"
+                                           IsHitTestVisible="False">*
+                                </TextBlock>
+                                <Border BorderThickness="1" CornerRadius="2">
+                                    <AdornedElementPlaceholder/>
+                                </Border>
+                            </DockPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="Validation.HasError" Value="true">
+                        <Setter Property="ToolTip"
+                                Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                                                Path=(Validation.Errors)[0].ErrorContent}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="{x:Type DatePicker}">
+                <Setter Property="Validation.ErrorTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <DockPanel LastChildFill="True">
+                                <TextBlock DockPanel.Dock="Right" 
+                                           Foreground="Red"
+                                           FontSize="14pt" 
+                                           Margin="-42,0,0,0"
+                                           FontWeight="Bold"
+                                           IsHitTestVisible="False">*
+                                </TextBlock>
+                                <Border BorderThickness="1" CornerRadius="2">
+                                    <AdornedElementPlaceholder/>
+                                </Border>
+                            </DockPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="Validation.HasError" Value="true">
+                        <Setter Property="ToolTip"
+                                Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                                                Path=(Validation.Errors)[0].ErrorContent}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

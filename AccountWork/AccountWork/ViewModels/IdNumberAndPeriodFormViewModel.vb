@@ -5,6 +5,7 @@ Public Class IdNumberAndPeriodFormViewModel
     Inherits BaseViewModel
     Implements IDataErrorInfo
 
+#Region "Properties"
     Public Property BankFinderVM As BankFinderViewModel
     Private _AllBanks As Boolean = False
     Public Property AllBanks As Boolean
@@ -20,10 +21,32 @@ Public Class IdNumberAndPeriodFormViewModel
     Public Property Bank As ClearingNumber
     Public Property IdNumber As String
     Public Property Name As String
-    Public Property PeriodStartDate As Date = Date.Now
-    Public Property PeriodEndDate As Date = Date.Now
+    Private _PeriodStartDate As Date = Date.Now
+    Public Property PeriodStartDate As Date
+        Get
+            Return _PeriodStartDate
+        End Get
+        Set(value As Date)
+            _PeriodStartDate = value
+            OnPropertyChanged("PeriodStartDate")
+            OnPropertyChanged("PeriodEndDate")
+        End Set
+    End Property
+    Private _PeriodEndDate As Date = Date.Now
+    Public Property PeriodEndDate As Date
+        Get
+            Return _PeriodEndDate
+        End Get
+        Set(value As Date)
+            _PeriodEndDate = value
+            OnPropertyChanged("PeriodStartDate")
+            OnPropertyChanged("PeriodEndDate")
+        End Set
+    End Property
     Public Property Errors As New Dictionary(Of String, String)
+#End Region
 
+#Region "ValidationRules"
     Public ReadOnly Property IsValid As Boolean
         Get
             Return Errors.Count = 0
@@ -38,6 +61,10 @@ Public Class IdNumberAndPeriodFormViewModel
     End Function
 
     Private Function ValidatePeriod() As String
+        Dim result = Date.Compare(PeriodStartDate, PeriodEndDate)
+        If result > 0 Then
+            Return "Slutdatum måste vara efter startdatum"
+        End If
         Return String.Empty
     End Function
 
@@ -47,11 +74,13 @@ Public Class IdNumberAndPeriodFormViewModel
         End If
         Return String.Empty
     End Function
+#End Region
 
 #Region "IDataErrorInfo"
     Default Public ReadOnly Property Item(columnName As String) As String Implements IDataErrorInfo.Item
         Get
             ' Validate input
+            Dim errorKey = columnName
             Dim validationResult As String = String.Empty
             Select Case columnName
                 Case "Bank"
@@ -62,23 +91,25 @@ Public Class IdNumberAndPeriodFormViewModel
                     Exit Select
                 Case "PeriodStartDate"
                     validationResult = ValidatePeriod()
+                    errorKey = "Period"
                     Exit Select
                 Case "PeriodEndDate"
                     validationResult = ValidatePeriod()
+                    errorKey = "Period"
                     Exit Select
                 Case Else
-                    Throw New ApplicationException("Unknown Property being validated on EbCase.")
+                    Throw New ApplicationException("Unknown Property being validated on IdNumberAndPeriodFormViewModel.")
             End Select
             ' Update error dictionary
             If (validationResult = String.Empty) Then
-                If (Errors.ContainsKey(columnName)) Then
-                    Errors.Remove(columnName)
+                If (Errors.ContainsKey(errorKey)) Then
+                    Errors.Remove(errorKey)
                 End If
             Else
-                If (Errors.ContainsKey(columnName)) Then
-                    Errors(columnName) = validationResult
+                If (Errors.ContainsKey(errorKey)) Then
+                    Errors(errorKey) = validationResult
                 Else
-                    Errors.Add(columnName, validationResult)
+                    Errors.Add(errorKey, validationResult)
                 End If
             End If
             OnPropertyChanged("Error")

@@ -8,17 +8,6 @@
         mc:Ignorable="d"
         Title="Beställningsformulär kontoutdrag"
         Height="780" Width="840" MinWidth="840">
-    <Window.Resources>
-        <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBox}">
-            <Style.Triggers>
-                <Trigger Property="Validation.HasError" Value="true">
-                    <Setter Property="ToolTip" Value="{Binding
-                        Path=(Validation.Errors).CurrentItem.ErrorContent,
-                        RelativeSource={x:Static RelativeSource.Self}}"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Resources>
     <Grid x:Name="layoutRoot" Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -43,13 +32,15 @@
         <TextBox x:Name="ebNumberTextBox" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"
                  Height="Auto" Width="200" TextWrapping="Wrap" Margin="10,0,0,10" VerticalAlignment="Bottom"
                  Text="{Binding Path=CurrentCase.EbNumber, ValidatesOnDataErrors=True,
-                        NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
+                        NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{StaticResource Validatable}" />
         <Label x:Name="aklLabel" Grid.Row="0" Grid.Column="1" Content="Åklagare" HorizontalAlignment="Left"
-               Height="Auto" Width="200" Margin="10,0,0,35" VerticalAlignment="Bottom" />
+               Height="Auto" Width="200" Margin="20,0,0,35" VerticalAlignment="Bottom" />
         <TextBox x:Name="aklTextBox" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left"
-                 Height="Auto" Width="200" Margin="10,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom"
+                 Height="Auto" Width="200" Margin="20,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom"
                  Text="{Binding Path=CurrentCase.Prosecutor, ValidatesOnDataErrors=True,
-                        NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
+                        NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{StaticResource Validatable}" />
         <TabControl Grid.Column="0" Grid.ColumnSpan="3" x:Name="tabControl" HorizontalAlignment="Stretch"
                     Height="Auto" VerticalAlignment="Stretch" Margin="10" Width="Auto" Grid.Row="1">
             <TabItem Header="Engagemangsförfrågan">
