@@ -44,134 +44,144 @@
         <TabControl Grid.Column="0" Grid.ColumnSpan="3" x:Name="tabControl" HorizontalAlignment="Stretch"
                     Height="Auto" VerticalAlignment="Stretch" Margin="10" Width="Auto" Grid.Row="1">
             <TabItem Header="Engagemangsförfrågan">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <GroupBox x:Name="q1MandatoryGroupBox" Grid.Row="0" Grid.Column="0"
+                <AdornerDecorator>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <GroupBox x:Name="q1MandatoryGroupBox" Grid.Row="0" Grid.Column="0"
                               Grid.ColumnSpan="3" Header="Grundläggande uppgifter"
                               HorizontalAlignment="Stretch" Margin="10"
                               VerticalAlignment="Top" Height="Auto" Width="Auto">
-                        <controls:IdNumberAndPeriodForm x:Name="engagementForm"/>
-                    </GroupBox>
-                    <GroupBox x:Name="q1ExtraGroupBox" Grid.Row="1" Grid.Column="0"
+                            <controls:IdNumberAndPeriodForm x:Name="engagementForm"/>
+                        </GroupBox>
+                        <GroupBox x:Name="q1ExtraGroupBox" Grid.Row="1" Grid.Column="0"
                               Grid.ColumnSpan="3" Header="Övriga uppgifter från beslag, HTM eller annat"
                               HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Top">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Label x:Name="cardNumberLabel" Grid.Row="0" Grid.Column="0"
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label x:Name="cardNumberLabel" Grid.Row="0" Grid.Column="0"
                                    Content="Kortnummer" HorizontalAlignment="Left"
                                    Height="Auto" Width="200" Margin="10,10,0,0"
                                    VerticalAlignment="Top" />
-                            <TextBox x:Name="cardNumberTextBox" Grid.Row="0" Grid.Column="0"
+                                <TextBox x:Name="cardNumberTextBox" Grid.Row="0" Grid.Column="0"
                                      HorizontalAlignment="Left" Height="Auto" Width="200"
                                      Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" />
-                            <Label x:Name="phoneNumberLabel" Grid.Row="0" Grid.Column="1"
+                                <Label x:Name="phoneNumberLabel" Grid.Row="0" Grid.Column="1"
                                    Content="Tel till misstänkt" HorizontalAlignment="Left"
                                    Height="Auto" Width="200" Margin="10,10,0,0" VerticalAlignment="Top" />
-                            <TextBox x:Name="phoneNumberTextBox" Grid.Row="0" Grid.Column="1"
+                                <TextBox x:Name="phoneNumberTextBox" Grid.Row="0" Grid.Column="1"
                                      HorizontalAlignment="Left" Height="Auto" Width="200"
                                      Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" />
-                            <Label x:Name="bankCardReaderLabel" Grid.Row="1" Grid.Column="0"
+                                <Label x:Name="bankCardReaderLabel" Grid.Row="1" Grid.Column="0"
                                    Content="Bankdosa (nummer)" HorizontalAlignment="Left"
                                    Height="Auto" Width="200" Margin="10,0,0,0" VerticalAlignment="Top" />
-                            <TextBox x:Name="bankCardReaderTextBox" Grid.Row="1" Grid.Column="0"
+                                <TextBox x:Name="bankCardReaderTextBox" Grid.Row="1" Grid.Column="0"
                                      HorizontalAlignment="Left" Height="Auto" Width="200"
                                      Margin="10,25,10,10" TextWrapping="Wrap" VerticalAlignment="Top" />
-                            <Label x:Name="phoneNumber2Label" Grid.Row="1" Grid.Column="1"
+                                <Label x:Name="phoneNumber2Label" Grid.Row="1" Grid.Column="1"
                                    Content="Tel som laddats från konto" HorizontalAlignment="Left"
                                    Height="Auto" Width="200" Margin="10,0,0,0" VerticalAlignment="Top" />
-                            <TextBox x:Name="phoneNumber2TextBox" Grid.Row="1" Grid.Column="1"
+                                <TextBox x:Name="phoneNumber2TextBox" Grid.Row="1" Grid.Column="1"
                                      HorizontalAlignment="Left" Height="Auto" Width="200"
                                      Margin="10,25,10,10" TextWrapping="Wrap" VerticalAlignment="Top" />
-                        </Grid>
-                    </GroupBox>
-                    <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                            </Grid>
+                        </GroupBox>
+                        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                                 Margin="10,0,0,0">
-                        <TextBlock x:Name="errorMessageTextBlock"
+                            <TextBlock x:Name="errorMessageTextBlock"
                                Text="{Binding CurrentCase.Error,
                                       UpdateSourceTrigger=PropertyChanged}"
                                HorizontalAlignment="Left" Foreground="Gray"
                                Height="Auto" Width="Auto" Margin="0" Padding="0" />
-                        <TextBlock x:Name="engagementFormErrorMessageTextBlock"
+                            <TextBlock x:Name="engagementFormErrorMessageTextBlock"
                                Text="{Binding Path=ErrorMessage,
                                       ElementName=engagementForm,
                                       UpdateSourceTrigger=PropertyChanged}"
                                HorizontalAlignment="Left" Foreground="Gray"
                                Height="Auto" Width="Auto" Margin="0" Padding="0" />
-                    </StackPanel>
-                    <Button x:Name="engagementButton" Grid.Row="2" Grid.Column="2"
+                        </StackPanel>
+                        <Button x:Name="engagementButton" Grid.Row="2" Grid.Column="2"
                             Content="Beställ" VerticalAlignment="Top"
                             HorizontalAlignment="Right" Margin="10"
                             Padding="5" Width="200"
                             IsEnabled="{Binding CurrentCase.IsValid,
                                         UpdateSourceTrigger=PropertyChanged}"/>
-                </Grid>
+                    </Grid>
+                </AdornerDecorator>
             </TabItem>
             <TabItem Header="Kontotecknarförfrågan">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <GroupBox x:Name="groupBoxAccountHolder"
+                <AdornerDecorator>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <GroupBox x:Name="groupBoxAccountHolder"
                               Grid.Row="0" Header="Parametrar"
                               HorizontalAlignment="Stretch" VerticalAlignment="Top"
                               Height="Auto" Width="Auto" Margin="10">
-                        <controls:AccountAndPeriodForm x:Name="accountHolderForm" />
-                    </GroupBox>
-                    <Button x:Name="accountButton"
+                            <controls:AccountAndPeriodForm x:Name="accountHolderForm" />
+                        </GroupBox>
+                        <Button x:Name="accountButton"
                             Grid.Row="1" Content="Beställ"
                             VerticalAlignment="Top" HorizontalAlignment="Right"
                             Margin="10" Padding="5" Width="200"
                             IsEnabled="{Binding CurrentCase.IsValid,
                                         UpdateSourceTrigger=PropertyChanged}"/>
-                </Grid>
+                    </Grid>
+                </AdornerDecorator>
             </TabItem>
             <TabItem Header="Förenklat kontoutdrag">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <GroupBox x:Name="groupBoxTransaction"
+                <AdornerDecorator>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <GroupBox x:Name="groupBoxTransaction"
                               Grid.Row="0" Header="Parametrar"
                               HorizontalAlignment="Stretch" VerticalAlignment="Top"
                               Height="Auto" Width="Auto" Margin="10">
-                        <controls:AccountAndPeriodForm x:Name="transactionForm" />
-                    </GroupBox>
-                    <Button x:Name="transactionButton"
+                            <controls:AccountAndPeriodForm x:Name="transactionForm" />
+                        </GroupBox>
+                        <Button x:Name="transactionButton"
                             Grid.Row="1" Content="Beställ"
                             VerticalAlignment="Top" HorizontalAlignment="Right"
                             Margin="10" Padding="5" Width="200"
                             IsEnabled="{Binding CurrentCase.IsValid,
                                         UpdateSourceTrigger=PropertyChanged}"/>
-                </Grid>
+                    </Grid>
+                </AdornerDecorator>
             </TabItem>
             <TabItem Header="Min beställningshistorik">
-                <Grid >
-                    <Button x:Name="button2" Content="Test leta igenom Outlook"
+                <AdornerDecorator>
+                    <Grid >
+                        <Button x:Name="button2" Content="Test leta igenom Outlook"
                             HorizontalAlignment="Left" VerticalAlignment="Top"
                             Width="225" Margin="430,52,0,0"/>
-                </Grid>
+                    </Grid>
+                </AdornerDecorator>
             </TabItem>
             <TabItem Header="Administrera bankinfo">
-                <local:BankDataGrid x:Name="bankAdminDataGrid" />
+                <AdornerDecorator>
+                    <local:BankDataGrid x:Name="bankAdminDataGrid" />
+                </AdornerDecorator>
             </TabItem>
         </TabControl>
         <Label x:Name="bylineLabel" Grid.Row="2" Grid.Column="2"
