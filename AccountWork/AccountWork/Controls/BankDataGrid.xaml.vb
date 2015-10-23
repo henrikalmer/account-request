@@ -3,6 +3,14 @@
 Public Class BankDataGrid
     Inherits BaseControl
 
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        layoutRoot.DataContext = New BankDataGridViewModel()
+    End Sub
+
     Private Sub dataGridEditButton_Click(sender As Object, e As RoutedEventArgs) Handles dataGridEditButton.Click
         Select Case clearingNumberDataGrid.IsReadOnly
             Case True

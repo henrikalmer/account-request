@@ -6,10 +6,7 @@
                    xmlns:local="clr-namespace:AccountWork"
                    mc:Ignorable="d" 
                    d:DesignHeight="500" d:DesignWidth="500">
-    <UserControl.DataContext>
-        <local:BankDataGridViewModel />
-    </UserControl.DataContext>
-    <Grid>
+    <Grid x:Name="layoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -22,15 +19,15 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <DataGrid x:Name="clearingNumberDataGrid" Grid.Row="0"
-                              Grid.Column="0" Grid.ColumnSpan="5"
-                              Height="Auto" Width="Auto" Margin="10"
-                              HorizontalAlignment="Stretch"
-                              VerticalAlignment="Stretch"
-                              CanUserAddRows="False"
-                              ItemsSource="{Binding ClearingNumbers}"
-                              AutoGenerateColumns="False" IsReadOnly="True"
-                              BorderBrush="{x:Null}" GridLinesVisibility="None"
-                              AlternationCount="2" AlternatingRowBackground="#FFEEEEEE">
+                  Grid.Column="0" Grid.ColumnSpan="5"
+                  Height="Auto" Width="Auto" Margin="10"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  CanUserAddRows="False"
+                  ItemsSource="{Binding ClearingNumbers}"
+                  AutoGenerateColumns="False" IsReadOnly="True"
+                  BorderBrush="{x:Null}" GridLinesVisibility="None"
+                  AlternationCount="2" AlternatingRowBackground="#FFEEEEEE">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Namn" Binding="{Binding Name,
@@ -50,36 +47,36 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="dataGridEditButton"
-                            Grid.Row="1" Grid.Column="0"
-                            Content="Lås upp för redigering"
-                            HorizontalAlignment="Left"
-                            Width="Auto" Margin="10,0,0,10" Padding="5"/>
+                Grid.Row="1" Grid.Column="0"
+                Content="Lås upp för redigering"
+                HorizontalAlignment="Left"
+                Width="Auto" Margin="10,0,0,10" Padding="5"/>
         <Button x:Name="dataGridAddRowButton"
-                            Grid.Row="1" Grid.Column="1"
-                            IsEnabled="False"
-                            Content="Lägg till ny"
-                            HorizontalAlignment="Right"
-                            Width="Auto" Margin="10,0,0,10" Padding="5" />
+                Grid.Row="1" Grid.Column="1"
+                IsEnabled="False"
+                Content="Lägg till ny"
+                HorizontalAlignment="Right"
+                Width="Auto" Margin="10,0,0,10" Padding="5" />
         <Button x:Name="dataGridRemoveRowsButton"
-                            Grid.Row="1" Grid.Column="2"
-                            IsEnabled="False"
-                            Content="Ta bort markerade"
-                            HorizontalAlignment="Right"
-                            Width="Auto" Margin="10,0,0,10" Padding="5" />
+                Grid.Row="1" Grid.Column="2"
+                IsEnabled="False"
+                Content="Ta bort markerade"
+                HorizontalAlignment="Right"
+                Width="Auto" Margin="10,0,0,10" Padding="5" />
         <Button x:Name="dataGridSaveButton"
-                            Grid.Row="1" Grid.Column="3"
-                            IsEnabled="{Binding HasChanges,
-                                        UpdateSourceTrigger=PropertyChanged}"
-                            Content="Spara ändringar"
-                            HorizontalAlignment="Right"
-                            Width="Auto" Margin="10,0,0,10" Padding="5" >
+                Grid.Row="1" Grid.Column="3"
+                IsEnabled="{Binding HasChanges,
+                            UpdateSourceTrigger=PropertyChanged}"
+                Content="Spara ändringar"
+                HorizontalAlignment="Right"
+                Width="Auto" Margin="10,0,0,10" Padding="5" >
         </Button>
         <Button x:Name="dataGridResetButton"
-                            Grid.Row="1" Grid.Column="4"
-                            IsEnabled="{Binding HasChanges,
-                                        UpdateSourceTrigger=PropertyChanged}"
-                            Content="Återställ"
-                            HorizontalAlignment="Right"
-                            Width="Auto" Margin="10,0,10,10" Padding="5" />
+                Grid.Row="1" Grid.Column="4"
+                IsEnabled="{Binding HasChanges,
+                            UpdateSourceTrigger=PropertyChanged}"
+                Content="Återställ"
+                HorizontalAlignment="Right"
+                Width="Auto" Margin="10,0,10,10" Padding="5" />
     </Grid>
 </local:BaseControl>
