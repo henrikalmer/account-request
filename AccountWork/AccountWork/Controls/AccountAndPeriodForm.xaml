@@ -25,7 +25,7 @@
                Content="Startdatum, period" HorizontalAlignment="Left"
                VerticalAlignment="Top" />
         <Label x:Name="dateEndLabel"
-               Grid.Row="1" Grid.Column="1" Margin="20,0,0,0"
+               Grid.Row="1" Grid.Column="1" Margin="30,0,0,0"
                Content="Slutdatum, period" HorizontalAlignment="Left"
                VerticalAlignment="Top" />
         <DatePicker x:Name="dateStartDatePicker"
@@ -33,7 +33,7 @@
                     HorizontalAlignment="Left" VerticalAlignment="Top"
                     Width="200" FirstDayOfWeek="Monday" />
         <DatePicker x:Name="dateEndDatePicker"
-                    Grid.Row="2" Grid.Column="1" Margin="20,0,0,0"
+                    Grid.Row="2" Grid.Column="1" Margin="30,0,0,0"
                     HorizontalAlignment="Left" VerticalAlignment="Top"
                     Width="200" FirstDayOfWeek="Monday" />
     </Grid>

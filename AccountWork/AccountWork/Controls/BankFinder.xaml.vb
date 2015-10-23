@@ -28,12 +28,10 @@ Public Class BankFinder
 
     Public Sub Enable()
         IsEnabled = True
-        bankComboBox.IsEnabled = True
         clearingTextBox.IsEnabled = True
     End Sub
 
     Public Sub Disable()
-        bankComboBox.IsEnabled = False
         clearingTextBox.IsEnabled = False
         IsEnabled = False
     End Sub
