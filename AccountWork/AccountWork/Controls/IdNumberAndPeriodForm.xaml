@@ -81,11 +81,5 @@
                     SelectedDate="{Binding PeriodEndDate,
                                    ValidatesOnDataErrors=True,
                                    NotifyOnValidationError=True}" />
-        <TextBlock x:Name="errorMessageTextBlock"
-                   Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
-                   Text="{Binding Error,
-                          UpdateSourceTrigger=PropertyChanged}"
-                   HorizontalAlignment="Left" Foreground="Gray"
-                   Height="Auto" Width="Auto" Margin="0,10"/>
     </Grid>
 </local:BaseControl>

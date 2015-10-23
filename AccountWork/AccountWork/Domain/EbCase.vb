@@ -54,7 +54,7 @@ Namespace Domain
                 For Each err As KeyValuePair(Of String, String) In Errors
                     ErrorMessage &= err.Value & Environment.NewLine
                 Next
-                Return ErrorMessage
+                Return ErrorMessage.Trim()
             End Get
         End Property
 

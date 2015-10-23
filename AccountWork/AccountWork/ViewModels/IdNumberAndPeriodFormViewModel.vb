@@ -55,7 +55,11 @@ Public Class IdNumberAndPeriodFormViewModel
 
     Private Function ValidateIdNumber() As String
         If (String.IsNullOrEmpty(IdNumber)) Then
-            Return "Ange ett 10-siffrigt personnummer utan bindestreck."
+            Return "Ange ett 12-siffrigt personnummer utan bindestreck."
+        ElseIf (IdNumber.Length < 12) Then
+            Return "Ange ett 12-siffrigt personnummer utan bindestreck."
+        ElseIf (Not IsNumeric(IdNumber)) Then
+            Return "Ange personnumret utan bindestreck eller andra tecken utöver siffror."
         End If
         Return String.Empty
     End Function
@@ -97,6 +101,8 @@ Public Class IdNumberAndPeriodFormViewModel
                     validationResult = ValidatePeriod()
                     errorKey = "Period"
                     Exit Select
+                Case "Error"
+                    Return String.Empty
                 Case Else
                     Throw New ApplicationException("Unknown Property being validated on IdNumberAndPeriodFormViewModel.")
             End Select
@@ -124,7 +130,7 @@ Public Class IdNumberAndPeriodFormViewModel
             For Each err As KeyValuePair(Of String, String) In Errors
                 ErrorMessage &= err.Value & Environment.NewLine
             Next
-            Return ErrorMessage
+            Return ErrorMessage.Trim()
         End Get
     End Property
 #End Region
