@@ -21,7 +21,8 @@ Public Class IdNumberAndPeriodFormViewModel
     Public Property Bank As ClearingNumber
     Public Property IdNumber As String
     Public Property Name As String
-    Private _PeriodStartDate As Date = Date.Now
+    Private _PeriodStartDate As Date = Date.Today
+    Private _PeriodEndDate As Date = Date.Today
     Public Property PeriodStartDate As Date
         Get
             Return _PeriodStartDate
@@ -32,7 +33,6 @@ Public Class IdNumberAndPeriodFormViewModel
             OnPropertyChanged("PeriodEndDate")
         End Set
     End Property
-    Private _PeriodEndDate As Date = Date.Now
     Public Property PeriodEndDate As Date
         Get
             Return _PeriodEndDate
