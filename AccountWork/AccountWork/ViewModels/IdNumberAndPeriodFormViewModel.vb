@@ -81,6 +81,16 @@ Public Class IdNumberAndPeriodFormViewModel
 #End Region
 
 #Region "IDataErrorInfo"
+    Public ReadOnly Property [Error] As String Implements IDataErrorInfo.Error
+        Get
+            Dim ErrorMessage As String = String.Empty
+            For Each err As KeyValuePair(Of String, String) In Errors
+                ErrorMessage &= err.Value & Environment.NewLine
+            Next
+            Return ErrorMessage.Trim()
+        End Get
+    End Property
+
     Default Public ReadOnly Property Item(columnName As String) As String Implements IDataErrorInfo.Item
         Get
             ' Validate input
@@ -121,16 +131,6 @@ Public Class IdNumberAndPeriodFormViewModel
             OnPropertyChanged("Error")
             OnPropertyChanged("IsValid")
             Return validationResult
-        End Get
-    End Property
-
-    Public ReadOnly Property [Error] As String Implements IDataErrorInfo.Error
-        Get
-            Dim ErrorMessage As String = String.Empty
-            For Each err As KeyValuePair(Of String, String) In Errors
-                ErrorMessage &= err.Value & Environment.NewLine
-            Next
-            Return ErrorMessage.Trim()
         End Get
     End Property
 #End Region
