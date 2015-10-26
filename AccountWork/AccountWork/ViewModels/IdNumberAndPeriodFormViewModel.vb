@@ -59,6 +59,11 @@ Public Class IdNumberAndPeriodFormViewModel
             Return "Ange person- eller organisationsnummret utan bindestreck eller andra tecken utöver siffror."
         ElseIf (IdNumber.Length <> 12) Then
             Return "Ange ett 12-siffrigt person- eller organisationsnummer utan bindestreck."
+        Else
+            Dim LC = New LuhnCheck(IdNumber)
+            If (Not LC.VerifyChecksum() Or Not LC.VerifyControlDigit()) Then
+                Return "Det angivna personnumret verkar inte vara giltigt."
+            End If
         End If
         Return String.Empty
     End Function

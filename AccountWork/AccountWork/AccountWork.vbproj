@@ -133,6 +133,7 @@
     <Compile Include="Controls\IdNumberAndPeriodForm.xaml.vb">
       <DependentUpon>IdNumberAndPeriodForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LuhnCheck.vb" />
     <Compile Include="ViewModels\EbCaseViewModel.vb" />
     <Compile Include="Domain\OutlookCommunicator.vb" />
     <Compile Include="Domain\WordDocument.vb" />
