@@ -55,10 +55,10 @@ Public Class IdNumberAndPeriodFormViewModel
     Private Function ValidateIdNumber() As String
         If (String.IsNullOrEmpty(IdNumber)) Then
             Return "Ange ett 12-siffrigt person- eller organisationsnummer utan bindestreck."
-        ElseIf (IdNumber.Length < 12) Then
-            Return "Ange ett 12-siffrigt person- eller organisationsnummer utan bindestreck."
         ElseIf (Not IsNumeric(IdNumber)) Then
             Return "Ange person- eller organisationsnummret utan bindestreck eller andra tecken utöver siffror."
+        ElseIf (IdNumber.Length <> 12) Then
+            Return "Ange ett 12-siffrigt person- eller organisationsnummer utan bindestreck."
         End If
         Return String.Empty
     End Function
