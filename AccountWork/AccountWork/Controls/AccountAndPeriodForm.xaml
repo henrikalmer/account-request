@@ -6,7 +6,7 @@
                    xmlns:local="clr-namespace:AccountWork"
                    xmlns:controls="clr-namespace:AccountWork"
                    mc:Ignorable="d" 
-                   d:DesignHeight="300" d:DesignWidth="440">
+                   d:DesignHeight="300" d:DesignWidth="450">
     <Grid x:Name="layoutRoot" Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -43,7 +43,7 @@
         <DatePicker x:Name="dateEndDatePicker"
                     Grid.Row="5" Grid.Column="1"
                     HorizontalAlignment="Left" VerticalAlignment="Top"
-                    Margin="20,0" Width="200" FirstDayOfWeek="Monday"
+                    Margin="30,0" Width="200" FirstDayOfWeek="Monday"
                     SelectedDate="{Binding PeriodEndDate,
                                    ValidatesOnDataErrors=True,
                                    NotifyOnValidationError=True}" />
