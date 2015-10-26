@@ -141,6 +141,7 @@
     <Compile Include="ViewModels\BankDataGridViewModel.vb" />
     <Compile Include="ViewModels\BankFinderViewModel.vb" />
     <Compile Include="ViewModels\BaseViewModel.vb" />
+    <Compile Include="ViewModels\AccountAndPeriodFormViewModel.vb" />
     <Compile Include="ViewModels\IdNumberAndPeriodFormViewModel.vb" />
     <Compile Include="ViewModels\MainWindowViewModel.vb" />
     <Page Include="Controls\AccountAndPeriodForm.xaml">

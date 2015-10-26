@@ -11,6 +11,16 @@ Public Class MainWindowViewModel
             Return CurrentCase.IsValid And Control.engagementForm.ErrorMessage = String.Empty
         End Get
     End Property
+    Public ReadOnly Property AccountFormIsValid As Boolean
+        Get
+            Return CurrentCase.IsValid And Control.accountHolderForm.ErrorMessage = String.Empty
+        End Get
+    End Property
+    Public ReadOnly Property TransactionFormIsValid As Boolean
+        Get
+            Return CurrentCase.IsValid And Control.transactionForm.ErrorMessage = String.Empty
+        End Get
+    End Property
 
     Public Sub New(ctrl As MainWindow)
         ' Register all decorated methods to the Mediator
@@ -21,5 +31,7 @@ Public Class MainWindowViewModel
     <MediatorMessageSink(MediatorMessages.FormValidationStatusChanged, ParameterType:=GetType(Message))>
     Public Sub ListenForValidationChanges(m As Message)
         OnPropertyChanged("EngagementFormIsValid")
+        OnPropertyChanged("AccountFormIsValid")
+        OnPropertyChanged("TransactionFormIsValid")
     End Sub
 End Class
