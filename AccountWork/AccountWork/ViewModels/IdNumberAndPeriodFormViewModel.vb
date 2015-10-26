@@ -6,7 +6,6 @@ Public Class IdNumberAndPeriodFormViewModel
     Implements IDataErrorInfo
 
 #Region "Properties"
-    Public Property BankFinderVM As BankFinderViewModel
     Private _AllBanks As Boolean = False
     Public Property AllBanks As Boolean
         Get
@@ -130,6 +129,8 @@ Public Class IdNumberAndPeriodFormViewModel
             End If
             OnPropertyChanged("Error")
             OnPropertyChanged("IsValid")
+            VMMediator.NotifyColleagues(MediatorMessages.FormValidationStatusChanged,
+                                        New Message("Validation status changed in form."))
             Return validationResult
         End Get
     End Property

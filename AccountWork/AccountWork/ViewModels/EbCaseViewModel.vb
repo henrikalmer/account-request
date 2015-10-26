@@ -2,8 +2,8 @@
 Imports System.Text.RegularExpressions
 
 Namespace Domain
-    Public Class EbCase
-        Implements INotifyPropertyChanged
+    Public Class EbCaseViewModel
+        Inherits BaseViewModel
         Implements IDataErrorInfo
 
         Public Property EbNumber As String
@@ -86,19 +86,11 @@ Namespace Domain
                 End If
                 OnPropertyChanged("Error")
                 OnPropertyChanged("IsValid")
+                VMMediator.NotifyColleagues(MediatorMessages.FormValidationStatusChanged,
+                                            New Message("Validation status changed in form."))
                 Return validationResult
             End Get
         End Property
-#End Region
-
-#Region "INotifyPropertyChanged"
-        Public Event PropertyChanged(ByVal sender As Object, ByVal e As PropertyChangedEventArgs) Implements INotifyPropertyChanged.PropertyChanged
-
-        Protected Sub OnPropertyChanged(ByVal strPropertyName As String)
-            If Me.PropertyChangedEvent IsNot Nothing Then
-                RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(strPropertyName))
-            End If
-        End Sub
 #End Region
     End Class
 End Namespace

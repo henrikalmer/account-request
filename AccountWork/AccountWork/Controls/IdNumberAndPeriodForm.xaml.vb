@@ -25,6 +25,7 @@ Public Class IdNumberAndPeriodForm
         Dim B As New Binding()
         B.Source = layoutRoot.DataContext
         B.Path = New PropertyPath("Error")
+        B.Mode = BindingMode.OneWay
         BindingOperations.SetBinding(Me, ErrorMessageProperty, B)
     End Sub
 

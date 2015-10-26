@@ -3,15 +3,13 @@ Imports System.Threading
 Imports AccountWork.Domain
 
 Class MainWindow
-    Public Property CurrentCase As New EbCase()
-
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
         Thread.CurrentThread.CurrentCulture = New CultureInfo("sv-SE")
-        layoutRoot.DataContext = Me
+        layoutRoot.DataContext = New MainWindowViewModel(Me)
     End Sub
 
     Private Sub engagementButton_Click(sender As Object, e As RoutedEventArgs) Handles engagementButton.Click
