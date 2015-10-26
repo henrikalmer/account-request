@@ -58,49 +58,9 @@
                     </Grid.ColumnDefinitions>
                     <GroupBox x:Name="q1MandatoryGroupBox" Grid.Row="0" Grid.Column="0"
                               Grid.ColumnSpan="4" Header="Grundläggande uppgifter"
-                              HorizontalAlignment="Stretch" Margin="10,10,10,0"
+                              HorizontalAlignment="Stretch" Margin="10"
                               VerticalAlignment="Top" Height="Auto" Width="Auto">
                         <controls:IdNumberAndPeriodForm x:Name="engagementForm"/>
-                    </GroupBox>
-                    <GroupBox x:Name="q1ExtraGroupBox" Grid.Row="1" Grid.Column="0"
-                              Grid.ColumnSpan="4" Header="Övriga uppgifter från beslag, HTM eller annat"
-                              HorizontalAlignment="Stretch" Margin="10,10,10,0" VerticalAlignment="Top">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Label x:Name="cardNumberLabel" Grid.Row="0" Grid.Column="0"
-                                   Content="Kortnummer" HorizontalAlignment="Left"
-                                   Height="Auto" Width="200" Margin="10,10,0,0"
-                                   VerticalAlignment="Top" />
-                            <TextBox x:Name="cardNumberTextBox" Grid.Row="0" Grid.Column="0"
-                                     HorizontalAlignment="Left" Height="Auto" Width="200"
-                                     Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" />
-                            <Label x:Name="phoneNumberLabel" Grid.Row="0" Grid.Column="1"
-                                   Content="Tel till misstänkt" HorizontalAlignment="Left"
-                                   Height="Auto" Width="200" Margin="10,10,0,0" VerticalAlignment="Top" />
-                            <TextBox x:Name="phoneNumberTextBox" Grid.Row="0" Grid.Column="1"
-                                     HorizontalAlignment="Left" Height="Auto" Width="200"
-                                     Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" />
-                            <Label x:Name="bankCardReaderLabel" Grid.Row="1" Grid.Column="0"
-                                   Content="Bankdosa (nummer)" HorizontalAlignment="Left"
-                                   Height="Auto" Width="200" Margin="10,0,0,0" VerticalAlignment="Top" />
-                            <TextBox x:Name="bankCardReaderTextBox" Grid.Row="1" Grid.Column="0"
-                                     HorizontalAlignment="Left" Height="Auto" Width="200"
-                                     Margin="10,25,10,10" TextWrapping="Wrap" VerticalAlignment="Top" />
-                            <Label x:Name="phoneNumber2Label" Grid.Row="1" Grid.Column="1"
-                                   Content="Tel som laddats från konto" HorizontalAlignment="Left"
-                                   Height="Auto" Width="200" Margin="10,0,0,0" VerticalAlignment="Top" />
-                            <TextBox x:Name="phoneNumber2TextBox" Grid.Row="1" Grid.Column="1"
-                                     HorizontalAlignment="Left" Height="Auto" Width="200"
-                                     Margin="10,25,10,10" TextWrapping="Wrap" VerticalAlignment="Top" />
-                        </Grid>
                     </GroupBox>
                     <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
                                 Margin="10,0,0,0">

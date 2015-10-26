@@ -41,10 +41,6 @@
                Grid.Row="2" Grid.Column="0" Content="Person- eller organisationsnummer"
                HorizontalAlignment="Left" VerticalAlignment="Top"
                Height="Auto" Width="200" Margin="0" />
-        <Label x:Name="nameLabel"
-               Grid.Row="2" Grid.Column="1" Content="Namn"
-               HorizontalAlignment="Left" VerticalAlignment="Top"
-               Height="Auto" Width="200" Margin="20,0" />
         <TextBox x:Name="pnrTextBox"
                  Grid.Row="3" Grid.Column="0" TextWrapping="Wrap"
                  HorizontalAlignment="Left" VerticalAlignment="Top"
@@ -54,11 +50,6 @@
                         ValidatesOnDataErrors=True,
                         NotifyOnValidationError=True,
                         UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox x:Name="nameTextBox"
-                 Grid.Row="3" Grid.Column="1" TextWrapping="Wrap"
-                 HorizontalAlignment="Left" VerticalAlignment="Top"
-                 Height="Auto" Width="200" Margin="20,0"
-                 Text="{Binding Name}"/>
         <Label x:Name="dateStartLabel"
                Grid.Row="4" Grid.Column="0" Content="Startdatum, period"
                HorizontalAlignment="Left" VerticalAlignment="Top"

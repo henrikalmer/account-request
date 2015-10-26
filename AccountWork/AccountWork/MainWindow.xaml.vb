@@ -22,13 +22,8 @@ Class MainWindow
         Dim EbNumber = ebNumberTextBox.Text
         Dim Prosecutor = aklTextBox.Text
         Dim Pnr = engagementForm.pnrTextBox.Text
-        Dim Name = engagementForm.nameTextBox.Text
         Dim PeriodStart = engagementForm.dateStartDatePicker.Text.ToString
         Dim PeriodEnd = engagementForm.dateEndDatePicker.Text.ToString
-        Dim CardNumber = cardNumberTextBox.Text
-        Dim PhoneNumber = phoneNumberTextBox.Text
-        Dim BankCardReader = bankCardReaderTextBox.Text
-        Dim PhoneNumber2 = phoneNumber2TextBox.Text
         Dim TabHeader = tmpTabItem.Header.ToString
         Dim BankName = ""
         Dim BankClearing = ""
@@ -40,11 +35,9 @@ Class MainWindow
             BankClearing = "ÖPPEN FRÅGA ALLA CLEARINGNR"
         End If
         MailOrderAttachment.parseGenerateOrder("c:\temp\kontobestmall.dotx",
-                                               EbNumber, Prosecutor, Pnr, Name,
+                                               EbNumber, Prosecutor, Pnr,
                                                BankName, BankClearing,
                                                PeriodStart, PeriodEnd,
-                                               CardNumber, PhoneNumber,
-                                               BankCardReader, PhoneNumber2,
                                                TabHeader)
         tmpTabItem = Nothing
         MailOrderAttachment = Nothing
@@ -121,9 +114,5 @@ Class MainWindow
 
     Private Sub ebNumberTextBox_LostFocus(sender As Object, e As RoutedEventArgs) Handles ebNumberTextBox.LostFocus
         layoutRoot.DataContext.CurrentCase.NormalizeEbNumber()
-    End Sub
-
-    Private Sub tabControl_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles tabControl.SelectionChanged
-
     End Sub
 End Class
