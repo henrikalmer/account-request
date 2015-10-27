@@ -1,6 +1,12 @@
 ﻿Imports word = Microsoft.Office.Interop.Word
+Imports System.IO
 Namespace Domain
     Public Class WordDocument
+        Private Function wFile() As Byte()
+            Dim obj As Object = My.Resources.ResourceManager.GetObject("kontobestmall.dotx")
+            Return CType(obj, Byte())
+        End Function
+
         Public Sub parseGenerateOrder(sPath2template As String, sEBnr As String, sAklname As String, sPnr As String, sBankName As String, sClearingno As String, sStartdate As String, sEnddate As String, sType As String)
             Dim sDomainUser As String = System.Security.Principal.WindowsIdentity.GetCurrent.Name.Replace("\", "/")
             Dim sADEntry As New DirectoryServices.DirectoryEntry("WinNT://" & sDomainUser)
@@ -22,13 +28,19 @@ Namespace Domain
             'sBankreader As String -bankdosa, bankID'
             'sPhone2 As String -tfn som blivit påladdat från kontot vi frågar på '
             'sType As String -typen av förfrågan, input för besthist
+            'Dim myTempFile As String = IO.Path.GetTempFileName(My.Computer.FileSystem.WriteAllBytes("C:\temp\test.dotx", wFile, False))
+
+            Dim myTempFile As String = IO.Path.GetTempPath & "\mytemp.dotx"
+            '  My.Computer.FileSystem.WriteAllBytes(myTempFile, My.Resources.ResourceManager.GetObject("kontobestmall.dotx"), False)
+            My.Computer.FileSystem.WriteAllBytes(myTempFile, wFile, False)
+
 
             With oWord
                 Stop
                 .Visible = True
-                .Documents.Add("c:\temp\kontobestmall.dotx")
+                .Documents.Add(myTempFile)
                 .ActiveDocument.Range.Font.Bold = True
-                .Selection.TypeText("Begäran om uppgifter enligt 11 § lag (2004:297) om bank- och finansieringsrörelse")
+                .Selection.TypeText("Begäran om uppgifter enligt 11 § lag (2004: 297) om bank- och finansieringsrörelse")
                 .Selection.TypeParagraph()
                 .Selection.Font.Bold = False
                 .Selection.TypeParagraph()
