@@ -3,7 +3,7 @@ Imports System.IO
 Namespace Domain
     Public Class WordDocument
         Private Function wFile() As Byte()
-            Dim obj As Object = My.Resources.ResourceManager.GetObject("kontobestmall.dotx")
+            Dim obj As Object = My.Resources.kontobestmall
             Return CType(obj, Byte())
         End Function
 

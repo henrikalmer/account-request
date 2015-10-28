@@ -5,7 +5,6 @@
     StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
-            <BitmapImage x:Key="EbmLogo" UriSource="Media/ebm-logo.jpg" />
             <Style x:Key="Validatable" TargetType="{x:Type Control}">
                 <Style.Triggers>
                     <MultiTrigger>
@@ -21,11 +20,11 @@
                                 <ControlTemplate>
                                     <DockPanel LastChildFill="True">
                                         <TextBlock DockPanel.Dock="Right" 
-                                           Foreground="Red"
-                                           FontSize="14pt" 
-                                           Margin="-15,0,0,0"
-                                           FontWeight="Bold"
-                                           IsHitTestVisible="False">*
+                                                   Foreground="Red"
+                                                   FontSize="14pt" 
+                                                   Margin="-15,0,0,0"
+                                                   FontWeight="Bold"
+                                                   IsHitTestVisible="False">*
                                         </TextBlock>
                                         <Border BorderThickness="1" CornerRadius="2">
                                             <AdornedElementPlaceholder/>
@@ -52,11 +51,11 @@
                                 <ControlTemplate>
                                     <DockPanel LastChildFill="True">
                                         <TextBlock DockPanel.Dock="Right" 
-                                           Foreground="Red"
-                                           FontSize="14pt" 
-                                           Margin="-42,0,0,0"
-                                           FontWeight="Bold"
-                                           IsHitTestVisible="False">*
+                                                   Foreground="Red"
+                                                   FontSize="14pt" 
+                                                   Margin="-42,0,0,0"
+                                                   FontWeight="Bold"
+                                                   IsHitTestVisible="False">*
                                         </TextBlock>
                                         <Border BorderThickness="1" CornerRadius="2">
                                             <AdornedElementPlaceholder/>

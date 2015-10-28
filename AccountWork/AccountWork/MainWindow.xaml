@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AccountWork"
         xmlns:controls="clr-namespace:AccountWork"
+        xmlns:res="clr-namespace:AccountWork.My.Resources"
         mc:Ignorable="d"
         Title="Beställningsformulär kontoutdrag"
         Height="780" Width="840" MinWidth="840">
@@ -23,7 +24,7 @@
                Content="Beställning av elektroniska kontoutdrag och engagemang"
                HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"
                FontSize="16" FontWeight="Bold" Height="31" Width="446"/>
-        <Image x:Name="logo" Grid.Row="0" Grid.Column="2" Source="{StaticResource EbmLogo}"
+        <Image x:Name="logo" Grid.Row="0" Grid.Column="2" Source="AccountWork/Resources/ebm-logo.jpg"
                HorizontalAlignment="Right" Height="101" VerticalAlignment="Top"
                Width="300" Margin="0,10,10,0"/>
         <Label x:Name="ebNumberLabel" Grid.Row="0" Grid.Column="0" Content="EB-nummer"
