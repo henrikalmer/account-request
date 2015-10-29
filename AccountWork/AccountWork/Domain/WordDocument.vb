@@ -7,7 +7,7 @@ Namespace Domain
             Return CType(obj, Byte())
         End Function
 
-        Public Sub parseGenerateOrder(sPath2template As String, sEBnr As String, sAklname As String, sPnr As String, sBankName As String, sClearingno As String, sStartdate As String, sEnddate As String, sType As String)
+        Public Function parseGenerateOrder(sEBnr As String, sAklname As String, sPnr As String, sBankName As String, sClearingno As String, sStartdate As String, sEnddate As String, sType As String) As String
             Dim sDomainUser As String = System.Security.Principal.WindowsIdentity.GetCurrent.Name.Replace("\", "/")
             Dim sADEntry As New DirectoryServices.DirectoryEntry("WinNT://" & sDomainUser)
             Dim sFullName As String = sADEntry.Properties("FullName").Value
@@ -49,7 +49,49 @@ Namespace Domain
                 .Selection.TypeParagraph()
                 .Selection.TypeParagraph()
                 If sType = "Engagemangsförfrågan" Then
-                    .Selection.TypeText("Förundersökningen har givit nedanstående ingångsparametrar och vill se om ni, baserat på dessa parametrar kan se om det finns engagemang hos er.")
+                    .Selection.TypeText("Engagemangsförfrågan bla bla")
+                    .Selection.TypeParagraph()
+                    .Selection.TypeParagraph()
+
+                    If Trim(sPnr) <> "" Then
+                        .Selection.TypeText("Personnr: " & sPnr)
+                        .Selection.TypeParagraph()
+                    End If
+
+                    If Trim(sClearingno) <> "" Then
+                        .Selection.TypeText("Clearingnr: " & sClearingno)
+                        .Selection.TypeParagraph()
+                    End If
+
+                    If Trim(sBankName) <> "" Then
+                        .Selection.TypeText("Bank (namn): " & sBankName)
+                        .Selection.TypeParagraph()
+                    End If
+                End If
+
+                If sType = "Kontotecknarförfrågan" Then
+                    .Selection.TypeText("Begäran om kontotecknarförfrågan bla bla")
+                    .Selection.TypeParagraph()
+                    .Selection.TypeParagraph()
+
+                    If Trim(sPnr) <> "" Then
+                        .Selection.TypeText("Personnr: " & sPnr)
+                        .Selection.TypeParagraph()
+                    End If
+
+                    If Trim(sClearingno) <> "" Then
+                        .Selection.TypeText("Clearingnr: " & sClearingno)
+                        .Selection.TypeParagraph()
+                    End If
+
+                    If Trim(sBankName) <> "" Then
+                        .Selection.TypeText("Bank (namn): " & sBankName)
+                        .Selection.TypeParagraph()
+                    End If
+                End If
+
+                If sType = "Förenklat Kontoutdrag" Then
+                    .Selection.TypeText("Begäran om förenklat kontoutdrag bla bla")
                     .Selection.TypeParagraph()
                     .Selection.TypeParagraph()
 
@@ -74,7 +116,8 @@ Namespace Domain
                 .Selection.TypeText("Mvh " & sFullName)
                 'end same for all
             End With
-        End Sub
+            Return myTempFile
+        End Function
     End Class
 End Namespace
 
