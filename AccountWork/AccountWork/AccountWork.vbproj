@@ -104,6 +104,7 @@
     </Reference>
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -133,6 +134,7 @@
     <Compile Include="Controls\IdNumberAndPeriodForm.xaml.vb">
       <DependentUpon>IdNumberAndPeriodForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Domain\RequestObject.vb" />
     <Compile Include="LuhnCheck.vb" />
     <Compile Include="ViewModels\EbCaseViewModel.vb" />
     <Compile Include="Domain\OutlookCommunicator.vb" />

@@ -118,8 +118,10 @@ Class MainWindow
 
     Private Sub button1_Click(sender As Object, e As RoutedEventArgs) Handles button1.Click
         'axel testar wordklassen
+        Dim r = New Request(123, "1", Nothing, "6500123456789", Today, Today)
+
 
         Dim j As New WordDocument
-        j.parseGenerateOrder("", "hh", "hh", "hh", "hh", "hh", "hh", "hh", "hh")
+        'j.parseGenerateOrder("", "hh", "hh", "hh", "hh", "hh", "hh", "hh", "hh")
     End Sub
 End Class
