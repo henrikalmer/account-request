@@ -1,8 +1,12 @@
-﻿Namespace Domain
+﻿Imports System.ComponentModel.DataAnnotations.Schema
+
+Namespace Domain
     Public Class Request
         Private _Id As Int32
         Public Property UserId As String
         Public Property BankId As Int32
+        <ForeignKey("BankId")>
+        Public Property Bank As ClearingNumber
         Public Property Timestamp As Date
         Public Property TypeOfRequest As String
         Public Property SerializedRequest As String
@@ -19,9 +23,9 @@
 
         Public Sub New()
         End Sub
-        Public Sub New(bId As Int32, rType As String, IdNumber As String, AccountNumber As String, PeriodStartDate As Date, PeriodEndDate As Date)
+        Public Sub New(B As ClearingNumber, rType As String, IdNumber As String, AccountNumber As String, PeriodStartDate As Date, PeriodEndDate As Date)
             UserId = "TestUser"
-            BankId = bId
+            Bank = B
             TypeOfRequest = rType
             Dim rObj = New RequestObject()
             rObj.TypeOfRequest = rType

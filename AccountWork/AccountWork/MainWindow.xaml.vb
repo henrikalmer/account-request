@@ -37,8 +37,7 @@ Class MainWindow
         MailOrderAttachment.parseGenerateOrder("c:\temp\kontobestmall.dotx",
                                                EbNumber, Prosecutor, Pnr,
                                                BankName, BankClearing,
-                                               PeriodStart, PeriodEnd,
-                                               TabHeader)
+                                               PeriodStart, PeriodEnd)
         tmpTabItem = Nothing
         MailOrderAttachment = Nothing
 
@@ -117,10 +116,13 @@ Class MainWindow
     End Sub
 
     Private Sub button1_Click(sender As Object, e As RoutedEventArgs) Handles button1.Click
+        Using Db = New AccountWorkDbContext()
+            Dim Bank = (From X In Db.ClearingNumbers Select X Where X.Id = 98).SingleOrDefault()
+            Db.Requests.Add(New Request(Bank, "1", Nothing, "6500123456789", Today, Today))
+            Db.SaveChanges()
+        End Using
+
         'axel testar wordklassen
-        Dim r = New Request(123, "1", Nothing, "6500123456789", Today, Today)
-
-
         Dim j As New WordDocument
         'j.parseGenerateOrder("", "hh", "hh", "hh", "hh", "hh", "hh", "hh", "hh")
     End Sub

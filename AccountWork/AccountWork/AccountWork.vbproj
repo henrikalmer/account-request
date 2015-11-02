@@ -127,6 +127,9 @@
     <Compile Include="Controls\AccountAndPeriodForm.xaml.vb">
       <DependentUpon>AccountAndPeriodForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\RequestDataGrid.xaml.vb">
+      <DependentUpon>RequestDataGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BankDataGrid.xaml.vb">
       <DependentUpon>BankDataGrid.xaml</DependentUpon>
     </Compile>
@@ -136,6 +139,7 @@
     </Compile>
     <Compile Include="Domain\RequestObject.vb" />
     <Compile Include="LuhnCheck.vb" />
+    <Compile Include="ViewModels\RequestDataGridViewModel.vb" />
     <Compile Include="ViewModels\EbCaseViewModel.vb" />
     <Compile Include="Domain\OutlookCommunicator.vb" />
     <Compile Include="Domain\WordDocument.vb" />
@@ -150,6 +154,10 @@
     <Page Include="Controls\AccountAndPeriodForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\RequestDataGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\BankDataGrid.xaml">
       <SubType>Designer</SubType>
