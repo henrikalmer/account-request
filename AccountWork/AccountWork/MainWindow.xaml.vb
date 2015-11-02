@@ -117,8 +117,9 @@ Class MainWindow
 
     Private Sub button1_Click(sender As Object, e As RoutedEventArgs) Handles button1.Click
         Using Db = New AccountWorkDbContext()
+            Dim EbNo = layoutRoot.DataContext.CurrentCase.EbNumber
             Dim Bank = (From X In Db.ClearingNumbers Select X Where X.Id = 98).SingleOrDefault()
-            Db.Requests.Add(New Request(Bank, "1", Nothing, "6500123456789", Today, Today))
+            Db.Requests.Add(New Request(EbNo, Bank, "1", Nothing, "6500123456789", Today, Today))
             Db.SaveChanges()
         End Using
 

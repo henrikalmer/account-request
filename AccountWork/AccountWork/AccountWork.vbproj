@@ -137,6 +137,7 @@
     <Compile Include="Controls\IdNumberAndPeriodForm.xaml.vb">
       <DependentUpon>IdNumberAndPeriodForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Domain\RequestInfo.vb" />
     <Compile Include="Domain\RequestObject.vb" />
     <Compile Include="LuhnCheck.vb" />
     <Compile Include="ViewModels\RequestDataGridViewModel.vb" />

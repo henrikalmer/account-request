@@ -24,8 +24,8 @@
                   BorderBrush="{x:Null}" GridLinesVisibility="None"
                   AlternationCount="2" AlternatingRowBackground="#FFEEEEEE">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Bank" Binding="{Binding Bank}" />
+                <!--<DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />-->
+                <DataGridTextColumn Header="Bank" Binding="{Binding BankName}" />
                 <DataGridTextColumn Header="Frågetyp" Binding="{Binding TypeOfRequest}" />
                 <DataGridTextColumn Header="Skapad" Binding="{Binding Timestamp}" />
                 <DataGridTextColumn Header="Kommentar" Binding="{Binding Comment}" />

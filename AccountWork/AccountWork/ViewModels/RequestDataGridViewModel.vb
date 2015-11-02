@@ -4,16 +4,23 @@ Imports AccountWork.Domain
 Public Class RequestDataGridViewModel
     Inherits BaseViewModel
 
-    Public Property Requests As ObservableCollection(Of Request)
+    Public Property Requests As ObservableCollection(Of RequestInfo)
 
     Public Sub New()
-        Dim reqs = From request In Db.Requests
-                   Join bank In Db.ClearingNumbers
-                       On request.BankId Equals bank.Id
-                   Order By request.Timestamp Descending
-                   Select request
-
-        Requests = New ObservableCollection(Of Request)(reqs.ToList())
-        Dim test = ""
+        Using T = Db.Database.BeginTransaction()
+            Dim reqs = From R In Db.Requests
+                       Select New RequestInfo With {
+                           .EbNumber = R.EbNumber,
+                           .RequestId = R.Id,
+                           .BankName = R.Bank.Name,
+                           .TypeOfRequest = R.TypeOfRequest,
+                           .Timestamp = R.Timestamp,
+                           .SerializedRequest = R.SerializedRequest,
+                           .Comment = R.Comment
+                       }
+            Requests = New ObservableCollection(Of RequestInfo)(reqs.ToList())
+            Dim test = ""
+            T.Commit()
+        End Using
     End Sub
 End Class
