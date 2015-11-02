@@ -24,10 +24,12 @@
                   BorderBrush="{x:Null}" GridLinesVisibility="None"
                   AlternationCount="2" AlternatingRowBackground="#FFEEEEEE">
             <DataGrid.Columns>
-                <!--<DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />-->
+                <DataGridTextColumn Header="EB-nummer" Binding="{Binding EbNumber}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Löpnummer" Binding="{Binding RequestId}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Bank" Binding="{Binding BankName}" />
                 <DataGridTextColumn Header="Frågetyp" Binding="{Binding TypeOfRequest}" />
                 <DataGridTextColumn Header="Skapad" Binding="{Binding Timestamp}" />
+                <DataGridTextColumn Header="Parametrar" Binding="{Binding Parameters}" />
                 <DataGridTextColumn Header="Kommentar" Binding="{Binding Comment}" />
             </DataGrid.Columns>
         </DataGrid>

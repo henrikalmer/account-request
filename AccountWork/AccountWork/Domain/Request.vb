@@ -35,12 +35,12 @@ Namespace Domain
             rObj.AccountNumber = AccountNumber
             rObj.PeriodStartDate = ToDateString(PeriodStartDate)
             rObj.PeriodEndDate = ToDateString(PeriodEndDate)
-            SerializedRequest = rObj.ToXml()
-            Timestamp = Now.ToUniversalTime()
+            SerializedRequest = rObj.ToJson()
+            Timestamp = Now
         End Sub
 
         Private Function ToDateString(ts As Date) As String
-            Return ts.ToUniversalTime().ToString()
+            Return ts.ToString()
         End Function
     End Class
 End Namespace
