@@ -9,15 +9,33 @@ Namespace Domain
     <DataContract>
     Public Class RequestObject
         <DataMember>
+        Public Property EbNumber As String
+        <DataMember>
         Public Property TypeOfRequest As String
         <DataMember>
         Public Property IdNumber As String
         <DataMember>
         Public Property AccountNumber As String
-        <DataMember>
-        Public Property PeriodStartDate As String
-        <DataMember>
-        Public Property PeriodEndDate As String
+        <DataMember(Name:="PeriodStartDate")>
+        Private Property _PeriodStartDate As String
+        <DataMember(Name:="PeriodEndDate")>
+        Private Property _PeriodEndDate As String
+        Public Property PeriodStartDate As Date
+            Get
+                Return Date.Parse(_PeriodStartDate)
+            End Get
+            Set(value As Date)
+                _PeriodStartDate = value.ToString("O")
+            End Set
+        End Property
+        Public Property PeriodEndDate As Date
+            Get
+                Return Date.Parse(_PeriodEndDate)
+            End Get
+            Set(value As Date)
+                _PeriodEndDate = value.ToString("O")
+            End Set
+        End Property
 
         Public Sub New()
         End Sub
@@ -55,6 +73,7 @@ Namespace Domain
         End Sub
 
         Public Sub FromObject(obj As RequestObject)
+            EbNumber = obj.EbNumber
             TypeOfRequest = obj.TypeOfRequest
             IdNumber = obj.IdNumber
             AccountNumber = obj.AccountNumber

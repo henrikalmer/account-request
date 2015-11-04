@@ -26,21 +26,24 @@ Namespace Domain
         End Sub
         Public Sub New(EbNo As String, B As ClearingNumber, rType As String, IdNumber As String, AccountNumber As String, PeriodStartDate As Date, PeriodEndDate As Date)
             EbNumber = EbNo
-            UserId = "TestUser"
+            UserId = GetActiveDirectoryUserName()
             Bank = B
             TypeOfRequest = rType
             Dim rObj = New RequestObject()
+            rObj.EbNumber = EbNumber
             rObj.TypeOfRequest = rType
             rObj.IdNumber = IdNumber
             rObj.AccountNumber = AccountNumber
-            rObj.PeriodStartDate = ToDateString(PeriodStartDate)
-            rObj.PeriodEndDate = ToDateString(PeriodEndDate)
+            rObj.PeriodStartDate = PeriodStartDate
+            rObj.PeriodEndDate = PeriodEndDate
             SerializedRequest = rObj.ToJson()
             Timestamp = Now
         End Sub
 
-        Private Function ToDateString(ts As Date) As String
-            Return ts.ToString()
+        Private Function GetActiveDirectoryUserName() As String
+            Dim DomainUser As String = Security.Principal.WindowsIdentity.GetCurrent.Name.Replace("\", "/")
+            Dim AdEntry As New DirectoryServices.DirectoryEntry("WinNT://" & DomainUser)
+            Return AdEntry.Properties("FullName").Value
         End Function
     End Class
 End Namespace
