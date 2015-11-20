@@ -4,6 +4,7 @@ Namespace Domain
     Public Class Request
         Private _Id As Int32
         Public Property EbNumber As String
+        Public Property Prosecutor As String
         Public Property UserId As String
         Public Property BankId As Int32
         <ForeignKey("BankId")>
@@ -24,13 +25,15 @@ Namespace Domain
 
         Public Sub New()
         End Sub
-        Public Sub New(EbNo As String, B As ClearingNumber, rType As String, IdNumber As String, AccountNumber As String, PeriodStartDate As Date, PeriodEndDate As Date)
+        Public Sub New(EbNo As String, P As String, B As ClearingNumber, rType As String, IdNumber As String, AccountNumber As String, PeriodStartDate As Date, PeriodEndDate As Date)
             EbNumber = EbNo
+            Prosecutor = P
             UserId = GetActiveDirectoryUserName()
             Bank = B
             TypeOfRequest = rType
             Dim rObj = New RequestObject()
             rObj.EbNumber = EbNumber
+            rObj.Prosecutor = Prosecutor
             rObj.TypeOfRequest = rType
             rObj.IdNumber = IdNumber
             rObj.AccountNumber = AccountNumber

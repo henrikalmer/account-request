@@ -13,6 +13,8 @@ Class MainWindow
     End Sub
 
     Private Sub engagementButton_Click(sender As Object, e As RoutedEventArgs) Handles engagementButton.Click
+        layoutRoot.DataContext.CreateRequest()
+
         'Generate word file for order of type
         Dim tmpTabItem As New TabItem
         tmpTabItem = Me.tabControl.SelectedItem
@@ -113,18 +115,5 @@ Class MainWindow
 
     Private Sub ebNumberTextBox_LostFocus(sender As Object, e As RoutedEventArgs) Handles ebNumberTextBox.LostFocus
         layoutRoot.DataContext.CurrentCase.NormalizeEbNumber()
-    End Sub
-
-    Private Sub button1_Click(sender As Object, e As RoutedEventArgs) Handles button1.Click
-        Using Db = New AccountWorkDbContext()
-            Dim EbNo = layoutRoot.DataContext.CurrentCase.EbNumber
-            Dim Bank = (From X In Db.ClearingNumbers Select X Where X.Id = 98).SingleOrDefault()
-            Db.Requests.Add(New Request(EbNo, Bank, "1. Engagemangsförfrågan", "198407120172", Nothing, Today, Today))
-            Db.SaveChanges()
-        End Using
-
-        'axel testar wordklassen
-        Dim j As New WordDocument
-        'j.parseGenerateOrder("", "hh", "hh", "hh", "hh", "hh", "hh", "hh", "hh")
     End Sub
 End Class

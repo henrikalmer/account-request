@@ -11,6 +11,8 @@ Namespace Domain
         <DataMember>
         Public Property EbNumber As String
         <DataMember>
+        Public Property Prosecutor As String
+        <DataMember>
         Public Property TypeOfRequest As String
         <DataMember>
         Public Property IdNumber As String

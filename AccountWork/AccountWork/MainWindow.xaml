@@ -170,10 +170,9 @@
             </TabItem>
         </TabControl>
         <Label x:Name="bylineLabel" Grid.Row="2" Grid.Column="2"
-               Content="Av Axel Thor och Henrik Almér för EBM"
+               Content="Av Henrik Almér och Axel Thor för EBM"
                HorizontalAlignment="Right" Margin="0,0,10,0"
                VerticalAlignment="Bottom" FontStyle="Italic"
                FontSize="9.333" Height="22" Width="168"/>
-        <Button x:Name="button1" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Height="25" Margin="110,384,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>

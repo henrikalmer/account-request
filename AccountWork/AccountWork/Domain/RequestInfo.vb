@@ -1,6 +1,7 @@
 ﻿Namespace Domain
     Public Class RequestInfo
         Public Property EbNumber As String
+        Public Property Prosecutor As String
         Public Property RequestId As Int32
         Public Property BankName As String
         Public Property TypeOfRequest As String

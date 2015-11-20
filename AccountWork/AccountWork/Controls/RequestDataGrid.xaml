@@ -26,6 +26,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="EB-nummer" Binding="{Binding EbNumber}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Löpnummer" Binding="{Binding RequestId}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Åklagare" Binding="{Binding Prosecutor}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Bank" Binding="{Binding BankName}" />
                 <DataGridTextColumn Header="Frågetyp" Binding="{Binding TypeOfRequest}" />
                 <DataGridTextColumn Header="Skapad" Binding="{Binding Timestamp}" />
