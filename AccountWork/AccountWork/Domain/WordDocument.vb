@@ -1,104 +1,70 @@
-﻿Imports word = Microsoft.Office.Interop.Word
+﻿Imports System.IO
+Imports Word = Microsoft.Office.Interop.Word
 
 Namespace Domain
     Public Class WordDocument
-        Private Function wFile() As Byte()
-            Dim obj As Object = My.Resources.kontobestmall
-            Return CType(obj, Byte())
-        End Function
+        Private ReadOnly Property WordTemplate As Byte()
+            Get
+                Return My.Resources.kontobestmall
+            End Get
+        End Property
 
-        Public Function parseGenerateOrder(sEBnr As String, sAklname As String, sPnr As String, sBankName As String, sClearingno As String, sStartdate As String, sEnddate As String, sType As String) As String
-            Dim sDomainUser As String = Security.Principal.WindowsIdentity.GetCurrent.Name.Replace("\", "/")
-            Dim sADEntry As New DirectoryServices.DirectoryEntry("WinNT://" & sDomainUser)
-            Dim sFullName As String = sADEntry.Properties("FullName").Value
-            Dim oWord As word.Application
-            oWord = CreateObject("Word.Application")
-
-            Dim myTempFile As String = IO.Path.GetTempPath & "\mytemp.dotx"
-            My.Computer.FileSystem.WriteAllBytes(myTempFile, wFile, False)
-
-            With oWord
-                Stop
+        Public Function Generate(ReqObj As RequestObject, RequestId As Integer) As String
+            ' Define content
+            Dim DomainUser As String = Security.Principal.WindowsIdentity.GetCurrent.Name.Replace("\", "/")
+            Dim AdEntry As New DirectoryServices.DirectoryEntry("WinNT://" & DomainUser)
+            Dim FullName As String = AdEntry.Properties("FullName").Value
+            ' Create temp file
+            Dim TmpFile As String = Path.GetTempPath & "Begäran " & RequestId & ".doc"
+            My.Computer.FileSystem.WriteAllBytes(TmpFile, WordTemplate, False)
+            ' Write document
+            Dim WordApp As Word.Application = CreateObject("Word.Application")
+            With WordApp
                 .Visible = True
-                .Documents.Add(myTempFile)
+                .Documents.Add(TmpFile)
                 .ActiveDocument.Range.Font.Bold = True
                 .Selection.TypeText("Begäran om uppgifter enligt 11 § lag (2004: 297) om bank- och finansieringsrörelse")
                 .Selection.TypeParagraph()
                 .Selection.Font.Bold = False
                 .Selection.TypeParagraph()
                 .Selection.TypeParagraph()
-                .Selection.TypeText("I pågående förundersökning " & UCase(sEBnr) & " begär åklagare att uppgifter enligt 11 § lag (2004:297) om bank- och finansieringsrörelse om enskildes förhållanden lämnas ut enligt följande:")
+                .Selection.TypeText("I pågående förundersökning " & ReqObj.EbNumber & " begär åklagare att uppgifter enligt 11 § lag (2004:297) om bank- och finansieringsrörelse om enskildes förhållanden lämnas ut enligt följande:")
                 .Selection.TypeParagraph()
                 .Selection.TypeParagraph()
-                If sType = "Engagemangsförfrågan" Then
+                If ReqObj.TypeOfRequest = "1. Engagemangsförfrågan" Then
                     .Selection.TypeText("Engagemangsförfrågan bla bla")
                     .Selection.TypeParagraph()
                     .Selection.TypeParagraph()
-
-                    If Trim(sPnr) <> "" Then
-                        .Selection.TypeText("Personnr: " & sPnr)
-                        .Selection.TypeParagraph()
-                    End If
-
-                    If Trim(sClearingno) <> "" Then
-                        .Selection.TypeText("Clearingnr: " & sClearingno)
-                        .Selection.TypeParagraph()
-                    End If
-
-                    If Trim(sBankName) <> "" Then
-                        .Selection.TypeText("Bank (namn): " & sBankName)
-                        .Selection.TypeParagraph()
-                    End If
+                    .Selection.TypeText("Personnr: " & ReqObj.IdNumber)
+                    .Selection.TypeParagraph()
                 End If
 
-                If sType = "Kontotecknarförfrågan" Then
+                If ReqObj.TypeOfRequest = "2. Kontotecknarförfrågan" Then
                     .Selection.TypeText("Begäran om kontotecknarförfrågan bla bla")
                     .Selection.TypeParagraph()
                     .Selection.TypeParagraph()
-
-                    If Trim(sPnr) <> "" Then
-                        .Selection.TypeText("Personnr: " & sPnr)
-                        .Selection.TypeParagraph()
-                    End If
-
-                    If Trim(sClearingno) <> "" Then
-                        .Selection.TypeText("Clearingnr: " & sClearingno)
-                        .Selection.TypeParagraph()
-                    End If
-
-                    If Trim(sBankName) <> "" Then
-                        .Selection.TypeText("Bank (namn): " & sBankName)
-                        .Selection.TypeParagraph()
-                    End If
+                    .Selection.TypeText("Kontonummer: " & ReqObj.AccountNumber)
+                    .Selection.TypeParagraph()
                 End If
 
-                If sType = "Förenklat Kontoutdrag" Then
+                If ReqObj.TypeOfRequest = "3. Förenklat kontoutdrag" Then
                     .Selection.TypeText("Begäran om förenklat kontoutdrag bla bla")
                     .Selection.TypeParagraph()
                     .Selection.TypeParagraph()
-
-                    If Trim(sPnr) <> "" Then
-                        .Selection.TypeText("Personnr: " & sPnr)
-                        .Selection.TypeParagraph()
-                    End If
-
-                    If Trim(sClearingno) <> "" Then
-                        .Selection.TypeText("Clearingnr: " & sClearingno)
-                        .Selection.TypeParagraph()
-                    End If
-
-                    If Trim(sBankName) <> "" Then
-                        .Selection.TypeText("Bank (namn): " & sBankName)
-                        .Selection.TypeParagraph()
-                    End If
+                    .Selection.TypeText("Kontonummer: " & ReqObj.AccountNumber)
+                    .Selection.TypeParagraph()
                 End If
 
-                .Selection.TypeText("På uppdrag av åklagaren: " & sAklname)
+                .Selection.TypeText("Period, startdatum: " & ReqObj.PeriodStartDate)
                 .Selection.TypeParagraph()
-                .Selection.TypeText("Mvh " & sFullName)
-                'end same for all
+                .Selection.TypeText("Period, slutdatum: " & ReqObj.PeriodEndDate)
+                .Selection.TypeParagraph()
+                .Selection.TypeText("På uppdrag av åklagare " & ReqObj.Prosecutor)
+                .Selection.TypeParagraph()
+                .Selection.TypeText("Med vänlig hälsning, " & FullName)
             End With
-            Return myTempFile
+            WordApp.Documents.Close()
+            Return TmpFile
         End Function
     End Class
 End Namespace

@@ -1,4 +1,6 @@
-﻿Imports System.Globalization
+﻿
+Imports System.IO
+Imports System.Globalization
 Imports System.Threading
 Imports AccountWork.Domain
 
@@ -13,104 +15,45 @@ Class MainWindow
     End Sub
 
     Private Sub engagementButton_Click(sender As Object, e As RoutedEventArgs) Handles engagementButton.Click
-        layoutRoot.DataContext.CreateRequest()
-
-        'Generate word file for order of type
-        Dim tmpTabItem As New TabItem
-        tmpTabItem = Me.tabControl.SelectedItem
-
-        Dim MailOrderAttachment As New WordDocument
-        'spara dokumentet någonstans, som ole-obj i en sqlite? inte på G:\ eller H:\ i vart fall
-        Dim EbNumber = ebNumberTextBox.Text
-        Dim Prosecutor = aklTextBox.Text
-        Dim Pnr = engagementForm.pnrTextBox.Text
-        Dim PeriodStart = engagementForm.dateStartDatePicker.Text.ToString
-        Dim PeriodEnd = engagementForm.dateEndDatePicker.Text.ToString
-        Dim TabHeader = tmpTabItem.Header.ToString
-        Dim BankName = ""
-        Dim BankClearing = ""
-        If engagementForm.allBanksCheckbox.IsChecked = False Then
-            BankName = engagementForm.bankFinder.bankComboBox.Text
-            BankClearing = engagementForm.bankFinder.clearingTextBox.Text
-        Else
-            BankName = "ÖPPEN FRÅGA ALLA BANKER"
-            BankClearing = "ÖPPEN FRÅGA ALLA CLEARINGNR"
-        End If
-        MailOrderAttachment.parseGenerateOrder("c:\temp\kontobestmall.dotx",
-                                               EbNumber, Prosecutor, Pnr,
-                                               BankName, BankClearing,
-                                               PeriodStart, PeriodEnd)
-        tmpTabItem = Nothing
-        MailOrderAttachment = Nothing
-
-        'email the file to relevant bank(s)
-        'whereTo As String, cc As String, attachment As String, strtype As String, strSubj As String
-        ' Dim sendRequest As New OutlookCommunicator
-        ' sendRequest.MailBanks(whereTo:=banken@banken.se, attachment:=minfil.docx, cc:=regbrevlådan, strSubj:=ebnumret, strtype:=engagemang/konto etc )
+        Dim Type As String = "1. Engagemangsförfrågan"
+        Dim Bank As ClearingNumber = engagementForm.layoutRoot.DataContext.Bank
+        Dim Pnr As String = engagementForm.pnrTextBox.Text
+        Dim PeriodStart As Date = engagementForm.dateStartDatePicker.DisplayDate
+        Dim PeriodEnd As Date = engagementForm.dateEndDatePicker.DisplayDate
+        Dim Req As Request = layoutRoot.DataContext.CreateRequest(Type, Bank, Pnr, Nothing, PeriodStart, PeriodEnd)
+        GenerateEmail(Req)
     End Sub
 
     Private Sub accountButton_Click(sender As Object, e As RoutedEventArgs) Handles accountButton.Click
-        'Generate word file for order of type
-        Dim tmpTabItem As New TabItem
-        tmpTabItem = Me.tabControl.SelectedItem
-
-        Dim MailOrderAttachment As New WordDocument
-        'spara dokumentet någonstans, som ole-obj i en sqlite? inte på G:\ eller H:\ i vart fall
-        Dim EbNumber = ebNumberTextBox.Text
-        Dim Prosecutor = aklTextBox.Text
-        Dim AccountNumber = engagementForm.pnrTextBox.Text
-        Dim PeriodStart = engagementForm.dateStartDatePicker.Text.ToString
-        Dim PeriodEnd = engagementForm.dateEndDatePicker.Text.ToString
-        Dim BankName = engagementForm.bankFinder.bankComboBox.Text
-        Dim BankClearing = engagementForm.bankFinder.clearingTextBox.Text
-        Dim TabHeader = tmpTabItem.Header.ToString
-        'MailOrderAttachment.parseGenerateOrder("c:\temp\kontobestmall.dotx",
-        '                                       EbNumber, Prosecutor,
-        '                                       AccountNumber BankName,
-        '                                       BankClearing, PeriodStart,
-        '                                       PeriodEnd, TabHeader)
-        tmpTabItem = Nothing
-        MailOrderAttachment = Nothing
-
-        'email the file to relevant bank(s)
-        'whereTo As String, cc As String, attachment As String, strtype As String, strSubj As String
-        ' Dim sendRequest As New OutlookCommunicator
-        ' sendRequest.MailBanks(whereTo:=banken@banken.se, attachment:=minfil.docx, cc:=regbrevlådan, strSubj:=ebnumret, strtype:=engagemang/konto etc )
+        Dim Type As String = "2. Kontotecknarförfrågan"
+        Dim Bank As ClearingNumber = accountHolderForm.layoutRoot.DataContext.Bank
+        Dim AccNo As String = accountHolderForm.bankFinder.clearingTextBox.Text
+        Dim PeriodStart As Date = accountHolderForm.dateStartDatePicker.DisplayDate
+        Dim PeriodEnd As Date = accountHolderForm.dateEndDatePicker.DisplayDate
+        Dim Req As Request = layoutRoot.DataContext.CreateRequest(Type, Bank, Nothing, AccNo, PeriodStart, PeriodEnd)
+        GenerateEmail(Req)
     End Sub
 
     Private Sub transactionButton_Click(sender As Object, e As RoutedEventArgs) Handles transactionButton.Click
-        'Generate word file for order of type
-        Dim tmpTabItem As New TabItem
-        tmpTabItem = Me.tabControl.SelectedItem
-
-        Dim MailOrderAttachment As New WordDocument
-        'spara dokumentet någonstans, som ole-obj i en sqlite? inte på G:\ eller H:\ i vart fall
-        Dim EbNumber = ebNumberTextBox.Text
-        Dim Prosecutor = aklTextBox.Text
-        Dim AccountNumber = engagementForm.pnrTextBox.Text
-        Dim PeriodStart = engagementForm.dateStartDatePicker.Text.ToString
-        Dim PeriodEnd = engagementForm.dateEndDatePicker.Text.ToString
-        Dim BankName = engagementForm.bankFinder.bankComboBox.Text
-        Dim BankClearing = engagementForm.bankFinder.clearingTextBox.Text
-        Dim TabHeader = tmpTabItem.Header.ToString
-        'MailOrderAttachment.parseGenerateOrder("c:\temp\kontobestmall.dotx",
-        '                                       EbNumber, Prosecutor,
-        '                                       AccountNumber BankName,
-        '                                       BankClearing, PeriodStart,
-        '                                       PeriodEnd, TabHeader)
-        tmpTabItem = Nothing
-        MailOrderAttachment = Nothing
-
-        'email the file to relevant bank(s)
-        'whereTo As String, cc As String, attachment As String, strtype As String, strSubj As String
-        ' Dim sendRequest As New OutlookCommunicator
-        ' sendRequest.MailBanks(whereTo:=banken@banken.se, attachment:=minfil.docx, cc:=regbrevlådan, strSubj:=ebnumret, strtype:=engagemang/konto etc )
+        Dim Type As String = "3. Förenklat kontoutdrag"
+        Dim Bank As ClearingNumber = transactionForm.layoutRoot.DataContext.Bank
+        Dim AccNo As String = transactionForm.bankFinder.clearingTextBox.Text
+        Dim PeriodStart As Date = transactionForm.dateStartDatePicker.DisplayDate
+        Dim PeriodEnd As Date = transactionForm.dateEndDatePicker.DisplayDate
+        Dim Req As Request = layoutRoot.DataContext.CreateRequest(Type, Bank, Nothing, AccNo, PeriodStart, PeriodEnd)
+        GenerateEmail(Req)
     End Sub
 
-    Private Sub button2_Click(sender As Object, e As RoutedEventArgs) Handles button2.Click
-        Dim test As New OutlookCommunicator
-
-        MsgBox(test.CheckIfNewMailFromBanks("EB 12345-15"))
+    Private Sub GenerateEmail(Req As Request)
+        Dim ReqObj As New RequestObject(Req.SerializedRequest, "json")
+        Dim WordGenerator As New WordDocument
+        Dim WordAttachment = WordGenerator.Generate(ReqObj, Req.Id)
+        Dim XmlAttachment As String = Path.GetTempPath & Req.Id & ".xml"
+        Dim JsonAttachment As String = Path.GetTempPath & Req.Id & ".json"
+        My.Computer.FileSystem.WriteAllText(XmlAttachment, ReqObj.ToXml(), False)
+        My.Computer.FileSystem.WriteAllText(JsonAttachment, ReqObj.ToJson(), False)
+        Dim OutlookCommunicator As New OutlookCommunicator
+        OutlookCommunicator.Generate("banken@banken.se", "kansli@ekobrottsmyndigheten.se", WordAttachment, XmlAttachment, JsonAttachment, ReqObj.TypeOfRequest)
     End Sub
 
     Private Sub ebNumberTextBox_LostFocus(sender As Object, e As RoutedEventArgs) Handles ebNumberTextBox.LostFocus

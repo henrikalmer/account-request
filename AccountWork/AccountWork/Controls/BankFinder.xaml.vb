@@ -22,7 +22,6 @@ Public Class BankFinder
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        Dim test = Me
         layoutRoot.DataContext = New BankFinderViewModel()
     End Sub
 

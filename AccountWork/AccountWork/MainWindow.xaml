@@ -160,9 +160,6 @@
             <TabItem Header="Min beställningshistorik">
                 <Grid >
                     <local:RequestDataGrid x:Name="requestHistoryDataGrid" />
-                    <Button x:Name="button2" Content="Test leta igenom Outlook"
-                            HorizontalAlignment="Left" VerticalAlignment="Top"
-                            Width="225" Margin="254,339,0,0"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Administrera bankinfo">

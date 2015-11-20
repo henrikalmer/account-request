@@ -35,15 +35,16 @@ Public Class MainWindowViewModel
         OnPropertyChanged("TransactionFormIsValid")
     End Sub
 
-    Public Sub CreateRequest()
+    Public Function CreateRequest(Type As String, Bank As ClearingNumber, Pnr As String, AccNr As String, StartDate As Date, EndDate As Date) As Request
         Using Db = New AccountWorkDbContext()
             Dim EbNo = CurrentCase.EbNumber
             Dim P = CurrentCase.Prosecutor
-            Dim Bank = (From X In Db.ClearingNumbers Select X Where X.Id = 98).SingleOrDefault()
-            Db.Requests.Add(New Request(EbNo, P, Bank, "1. Engagemangsförfrågan", "198407120172", Nothing, Today, Today))
+            Dim Req As New Request(EbNo, P, Bank, Type, Pnr, AccNr, StartDate, EndDate)
+            Db.Requests.Add(Req)
             Db.SaveChanges()
             VMMediator.NotifyColleagues(MediatorMessages.RequestAdded,
                                         New Message("User created a new Request."))
+            Return Req
         End Using
-    End Sub
+    End Function
 End Class
