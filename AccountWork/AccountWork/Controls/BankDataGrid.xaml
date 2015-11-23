@@ -33,17 +33,20 @@
                 <DataGridTextColumn Header="Namn" Binding="{Binding Name,
                                                             UpdateSourceTrigger=LostFocus}" />
                 <DataGridTextColumn Header="Clearingnr, start"
-                                                Binding="{Binding ClearingNumberIntervalStart,
-                                                          UpdateSourceTrigger=LostFocus}" />
+                                    Binding="{Binding ClearingNumberIntervalStart,
+                                              UpdateSourceTrigger=LostFocus}" />
                 <DataGridTextColumn Header="Clearingnr, slut"
-                                                Binding="{Binding ClearingNumberIntervalEnd,
-                                                          UpdateSourceTrigger=LostFocus}" />
+                                    Binding="{Binding ClearingNumberIntervalEnd,
+                                              UpdateSourceTrigger=LostFocus}" />
                 <DataGridTextColumn Header="E-post" Binding="{Binding Email,
                                                               UpdateSourceTrigger=LostFocus}" />
                 <DataGridTextColumn Header="Telefon" Binding="{Binding PhoneNumber,
                                                                UpdateSourceTrigger=LostFocus}" />
                 <DataGridTextColumn Header="Fax" Binding="{Binding FaxNumber,
-                                                                   UpdateSourceTrigger=LostFocus}" />
+                                                           UpdateSourceTrigger=LostFocus}" />
+                <DataGridCheckBoxColumn Header="Avtal finns" Binding="{Binding MayContact,
+                                                                       UpdateSourceTrigger=LostFocus}" />
+
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="dataGridEditButton"

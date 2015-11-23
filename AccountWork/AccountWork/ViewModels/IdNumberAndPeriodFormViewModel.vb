@@ -79,6 +79,8 @@ Public Class IdNumberAndPeriodFormViewModel
     Private Function ValidateBankChoice() As String
         If (AllBanks = False And Bank Is Nothing) Then
             Return "Ange en bank eller kryssa i checkboxen för att fråga samtliga banker."
+        ElseIf (Bank.MayContact = False) Then
+            Return "EBM har inget avtal med " & Bank.Name
         End If
         Return String.Empty
     End Function

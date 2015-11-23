@@ -58,5 +58,6 @@ Class MainWindow
 
     Private Sub ebNumberTextBox_LostFocus(sender As Object, e As RoutedEventArgs) Handles ebNumberTextBox.LostFocus
         layoutRoot.DataContext.CurrentCase.NormalizeEbNumber()
+        layoutRoot.DataContext.CurrentCase.SearchProsecutors()
     End Sub
 End Class

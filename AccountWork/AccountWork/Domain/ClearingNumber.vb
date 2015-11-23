@@ -10,6 +10,7 @@ Namespace Domain
         Public Property PhoneNumber As String
         Public Property FaxNumber As String
         Public Property Address As String
+        Public Property MayContact As Boolean
 
         <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
         Public Property Id() As Int32

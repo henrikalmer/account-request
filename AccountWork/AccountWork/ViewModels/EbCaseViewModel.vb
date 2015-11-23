@@ -47,6 +47,19 @@ Namespace Domain
             End If
         End Sub
 
+        ' Search database for the prosecutor for the current EB number
+        Public Sub SearchProsecutors()
+            Dim Query = From X In Db.Requests
+                        Select X
+                        Where X.EbNumber = EbNumber
+                        Order By X.Timestamp Descending
+            Dim Req As Request = Query.FirstOrDefault()
+            If (Not Req Is Nothing) Then
+                Prosecutor = Req.Prosecutor
+                OnPropertyChanged("Prosecutor")
+            End If
+        End Sub
+
 #Region "IDataErrorInfo"
         Public ReadOnly Property [Error] As String Implements IDataErrorInfo.Error
             Get

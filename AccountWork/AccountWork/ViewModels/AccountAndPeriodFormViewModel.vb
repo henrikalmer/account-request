@@ -50,6 +50,8 @@ Public Class AccountAndPeriodFormViewModel
     Private Function ValidateBankChoice() As String
         If (Bank Is Nothing) Then
             Return "Ange ett giltigt kontonummer."
+        ElseIf (Bank.MayContact = False) Then
+            Return "EBM har inget avtal med " & Bank.Name
         End If
         Return String.Empty
     End Function

@@ -36,20 +36,18 @@ Public Class MainWindowViewModel
     End Sub
 
     Public Function CreateRequest(Type As String, Bank As ClearingNumber, Pnr As String, AccNr As String, StartDate As Date, EndDate As Date) As Request
-        Using Db = New AccountWorkDbContext()
-            Dim EbNo = CurrentCase.EbNumber
-            Dim P = CurrentCase.Prosecutor
-            Dim Req As New Request(EbNo, P, Bank, Type, Pnr, AccNr, StartDate, EndDate)
-            Db.Requests.Add(Req)
-            Db.SaveChanges()
-            ' Update request id in child request object
-            Dim ReqObj As New RequestObject(Req.SerializedRequest, "json")
-            ReqObj.RequestId = Req.Id
-            Req.SerializedRequest = ReqObj.ToJson()
-            Db.SaveChanges()
-            VMMediator.NotifyColleagues(MediatorMessages.RequestAdded,
-                                        New Message("User created a new Request."))
-            Return Req
-        End Using
+        Dim EbNo = CurrentCase.EbNumber
+        Dim P = CurrentCase.Prosecutor
+        Dim Req As New Request(EbNo, P, Bank, Type, Pnr, AccNr, StartDate, EndDate)
+        Db.Requests.Add(Req)
+        Db.SaveChanges()
+        ' Update request id in child request object
+        Dim ReqObj As New RequestObject(Req.SerializedRequest, "json")
+        ReqObj.RequestId = Req.Id
+        Req.SerializedRequest = ReqObj.ToJson()
+        Db.SaveChanges()
+        VMMediator.NotifyColleagues(MediatorMessages.RequestAdded,
+                                    New Message("User created a new Request."))
+        Return Req
     End Function
 End Class
