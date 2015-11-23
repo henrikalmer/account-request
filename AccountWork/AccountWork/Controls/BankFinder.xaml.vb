@@ -28,6 +28,7 @@ Public Class BankFinder
     Public Sub Enable()
         IsEnabled = True
         clearingTextBox.IsEnabled = True
+        clearingTextBox_TextChanged(clearingTextBox, Nothing)
     End Sub
 
     Public Sub Disable()

@@ -53,7 +53,13 @@ Class MainWindow
         My.Computer.FileSystem.WriteAllText(XmlAttachment, ReqObj.ToXml(), False)
         My.Computer.FileSystem.WriteAllText(JsonAttachment, ReqObj.ToJson(), False)
         Dim OutlookCommunicator As New OutlookCommunicator
-        OutlookCommunicator.Generate(Req.Bank.Email, "", WordAttachment, XmlAttachment, JsonAttachment, ReqObj.TypeOfRequest)
+        Dim Recipient As String
+        If (Req.Bank Is Nothing) Then
+            Recipient = "testar@testar.se"
+        Else
+            Recipient = Req.Bank.Email
+        End If
+        OutlookCommunicator.Generate(Recipient, "", WordAttachment, XmlAttachment, JsonAttachment, ReqObj.TypeOfRequest)
     End Sub
 
     Private Sub ebNumberTextBox_LostFocus(sender As Object, e As RoutedEventArgs) Handles ebNumberTextBox.LostFocus

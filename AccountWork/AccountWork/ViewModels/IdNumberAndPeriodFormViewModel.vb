@@ -13,6 +13,9 @@ Public Class IdNumberAndPeriodFormViewModel
         End Get
         Set(value As Boolean)
             _AllBanks = value
+            If (_AllBanks = True) Then
+                Bank = Nothing
+            End If
             OnPropertyChanged("AllBanks")
             OnPropertyChanged("Bank")
         End Set
@@ -77,10 +80,12 @@ Public Class IdNumberAndPeriodFormViewModel
     End Function
 
     Private Function ValidateBankChoice() As String
-        If (AllBanks = False And Bank Is Nothing) Then
-            Return "Ange en bank eller kryssa i checkboxen för att fråga samtliga banker."
-        ElseIf (Bank.MayContact = False) Then
-            Return "EBM har inget avtal med " & Bank.Name
+        If (AllBanks = False) Then
+            If (Bank Is Nothing) Then
+                Return "Ange en bank eller kryssa i checkboxen för att fråga samtliga banker."
+            ElseIf (Bank.MayContact = False) Then
+                Return "EBM har inget avtal med " & Bank.Name
+            End If
         End If
         Return String.Empty
     End Function
