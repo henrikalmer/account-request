@@ -28,7 +28,7 @@ Namespace Domain
         Public Sub New(EbNo As String, P As String, B As ClearingNumber, rType As String, IdNumber As String, AccountNumber As String, PeriodStartDate As Date, PeriodEndDate As Date)
             EbNumber = EbNo
             Prosecutor = P
-            UserId = GetActiveDirectoryUserName()
+            UserId = Utils.GetActiveDirectoryUserName()
             Bank = B
             TypeOfRequest = rType
             Dim rObj = New RequestObject()
@@ -42,11 +42,5 @@ Namespace Domain
             SerializedRequest = rObj.ToJson()
             Timestamp = Now
         End Sub
-
-        Private Function GetActiveDirectoryUserName() As String
-            Dim DomainUser As String = Security.Principal.WindowsIdentity.GetCurrent.Name.Replace("\", "/")
-            Dim AdEntry As New DirectoryServices.DirectoryEntry("WinNT://" & DomainUser)
-            Return AdEntry.Properties("FullName").Value
-        End Function
     End Class
 End Namespace

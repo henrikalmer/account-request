@@ -16,6 +16,17 @@ Public Class BankDataGridViewModel
         End Set
     End Property
 
+    Public ReadOnly Property EditButtonsVisibility As String
+        Get
+            Dim UserId As String = Utils.GetActiveDirectoryUserName()
+            Dim PermittedUsers As List(Of String) = My.Resources.Superusers.Split(";").ToList()
+            If (PermittedUsers.Contains(UserId)) Then
+                Return "Visible"
+            End If
+            Return "Hidden"
+        End Get
+    End Property
+
     Public Sub New()
         ClearingNumbers = New ObservableCollection(Of ClearingNumber)(Db.ClearingNumbers.ToList())
     End Sub

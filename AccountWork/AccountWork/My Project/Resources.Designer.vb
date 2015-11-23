@@ -81,7 +81,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to almerhen;thoraxel.
+        '''  Looks up a localized string similar to almerhen;thoraxel;1.
         '''</summary>
         Public ReadOnly Property Superusers() As String
             Get
