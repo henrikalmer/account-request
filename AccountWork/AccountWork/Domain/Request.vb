@@ -2,11 +2,11 @@
 
 Namespace Domain
     Public Class Request
-        Private _Id As Int32
+        Private _Id As Integer
         Public Property EbNumber As String
         Public Property Prosecutor As String
         Public Property UserId As String
-        Public Property BankId As Int32
+        Public Property BankId As Integer
         <ForeignKey("BankId")>
         Public Property Bank As ClearingNumber
         Public Property Timestamp As Date
@@ -14,11 +14,11 @@ Namespace Domain
         Public Property SerializedRequest As String
         Public Property Comment As String
 
-        Public Property Id() As Int32
+        Public Property Id() As Integer
             Get
                 Return _Id
             End Get
-            Protected Set(value As Int32)
+            Protected Set(value As Integer)
                 _Id = value
             End Set
         End Property

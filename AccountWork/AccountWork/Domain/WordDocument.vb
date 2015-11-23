@@ -15,58 +15,64 @@ Namespace Domain
             Dim AdEntry As New DirectoryServices.DirectoryEntry("WinNT://" & DomainUser)
             Dim FullName As String = AdEntry.Properties("FullName").Value
             ' Create temp file
-            Dim TmpFile As String = Path.GetTempPath & "Begäran " & RequestId & ".doc"
-            My.Computer.FileSystem.WriteAllBytes(TmpFile, WordTemplate, False)
+            Dim TmpPath As String = Path.GetTempPath() & Path.GetRandomFileName()
+            Dim AttachmentPath As String = Path.GetTempPath() & "Begäran " & RequestId & ".doc"
+            Using fs As FileStream = File.Create(TmpPath)
+                fs.Write(WordTemplate, 0, WordTemplate.Length)
+                fs.Close()
+            End Using
             ' Write document
             Dim WordApp As Word.Application = CreateObject("Word.Application")
-            With WordApp
-                .Visible = True
-                .Documents.Add(TmpFile)
-                .ActiveDocument.Range.Font.Bold = True
-                .Selection.TypeText("Begäran om uppgifter enligt 11 § lag (2004: 297) om bank- och finansieringsrörelse")
-                .Selection.TypeParagraph()
-                .Selection.Font.Bold = False
-                .Selection.TypeParagraph()
-                .Selection.TypeParagraph()
-                .Selection.TypeText("I pågående förundersökning " & ReqObj.EbNumber & " begär åklagare att uppgifter enligt 11 § lag (2004:297) om bank- och finansieringsrörelse om enskildes förhållanden lämnas ut enligt följande:")
-                .Selection.TypeParagraph()
-                .Selection.TypeParagraph()
-                If ReqObj.TypeOfRequest = "1. Engagemangsförfrågan" Then
-                    .Selection.TypeText("Engagemangsförfrågan bla bla")
-                    .Selection.TypeParagraph()
-                    .Selection.TypeParagraph()
-                    .Selection.TypeText("Personnr: " & ReqObj.IdNumber)
-                    .Selection.TypeParagraph()
-                End If
-
-                If ReqObj.TypeOfRequest = "2. Kontotecknarförfrågan" Then
-                    .Selection.TypeText("Begäran om kontotecknarförfrågan bla bla")
-                    .Selection.TypeParagraph()
-                    .Selection.TypeParagraph()
-                    .Selection.TypeText("Kontonummer: " & ReqObj.AccountNumber)
-                    .Selection.TypeParagraph()
-                End If
-
-                If ReqObj.TypeOfRequest = "3. Förenklat kontoutdrag" Then
-                    .Selection.TypeText("Begäran om förenklat kontoutdrag bla bla")
-                    .Selection.TypeParagraph()
-                    .Selection.TypeParagraph()
-                    .Selection.TypeText("Kontonummer: " & ReqObj.AccountNumber)
-                    .Selection.TypeParagraph()
-                End If
-
-                .Selection.TypeText("Period, startdatum: " & ReqObj.PeriodStartDate)
-                .Selection.TypeParagraph()
-                .Selection.TypeText("Period, slutdatum: " & ReqObj.PeriodEndDate)
-                .Selection.TypeParagraph()
-                .Selection.TypeText("På uppdrag av åklagare " & ReqObj.Prosecutor)
-                .Selection.TypeParagraph()
-                .Selection.TypeText("Med vänlig hälsning, " & FullName)
+            Dim Documents As Word.Documents = WordApp.Documents
+            Dim Doc As Word.Document = Documents.Add(TmpPath)
+            Dim Paragraph As Word.Paragraph = Doc.Paragraphs.Add()
+            With Paragraph
+                .Range.Text = "Begäran om uppgifter enligt 11 § lag (2004: 297) om bank- och finansieringsrörelse"
+                .Range.Font.Bold = True
+                .Format.SpaceAfter = 24
+                .Range.InsertParagraphAfter()
             End With
-            WordApp.Documents.Close()
-            Return TmpFile
+
+            Paragraph = Doc.Paragraphs.Add()
+            With Paragraph
+                .Range.Text = "I pågående förundersökning " & ReqObj.EbNumber &
+                    " begär åklagare att uppgifter enligt 11 § lag (2004:297) om" &
+                    " bank- och finansieringsrörelse om enskildes förhållanden lämnas ut enligt följande:"
+                .Range.Font.Bold = False
+                .Format.SpaceAfter = 12
+                .Range.InsertParagraphAfter()
+            End With
+
+            Paragraph = Doc.Paragraphs.Add()
+            With Paragraph
+                .Range.Font.Bold = False
+                .Format.SpaceAfter = 12
+                If ReqObj.TypeOfRequest = "1. Engagemangsförfrågan" Then
+                    .Range.Text = "Engagemangsförfrågan bla bla"
+                    .Range.Text &= "Personnr: " & ReqObj.IdNumber
+                ElseIf ReqObj.TypeOfRequest = "2. Kontotecknarförfrågan" Then
+                    .Range.Text = "Begäran om kontotecknarförfrågan bla bla"
+                    .Range.Text &= "Kontonummer: " & ReqObj.AccountNumber
+                ElseIf ReqObj.TypeOfRequest = "3. Förenklat kontoutdrag" Then
+                    .Range.Text = "Begäran om förenklat kontoutdrag bla bla"
+                    .Range.Text &= "Kontonummer: " & ReqObj.AccountNumber
+                End If
+                .Range.InsertParagraphAfter()
+            End With
+
+            Paragraph = Doc.Paragraphs.Add()
+            With Paragraph
+                .Range.Text = "Period, startdatum: " & ReqObj.PeriodStartDate
+                .Range.Text &= "Period, slutdatum: " & ReqObj.PeriodEndDate
+                .Range.Text &= "På uppdrag av åklagare " & ReqObj.Prosecutor
+                .Range.Text &= "Med vänlig hälsning, " & FullName
+                .Range.Font.Bold = False
+                .Range.InsertParagraphAfter()
+            End With
+
+            Doc.SaveAs2(AttachmentPath)
+            WordApp.Quit()
+            Return AttachmentPath
         End Function
     End Class
 End Namespace
-
-

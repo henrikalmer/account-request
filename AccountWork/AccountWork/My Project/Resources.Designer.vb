@@ -79,5 +79,14 @@ Namespace My.Resources
                 Return CType(obj,Byte())
             End Get
         End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to almerhen;thoraxel.
+        '''</summary>
+        Public ReadOnly Property Superusers() As String
+            Get
+                Return ResourceManager.GetString("Superusers", resourceCulture)
+            End Get
+        End Property
     End Module
 End Namespace

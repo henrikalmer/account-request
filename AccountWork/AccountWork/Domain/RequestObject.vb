@@ -13,6 +13,8 @@ Namespace Domain
         <DataMember>
         Public Property Prosecutor As String
         <DataMember>
+        Public Property RequestId As Integer
+        <DataMember>
         Public Property TypeOfRequest As String
         <DataMember>
         Public Property IdNumber As String
@@ -76,6 +78,8 @@ Namespace Domain
 
         Public Sub FromObject(obj As RequestObject)
             EbNumber = obj.EbNumber
+            Prosecutor = obj.Prosecutor
+            RequestId = obj.RequestId
             TypeOfRequest = obj.TypeOfRequest
             IdNumber = obj.IdNumber
             AccountNumber = obj.AccountNumber

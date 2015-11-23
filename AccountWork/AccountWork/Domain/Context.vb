@@ -22,4 +22,3 @@ Namespace Domain
         End Sub
     End Class
 End Namespace
-

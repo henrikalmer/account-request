@@ -42,6 +42,11 @@ Public Class MainWindowViewModel
             Dim Req As New Request(EbNo, P, Bank, Type, Pnr, AccNr, StartDate, EndDate)
             Db.Requests.Add(Req)
             Db.SaveChanges()
+            ' Update request id in child request object
+            Dim ReqObj As New RequestObject(Req.SerializedRequest, "json")
+            ReqObj.RequestId = Req.Id
+            Req.SerializedRequest = ReqObj.ToJson()
+            Db.SaveChanges()
             VMMediator.NotifyColleagues(MediatorMessages.RequestAdded,
                                         New Message("User created a new Request."))
             Return Req

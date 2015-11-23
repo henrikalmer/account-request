@@ -124,4 +124,8 @@
   <data name="kontobestmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\kontobestmall.dotx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Superusers" xml:space="preserve">
+    <value>almerhen;thoraxel</value>
+    <comment>Users with permission to edit bank information using the application.</comment>
+  </data>
 </root>
