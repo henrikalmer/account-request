@@ -143,8 +143,8 @@
     <Compile Include="LuhnCheck.vb" />
     <Compile Include="ViewModels\RequestDataGridViewModel.vb" />
     <Compile Include="ViewModels\EbCaseViewModel.vb" />
-    <Compile Include="Domain\OutlookCommunicator.vb" />
-    <Compile Include="Domain\WordDocument.vb" />
+    <Compile Include="OutlookCommunicator.vb" />
+    <Compile Include="WordGenerator.vb" />
     <Compile Include="MediatorMessages.vb" />
     <Compile Include="Message.vb" />
     <Compile Include="ViewModels\BankDataGridViewModel.vb" />

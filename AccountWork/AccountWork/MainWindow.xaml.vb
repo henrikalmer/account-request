@@ -46,14 +46,14 @@ Class MainWindow
 
     Private Sub GenerateEmail(Req As Request)
         Dim ReqObj As New RequestObject(Req.SerializedRequest, "json")
-        Dim WordGenerator As New WordDocument
+        Dim WordGenerator As New WordGenerator
         Dim WordAttachment = WordGenerator.Generate(ReqObj, Req.Id)
         Dim XmlAttachment As String = Path.GetTempPath & Req.Id & ".xml"
         Dim JsonAttachment As String = Path.GetTempPath & Req.Id & ".json"
         My.Computer.FileSystem.WriteAllText(XmlAttachment, ReqObj.ToXml(), False)
         My.Computer.FileSystem.WriteAllText(JsonAttachment, ReqObj.ToJson(), False)
         Dim OutlookCommunicator As New OutlookCommunicator
-        OutlookCommunicator.Generate("banken@banken.se", "kansli@ekobrottsmyndigheten.se", WordAttachment, XmlAttachment, JsonAttachment, ReqObj.TypeOfRequest)
+        OutlookCommunicator.Generate(Req.Bank.Email, "", WordAttachment, XmlAttachment, JsonAttachment, ReqObj.TypeOfRequest)
     End Sub
 
     Private Sub ebNumberTextBox_LostFocus(sender As Object, e As RoutedEventArgs) Handles ebNumberTextBox.LostFocus

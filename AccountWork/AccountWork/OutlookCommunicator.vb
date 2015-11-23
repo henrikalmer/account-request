@@ -1,5 +1,4 @@
 ﻿Imports Outlook = Microsoft.Office.Interop.Outlook
-Imports System.Runtime.InteropServices
 
 Public Class OutlookCommunicator
     WithEvents Momentary_session As Outlook.Application
@@ -22,7 +21,7 @@ Public Class OutlookCommunicator
             End If
             Dim RetVal = Recipients.ResolveAll()
             Email.Subject = "Beställning av kontoutdrag/engagemang"
-            Email.Body = "Vi beställer härmed in " & LCase(Type) & " enligt bifogad fil. "
+            Email.Body = "Vi beställer härmed in " & LCase(Type) & " enligt bifogad fil." & vbNewLine
             Email.BodyFormat = Outlook.OlBodyFormat.olFormatRichText
             Dim Attachments As Outlook.Attachments = Email.Attachments
             Attachments.Add(WordFile)
