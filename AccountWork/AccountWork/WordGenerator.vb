@@ -10,10 +10,7 @@ Public Class WordGenerator
     End Property
 
     Public Function Generate(ReqObj As RequestObject, RequestId As Integer) As String
-        ' Define content
-        Dim DomainUser As String = Security.Principal.WindowsIdentity.GetCurrent.Name.Replace("\", "/")
-        Dim AdEntry As New DirectoryServices.DirectoryEntry("WinNT://" & DomainUser)
-        Dim FullName As String = AdEntry.Properties("FullName").Value
+        Dim FullName As String = Utils.GetActiveDirectoryFullName()
         ' Create temp file
         Dim TmpPath As String = Path.GetTempPath() & Path.GetRandomFileName()
         Dim AttachmentPath As String = Path.GetTempPath() & "Begäran " & RequestId & ".doc"
@@ -47,13 +44,13 @@ Public Class WordGenerator
         With Paragraph
             .Range.Font.Bold = False
             .Format.SpaceAfter = 12
-            If ReqObj.TypeString = "1. Engagemangsförfrågan" Then
+            If ReqObj.TypeId = 1 Then
                 .Range.Text = "Engagemangsförfrågan bla bla"
                 .Range.Text &= "Personnr: " & ReqObj.IdNumber
-            ElseIf ReqObj.TypeString = "2. Kontotecknarförfrågan" Then
+            ElseIf ReqObj.TypeId = 2 Then
                 .Range.Text = "Begäran om kontotecknarförfrågan bla bla"
                 .Range.Text &= "Kontonummer: " & ReqObj.AccountNumber
-            ElseIf ReqObj.TypeString = "3. Förenklat kontoutdrag" Then
+            ElseIf ReqObj.TypeId = 3 Then
                 .Range.Text = "Begäran om förenklat kontoutdrag bla bla"
                 .Range.Text &= "Kontonummer: " & ReqObj.AccountNumber
             End If
