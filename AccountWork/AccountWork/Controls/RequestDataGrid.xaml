@@ -27,8 +27,8 @@
                 <DataGridTextColumn Header="EB-nummer" Binding="{Binding EbNumber}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Löpnummer" Binding="{Binding RequestId}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Åklagare" Binding="{Binding Prosecutor}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Bank" Binding="{Binding BankName}" />
-                <DataGridTextColumn Header="Frågetyp" Binding="{Binding TypeOfRequest}" />
+                <DataGridTextColumn Header="Bank" Binding="{Binding Bank.Name}" />
+                <DataGridTextColumn Header="Frågetyp" Binding="{Binding TypeString}" />
                 <DataGridTextColumn Header="Skapad" Binding="{Binding Timestamp}" />
                 <DataGridTextColumn Header="Parametrar" Binding="{Binding Parameters}" />
                 <DataGridTextColumn Header="Kommentar" Binding="{Binding Comment}" />

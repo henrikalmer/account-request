@@ -10,7 +10,8 @@ Namespace Domain
         <ForeignKey("BankId")>
         Public Property Bank As ClearingNumber
         Public Property Timestamp As Date
-        Public Property TypeOfRequest As String
+        Public Property TypeId As Integer
+        Public Property TypeString As String
         Public Property SerializedRequest As String
         Public Property Comment As String
 
@@ -25,16 +26,20 @@ Namespace Domain
 
         Public Sub New()
         End Sub
-        Public Sub New(EbNo As String, P As String, B As ClearingNumber, rType As String, IdNumber As String, AccountNumber As String, PeriodStartDate As Date, PeriodEndDate As Date)
+        Public Sub New(EbNo As String, P As String, B As ClearingNumber, tId As Integer, tString As String, IdNumber As String, AccountNumber As String, PeriodStartDate As Date, PeriodEndDate As Date)
             EbNumber = EbNo
             Prosecutor = P
             UserId = Utils.GetActiveDirectoryUserName()
+            Dim UserEmail = Utils.GetActiveDirectoryEmail()
             Bank = B
-            TypeOfRequest = rType
+            TypeId = tId
+            TypeString = tString
             Dim rObj = New RequestObject()
             rObj.EbNumber = EbNumber
             rObj.Prosecutor = Prosecutor
-            rObj.TypeOfRequest = rType
+            rObj.Contact = UserEmail
+            rObj.TypeId = TypeId
+            rObj.TypeString = TypeString
             rObj.IdNumber = IdNumber
             rObj.AccountNumber = AccountNumber
             rObj.PeriodStartDate = PeriodStartDate

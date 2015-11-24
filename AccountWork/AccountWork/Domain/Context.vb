@@ -9,6 +9,15 @@ Namespace Domain
         Public Property ClearingNumbers As DbSet(Of ClearingNumber)
         Public Property Requests As DbSet(Of Request)
 
+        Public ReadOnly Property AllBankEmails As HashSet(Of String)
+            Get
+                Dim Emails = From C In ClearingNumbers
+                             Where C.MayContact = True
+                             Select C.Email
+                Return New HashSet(Of String)(Emails.ToList())
+            End Get
+        End Property
+
         Public Sub New()
             MyBase.New("AccountWorkDbContext")
         End Sub

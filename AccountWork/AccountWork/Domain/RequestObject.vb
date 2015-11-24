@@ -9,13 +9,19 @@ Namespace Domain
     <DataContract>
     Public Class RequestObject
         <DataMember>
+        Public Property Authority As String = "Ekobrottsmyndigheten"
+        <DataMember>
         Public Property EbNumber As String
         <DataMember>
         Public Property Prosecutor As String
         <DataMember>
         Public Property RequestId As Integer
         <DataMember>
-        Public Property TypeOfRequest As String
+        Public Property Contact As String
+        <DataMember>
+        Public Property TypeId As Integer
+        <DataMember>
+        Public Property TypeString As String
         <DataMember>
         Public Property IdNumber As String
         <DataMember>
@@ -80,7 +86,9 @@ Namespace Domain
             EbNumber = obj.EbNumber
             Prosecutor = obj.Prosecutor
             RequestId = obj.RequestId
-            TypeOfRequest = obj.TypeOfRequest
+            Contact = obj.Contact
+            TypeId = obj.TypeId
+            TypeString = obj.TypeString
             IdNumber = obj.IdNumber
             AccountNumber = obj.AccountNumber
             PeriodStartDate = obj.PeriodStartDate

@@ -47,13 +47,13 @@ Public Class WordGenerator
         With Paragraph
             .Range.Font.Bold = False
             .Format.SpaceAfter = 12
-            If ReqObj.TypeOfRequest = "1. Engagemangsförfrågan" Then
+            If ReqObj.TypeString = "1. Engagemangsförfrågan" Then
                 .Range.Text = "Engagemangsförfrågan bla bla"
                 .Range.Text &= "Personnr: " & ReqObj.IdNumber
-            ElseIf ReqObj.TypeOfRequest = "2. Kontotecknarförfrågan" Then
+            ElseIf ReqObj.TypeString = "2. Kontotecknarförfrågan" Then
                 .Range.Text = "Begäran om kontotecknarförfrågan bla bla"
                 .Range.Text &= "Kontonummer: " & ReqObj.AccountNumber
-            ElseIf ReqObj.TypeOfRequest = "3. Förenklat kontoutdrag" Then
+            ElseIf ReqObj.TypeString = "3. Förenklat kontoutdrag" Then
                 .Range.Text = "Begäran om förenklat kontoutdrag bla bla"
                 .Range.Text &= "Kontonummer: " & ReqObj.AccountNumber
             End If

@@ -22,6 +22,12 @@ Public Class MainWindowViewModel
         End Get
     End Property
 
+    Public ReadOnly Property AllBanksRecipientString As String
+        Get
+            Return Db.AllBankEmails.Aggregate(Function(i, j) i & ";" & j)
+        End Get
+    End Property
+
     Public Sub New(ctrl As MainWindow)
         ' Register all decorated methods to the Mediator
         Control = ctrl
@@ -35,10 +41,10 @@ Public Class MainWindowViewModel
         OnPropertyChanged("TransactionFormIsValid")
     End Sub
 
-    Public Function CreateRequest(Type As String, Bank As ClearingNumber, Pnr As String, AccNr As String, StartDate As Date, EndDate As Date) As Request
+    Public Function CreateRequest(TypeId As Integer, TypeString As String, Bank As ClearingNumber, Pnr As String, AccNr As String, StartDate As Date, EndDate As Date) As Request
         Dim EbNo = CurrentCase.EbNumber
         Dim P = CurrentCase.Prosecutor
-        Dim Req As New Request(EbNo, P, Bank, Type, Pnr, AccNr, StartDate, EndDate)
+        Dim Req As New Request(EbNo, P, Bank, TypeId, TypeString, Pnr, AccNr, StartDate, EndDate)
         Db.Requests.Add(Req)
         Db.SaveChanges()
         ' Update request id in child request object
