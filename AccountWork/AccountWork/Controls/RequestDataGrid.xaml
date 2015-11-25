@@ -31,7 +31,6 @@
                 <DataGridTextColumn Header="Bank" Binding="{Binding BankName}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Parametrar" Binding="{Binding Parameters}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Skapad" Binding="{Binding Timestamp}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Kommentar" Binding="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
