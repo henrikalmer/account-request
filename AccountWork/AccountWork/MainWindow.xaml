@@ -7,7 +7,7 @@
         xmlns:controls="clr-namespace:AccountWork"
         xmlns:res="clr-namespace:AccountWork.My.Resources"
         mc:Ignorable="d"
-        Title="Beställningsformulär kontoutdrag"
+        Title="EBM Bankförfrågningar"
         Height="780" Width="840" MinWidth="840">
     <Grid x:Name="layoutRoot" Margin="5">
         <Grid.RowDefinitions>
