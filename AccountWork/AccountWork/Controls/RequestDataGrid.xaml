@@ -20,18 +20,18 @@
                   VerticalAlignment="Stretch"
                   CanUserAddRows="False"
                   ItemsSource="{Binding Requests}"
-                  AutoGenerateColumns="False" IsReadOnly="True"
+                  AutoGenerateColumns="False"
                   BorderBrush="{x:Null}" GridLinesVisibility="None"
                   AlternationCount="2" AlternatingRowBackground="#FFEEEEEE">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="EB-nummer" Binding="{Binding EbNumber}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Löpnummer" Binding="{Binding RequestId}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Åklagare" Binding="{Binding Prosecutor}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Bank" Binding="{Binding Bank.Name}" />
-                <DataGridTextColumn Header="Frågetyp" Binding="{Binding TypeString}" />
-                <DataGridTextColumn Header="Skapad" Binding="{Binding Timestamp}" />
-                <DataGridTextColumn Header="Parametrar" Binding="{Binding Parameters}" />
-                <DataGridTextColumn Header="Kommentar" Binding="{Binding Comment}" />
+                <DataGridTextColumn Header="Frågetyp" Binding="{Binding TypeString}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Bank" Binding="{Binding BankName}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Parametrar" Binding="{Binding Parameters}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Skapad" Binding="{Binding Timestamp}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Kommentar" Binding="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -3,7 +3,7 @@
         Public Property EbNumber As String
         Public Property Prosecutor As String
         Public Property RequestId As Integer
-        Public Property Bank As ClearingNumber
+        Public Property BankName As String
         Public Property TypeId As Integer
         Public Property TypeString As String
         Public Property Timestamp As Date
