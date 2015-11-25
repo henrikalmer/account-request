@@ -13,7 +13,7 @@ Public Class BaseViewModel
     Public Event PropertyChanged(ByVal sender As Object, ByVal e As PropertyChangedEventArgs) Implements INotifyPropertyChanged.PropertyChanged
 
     Protected Sub OnPropertyChanged(ByVal strPropertyName As String)
-        If Me.PropertyChangedEvent IsNot Nothing Then
+        If PropertyChangedEvent IsNot Nothing Then
             RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(strPropertyName))
         End If
     End Sub

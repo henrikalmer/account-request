@@ -15,6 +15,21 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -51,6 +66,9 @@
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -66,9 +84,8 @@
     <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="SQLite.CodeFirst, Version=0.9.8.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SQLite.CodeFirst">
       <HintPath>..\packages\SQLite.CodeFirst.0.9.8.0\lib\net45\SQLite.CodeFirst.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -86,6 +103,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -105,27 +124,42 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utils.vb" />
     <Compile Include="Controls\AccountAndPeriodForm.xaml.vb">
       <DependentUpon>AccountAndPeriodForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RequestDataGrid.xaml.vb">
+      <DependentUpon>RequestDataGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\BankDataGrid.xaml.vb">
       <DependentUpon>BankDataGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BaseControl.vb" />
     <Compile Include="Controls\IdNumberAndPeriodForm.xaml.vb">
       <DependentUpon>IdNumberAndPeriodForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Domain\EbCase.vb" />
-    <Compile Include="Domain\OutlookCommunicator.vb" />
-    <Compile Include="Domain\WordDocument.vb" />
+    <Compile Include="Domain\RequestInfo.vb" />
+    <Compile Include="Domain\RequestObject.vb" />
+    <Compile Include="LuhnCheck.vb" />
+    <Compile Include="ViewModels\RequestDataGridViewModel.vb" />
+    <Compile Include="ViewModels\EbCaseViewModel.vb" />
+    <Compile Include="OutlookCommunicator.vb" />
+    <Compile Include="WordGenerator.vb" />
     <Compile Include="MediatorMessages.vb" />
     <Compile Include="Message.vb" />
     <Compile Include="ViewModels\BankDataGridViewModel.vb" />
     <Compile Include="ViewModels\BankFinderViewModel.vb" />
     <Compile Include="ViewModels\BaseViewModel.vb" />
-    <Compile Include="ViewModels\EngagementFormViewModel.vb" />
+    <Compile Include="ViewModels\AccountAndPeriodFormViewModel.vb" />
+    <Compile Include="ViewModels\IdNumberAndPeriodFormViewModel.vb" />
+    <Compile Include="ViewModels\MainWindowViewModel.vb" />
     <Page Include="Controls\AccountAndPeriodForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\RequestDataGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\BankDataGrid.xaml">
       <SubType>Designer</SubType>
@@ -196,24 +230,23 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="My Project\Resources.resx">
-      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <Generator>PublicVbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
     </EmbeddedResource>
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <AppDesigner Include="My Project\" />
     <None Include="packages.config" />
+    <None Include="Resources\kontobestmall.dotx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Media\ebm-logo.jpg" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
@@ -227,13 +260,25 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\MediatorLib\MediatorLib.csproj">
       <Project>{4c1f5063-1f00-45ae-ba6d-e506df297ae1}</Project>
       <Name>MediatorLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ebm-logo.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.98.1\build\net45\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.98.1\build\net45\System.Data.SQLite.Core.targets')" />

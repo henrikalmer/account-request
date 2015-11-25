@@ -1,0 +1,37 @@
+﻿<local:BaseControl x:Class="RequestDataGrid"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                   xmlns:local="clr-namespace:AccountWork"
+                   mc:Ignorable="d" 
+                   d:DesignHeight="500" d:DesignWidth="500">
+    <Grid x:Name="layoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="requestHistoryDataGrid"
+                  Grid.Row="0" Grid.Column="0"
+                  Height="Auto" Width="Auto" Margin="10"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  CanUserAddRows="False"
+                  ItemsSource="{Binding Requests}"
+                  AutoGenerateColumns="False"
+                  BorderBrush="{x:Null}" GridLinesVisibility="None"
+                  AlternationCount="2" AlternatingRowBackground="#FFEEEEEE">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="EB-nummer" Binding="{Binding EbNumber}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Löpnummer" Binding="{Binding RequestId}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Åklagare" Binding="{Binding Prosecutor}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Frågetyp" Binding="{Binding TypeString}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Bank" Binding="{Binding BankName}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Parametrar" Binding="{Binding Parameters}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Skapad" Binding="{Binding Timestamp}" IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</local:BaseControl>

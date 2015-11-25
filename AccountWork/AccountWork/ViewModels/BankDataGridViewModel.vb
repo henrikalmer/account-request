@@ -1,6 +1,5 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.Data.Entity
-Imports MediatorLib
 Imports AccountWork.Domain
 
 Public Class BankDataGridViewModel
@@ -15,6 +14,17 @@ Public Class BankDataGridViewModel
         Set(value As Boolean)
             OnPropertyChanged("HasChanges")
         End Set
+    End Property
+
+    Public ReadOnly Property EditButtonsVisibility As String
+        Get
+            Dim UserId As String = Utils.GetActiveDirectoryUserName()
+            Dim PermittedUsers As List(Of String) = My.Resources.Superusers.Split(";").ToList()
+            If (PermittedUsers.Contains(UserId)) Then
+                Return "Visible"
+            End If
+            Return "Hidden"
+        End Get
     End Property
 
     Public Sub New()

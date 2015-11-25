@@ -2,8 +2,8 @@
 Imports System.Text.RegularExpressions
 
 Namespace Domain
-    Public Class EbCase
-        Implements INotifyPropertyChanged
+    Public Class EbCaseViewModel
+        Inherits BaseViewModel
         Implements IDataErrorInfo
 
         Public Property EbNumber As String
@@ -47,6 +47,19 @@ Namespace Domain
             End If
         End Sub
 
+        ' Search database for the prosecutor for the current EB number
+        Public Sub SearchProsecutors()
+            Dim Query = From X In Db.Requests
+                        Select X
+                        Where X.EbNumber = EbNumber
+                        Order By X.Timestamp Descending
+            Dim Req As Request = Query.FirstOrDefault()
+            If (Not Req Is Nothing) Then
+                Prosecutor = Req.Prosecutor
+                OnPropertyChanged("Prosecutor")
+            End If
+        End Sub
+
 #Region "IDataErrorInfo"
         Public ReadOnly Property [Error] As String Implements IDataErrorInfo.Error
             Get
@@ -54,7 +67,7 @@ Namespace Domain
                 For Each err As KeyValuePair(Of String, String) In Errors
                     ErrorMessage &= err.Value & Environment.NewLine
                 Next
-                Return ErrorMessage
+                Return ErrorMessage.Trim()
             End Get
         End Property
 
@@ -86,19 +99,11 @@ Namespace Domain
                 End If
                 OnPropertyChanged("Error")
                 OnPropertyChanged("IsValid")
+                VMMediator.NotifyColleagues(MediatorMessages.FormValidationStatusChanged,
+                                            New Message("Validation status changed in form."))
                 Return validationResult
             End Get
         End Property
-#End Region
-
-#Region "INotifyPropertyChanged"
-        Public Event PropertyChanged(ByVal sender As Object, ByVal e As PropertyChangedEventArgs) Implements INotifyPropertyChanged.PropertyChanged
-
-        Protected Sub OnPropertyChanged(ByVal strPropertyName As String)
-            If Me.PropertyChangedEvent IsNot Nothing Then
-                RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(strPropertyName))
-            End If
-        End Sub
 #End Region
     End Class
 End Namespace

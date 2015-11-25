@@ -1,15 +1,12 @@
-﻿<UserControl x:Class="BankFinder"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AccountWork"
-             mc:Ignorable="d" 
-             d:DesignHeight="50" d:DesignWidth="420">
-    <UserControl.DataContext>
-        <local:BankFinderViewModel />
-    </UserControl.DataContext>
-    <Grid>
+﻿<local:BaseControl x:Class="BankFinder"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:local="clr-namespace:AccountWork"
+                   mc:Ignorable="d"
+                   d:DesignHeight="50" d:DesignWidth="420">
+    <Grid x:Name="layoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -23,15 +20,15 @@
                Margin="0" VerticalAlignment="Top" />
         <Label x:Name="clearingLabel" Grid.Row="0" Grid.Column="1"
                Content="Clearing-/kontonummer" HorizontalAlignment="Left"
-               Margin="10,0,0,0" VerticalAlignment="Top" />
+               Margin="20,0,0,0" VerticalAlignment="Top" />
         <ComboBox x:Name="bankComboBox" Grid.Row="1" Grid.Column="0"
-                  ItemsSource="{Binding BankNames}"
+                  ItemsSource="{Binding Path=BankNames}"
                   HorizontalAlignment="Left" Margin="0,0,10,0"
-                  VerticalAlignment="Top" Width="200"/>
+                  VerticalAlignment="Top" Width="200" IsEnabled="False" />
         <TextBox x:Name="clearingTextBox" Grid.Row="1" Grid.Column="1"
                  HorizontalAlignment="Left" Height="23"
-                 Margin="10,0,0,0" TextWrapping="Wrap"
+                 Margin="20,0,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="200"
                  TextChanged="clearingTextBox_TextChanged" />
     </Grid>
-</UserControl>
+</local:BaseControl>
