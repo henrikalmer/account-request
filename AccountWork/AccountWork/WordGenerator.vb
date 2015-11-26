@@ -10,7 +10,6 @@ Public Class WordGenerator
     End Property
 
     Public Function Generate(ReqObj As RequestObject, RequestId As Integer) As String
-        Dim FullName As String = Utils.GetUserFullName()
         ' Create temp file
         Dim TmpPath As String = Path.GetTempPath() & Path.GetRandomFileName()
         Dim AttachmentPath As String = Path.GetTempPath() & "Begäran " & RequestId & ".doc"
@@ -66,9 +65,9 @@ Public Class WordGenerator
                 vbNewLine
             .Range.Text &= "På uppdrag av åklagare " & ReqObj.Prosecutor & "." & vbNewLine
             .Range.Text &= "Svar önskas till " & ReqObj.Contact &
-                " med CC till registrator@ekobrottsmyndigheten.se. Vid frågor kontakta mig på mail " &
-                ReqObj.Contact & "." & vbNewLine
-            .Range.Text &= "Med vänlig hälsning, " & FullName
+                " med CC till " & Utils.GetUserRegEmail() & ". Vid frågor kontakta mig på mail " &
+                ReqObj.Contact & " eller telefon " & Utils.GetUserPhoneNo() & "." & vbNewLine
+            .Range.Text &= "Med vänlig hälsning, " & Utils.GetUserFullName()
             .Range.Font.Bold = False
             .Format.SpaceAfter = 12
             .Range.InsertParagraphAfter()

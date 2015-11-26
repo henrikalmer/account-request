@@ -4,14 +4,12 @@ Public Class OutlookCommunicator
     WithEvents Momentary_session As Outlook.Application
     Public Event eBankAnswer()
 
-    Public Sub Generate(Recipient As String, WordFile As String, XmlFile As String, JsonFile As String, Type As String)
+    Public Sub Generate(Recipient As String, CC As String, WordFile As String, XmlFile As String, JsonFile As String, Type As String)
         Dim App As New Outlook.Application
         Dim Email As Outlook.MailItem
         ' Find users outbox
         Dim MapiNamespace As Outlook.NameSpace = App.GetNamespace("MAPI")
         Dim Drafts As Outlook.MAPIFolder = MapiNamespace.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderOutbox)
-        Dim City = Utils.GetUserCity()
-        Dim CC = "registrator." & LCase(Utils.RemoveAccentMarks(City)) & "@ekobrottsmyndigheten.se"
         ' Put together email and place in the users outbox
         Try
             Email = App.CreateItem(Outlook.OlItemType.olMailItem)

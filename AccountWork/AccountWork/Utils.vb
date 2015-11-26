@@ -31,10 +31,15 @@ Public Class Utils
         Dim c As Char
         For i = 0 To NormalizedString.Length - 1
             c = NormalizedString(i)
-            If Globalization.CharUnicodeInfo.GetUnicodeCategory(c) = Globalization.UnicodeCategory.NonSpacingMark Then
+            If Globalization.CharUnicodeInfo.GetUnicodeCategory(c) <> Globalization.UnicodeCategory.NonSpacingMark Then
                 SB.Append(c)
             End If
         Next
         Return SB.ToString
+    End Function
+
+    Public Shared Function GetUserRegEmail() As String
+        Dim City = GetUserCity()
+        Return "registrator." & LCase(RemoveAccentMarks(City)) & "@ekobrottsmyndigheten.se"
     End Function
 End Class
