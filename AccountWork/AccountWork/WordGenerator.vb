@@ -10,7 +10,7 @@ Public Class WordGenerator
     End Property
 
     Public Function Generate(ReqObj As RequestObject, RequestId As Integer) As String
-        Dim FullName As String = Utils.GetActiveDirectoryFullName()
+        Dim FullName As String = Utils.GetUserFullName()
         ' Create temp file
         Dim TmpPath As String = Path.GetTempPath() & Path.GetRandomFileName()
         Dim AttachmentPath As String = Path.GetTempPath() & "Begäran " & RequestId & ".doc"
@@ -40,30 +40,37 @@ Public Class WordGenerator
             .Range.InsertParagraphAfter()
         End With
 
+        Dim ParameterString As String = String.Empty
         Paragraph = Doc.Paragraphs.Add()
         With Paragraph
-            .Range.Font.Bold = False
-            .Format.SpaceAfter = 12
             If ReqObj.TypeId = 1 Then
-                .Range.Text = "Engagemangsförfrågan bla bla"
-                .Range.Text &= "Personnr: " & ReqObj.IdNumber
+                .Range.Text = "Begäran om engagemangsförfrågan (frågetyp 1)." & vbNewLine
+                ParameterString = "Personnummer:" & vbTab & ReqObj.IdNumber
             ElseIf ReqObj.TypeId = 2 Then
-                .Range.Text = "Begäran om kontotecknarförfrågan bla bla"
-                .Range.Text &= "Kontonummer: " & ReqObj.AccountNumber
+                .Range.Text = "Begäran om kontotecknarförfrågan (frågetyp 2)." & vbNewLine
+                ParameterString = "Kontonummer:" & vbTab & ReqObj.AccountNumber
             ElseIf ReqObj.TypeId = 3 Then
-                .Range.Text = "Begäran om förenklat kontoutdrag bla bla"
-                .Range.Text &= "Kontonummer: " & ReqObj.AccountNumber
+                .Range.Text = "Begäran om förenklat kontoutdrag (frågetyp 3)." & vbNewLine
+                ParameterString = "Kontonummer:" & vbTab & ReqObj.AccountNumber
             End If
+            .Range.Font.Bold = False
+            .Format.SpaceAfter = 0
             .Range.InsertParagraphAfter()
         End With
 
         Paragraph = Doc.Paragraphs.Add()
         With Paragraph
-            .Range.Text = "Period, startdatum: " & ReqObj.PeriodStartDate
-            .Range.Text &= "Period, slutdatum: " & ReqObj.PeriodEndDate
-            .Range.Text &= "På uppdrag av åklagare " & ReqObj.Prosecutor
+            .Range.Text = ParameterString &
+                vbNewLine & "Period, startdatum: " & vbTab & ReqObj.PeriodStartDate &
+                vbNewLine & "Period, slutdatum: " & vbTab & ReqObj.PeriodEndDate &
+                vbNewLine
+            .Range.Text &= "På uppdrag av åklagare " & ReqObj.Prosecutor & "." & vbNewLine
+            .Range.Text &= "Svar önskas till " & ReqObj.Contact &
+                " med CC till registrator@ekobrottsmyndigheten.se. Vid frågor kontakta mig på mail " &
+                ReqObj.Contact & "." & vbNewLine
             .Range.Text &= "Med vänlig hälsning, " & FullName
             .Range.Font.Bold = False
+            .Format.SpaceAfter = 12
             .Range.InsertParagraphAfter()
         End With
 

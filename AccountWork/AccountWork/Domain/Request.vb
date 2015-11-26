@@ -30,8 +30,8 @@ Namespace Domain
         Public Sub New(EbNo As String, P As String, B As ClearingNumber, tId As Integer, tString As String, IdNumber As String, AccountNumber As String, PeriodStartDate As Date, PeriodEndDate As Date)
             EbNumber = EbNo
             Prosecutor = P
-            UserId = Utils.GetActiveDirectoryUserName()
-            Dim UserEmail = Utils.GetActiveDirectoryEmail()
+            UserId = Utils.GetUserName()
+            Dim UserEmail = Utils.GetUserEmail()
             Bank = B
             BankName = If(B Is Nothing, "Alla banker", B.Name)
             TypeId = tId

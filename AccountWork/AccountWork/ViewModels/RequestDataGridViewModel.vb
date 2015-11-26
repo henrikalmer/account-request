@@ -7,7 +7,7 @@ Public Class RequestDataGridViewModel
 
     Public ReadOnly Property Requests As ObservableCollection(Of RequestInfo)
         Get
-            Dim UserId = Utils.GetActiveDirectoryUserName()
+            Dim UserId = Utils.GetUserName()
             Dim Reqs = From R In Db.Requests
                        Where R.UserId = UserId
                        Select New RequestInfo With {

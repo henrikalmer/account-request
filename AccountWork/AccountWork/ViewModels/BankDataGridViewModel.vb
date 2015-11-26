@@ -18,7 +18,7 @@ Public Class BankDataGridViewModel
 
     Public ReadOnly Property EditButtonsVisibility As String
         Get
-            Dim UserId As String = Utils.GetActiveDirectoryUserName()
+            Dim UserId As String = Utils.GetUserName()
             Dim PermittedUsers As List(Of String) = My.Resources.Superusers.Split(";").ToList()
             If (PermittedUsers.Contains(UserId)) Then
                 Return "Visible"

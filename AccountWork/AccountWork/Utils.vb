@@ -1,19 +1,23 @@
-﻿Public Class Utils
-    Public Shared Function GetActiveDirectoryUserName() As String
-        Dim DomainUser As String = Security.Principal.WindowsIdentity.GetCurrent.Name.Replace("\", "/")
-        Dim AdEntry As New DirectoryServices.DirectoryEntry("WinNT://" & DomainUser)
-        Return AdEntry.Name
+Imports System.DirectoryServices.AccountManagement
+
+Public Class Utils
+    Public Shared Function GetUserName() As String
+        Dim User = UserPrincipal.Current
+        Return User.SamAccountName
     End Function
 
-    Public Shared Function GetActiveDirectoryFullName() As String
-        Dim DomainUser As String = Security.Principal.WindowsIdentity.GetCurrent.Name.Replace("\", "/")
-        Dim AdEntry As New DirectoryServices.DirectoryEntry("WinNT://" & DomainUser)
-        Return AdEntry.Properties("FullName").Value
+    Public Shared Function GetUserFullName() As String
+        Dim User = UserPrincipal.Current
+        Return User.GivenName & " " & User.Surname
     End Function
 
-    Public Shared Function GetActiveDirectoryEmail() As String
-        Dim DomainUser As String = Security.Principal.WindowsIdentity.GetCurrent.Name.Replace("\", "/")
-        Dim AdEntry As New DirectoryServices.DirectoryEntry("WinNT://" & DomainUser)
-        Return AdEntry.Properties("Mail").Value
+    Public Shared Function GetUserEmail() As String
+        Dim User = UserPrincipal.Current
+        Return User.EmailAddress
+    End Function
+
+    Public Shared Function GetUserPhoneNo() As String
+        Dim User = UserPrincipal.Current
+        Return User.VoiceTelephoneNumber
     End Function
 End Class
