@@ -18,7 +18,7 @@
     ' Returns True For valid numbers And False for invalid numbers.
     Public Function VerifyControlDigit() As Boolean
         Dim num As String = Number.Substring(0, 9)
-        Dim controlDigit = 10 - (num.Select(Function(c, i) (AscW(c) - 48) << ((num.Length - i) And 1)).Sum(Function(n) If(n > 9, n - 9, n)) Mod 10)
+        Dim controlDigit = (10 - (num.Select(Function(c, i) (AscW(c) - 48) << ((num.Length - i) And 1)).Sum(Function(n) If(n > 9, n - 9, n)) Mod 10)) Mod 10
         Return controlDigit = Integer.Parse(Number.Substring(9, 1))
     End Function
 End Class
