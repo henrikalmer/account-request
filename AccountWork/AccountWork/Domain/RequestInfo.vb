@@ -27,8 +27,8 @@
                 Else
                     response = "Tom fråga"
                 End If
-                response &= vbNewLine & "Från " & rObj.PeriodStartDate.ToString()
-                response &= vbNewLine & "Till " & rObj.PeriodEndDate.ToString()
+                response &= vbNewLine & "Från " & rObj.PeriodStartDate.ToString("d")
+                response &= vbNewLine & "Till " & rObj.PeriodEndDate.ToString("d")
                 Return response
             End Get
         End Property
