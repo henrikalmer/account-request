@@ -21,8 +21,16 @@ Class MainWindow
         Dim Pnr As String = engagementForm.pnrTextBox.Text
         Dim PeriodStart As Date = engagementForm.dateStartDatePicker.DisplayDate
         Dim PeriodEnd As Date = engagementForm.dateEndDatePicker.DisplayDate
-        Dim Req As Request = layoutRoot.DataContext.CreateRequest(TypeId, TypeString, Bank, Pnr, Nothing, PeriodStart, PeriodEnd)
-        GenerateEmail(Req)
+        Dim Req As Request
+        If (Bank Is Nothing) Then
+            For Each B In layoutRoot.DataContext.AllBanks
+                Req = layoutRoot.DataContext.CreateRequest(TypeId, TypeString, B, Pnr, Nothing, PeriodStart, PeriodEnd)
+                GenerateEmail(Req)
+            Next
+        Else
+            Req = layoutRoot.DataContext.CreateRequest(TypeId, TypeString, Bank, Pnr, Nothing, PeriodStart, PeriodEnd)
+            GenerateEmail(Req)
+        End If
     End Sub
 
     Private Sub accountButton_Click(sender As Object, e As RoutedEventArgs) Handles accountButton.Click

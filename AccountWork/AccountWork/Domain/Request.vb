@@ -9,7 +9,6 @@ Namespace Domain
         Public Property BankId As Integer
         <ForeignKey("BankId")>
         Public Property Bank As ClearingNumber
-        Public Property BankName As String
         Public Property Timestamp As Date
         Public Property TypeId As Integer
         Public Property TypeString As String
@@ -33,7 +32,6 @@ Namespace Domain
             UserId = Utils.GetUserName()
             Dim UserEmail = Utils.GetUserEmail()
             Bank = B
-            BankName = If(B Is Nothing, "Alla banker", B.Name)
             TypeId = tId
             TypeString = tString
             Dim rObj = New RequestObject()

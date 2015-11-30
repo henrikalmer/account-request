@@ -22,9 +22,9 @@ Public Class MainWindowViewModel
         End Get
     End Property
 
-    Public ReadOnly Property AllBanksRecipientString As String
+    Public ReadOnly Property AllBanks As List(Of ClearingNumber)
         Get
-            Return Db.AllBankEmails.Aggregate(Function(i, j) i & ";" & j)
+            Return Db.AllBanksWithEmail
         End Get
     End Property
 

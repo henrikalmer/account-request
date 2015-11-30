@@ -9,12 +9,15 @@ Namespace Domain
         Public Property ClearingNumbers As DbSet(Of ClearingNumber)
         Public Property Requests As DbSet(Of Request)
 
-        Public ReadOnly Property AllBankEmails As HashSet(Of String)
+        Public ReadOnly Property AllBanksWithEmail As List(Of ClearingNumber)
             Get
-                Dim Emails = From C In ClearingNumbers
-                             Where C.MayContact = True
-                             Select C.Email
-                Return New HashSet(Of String)(Emails.ToList())
+                Dim BankGroups As IQueryable(Of IEnumerable(Of ClearingNumber)) =
+                    From C In ClearingNumbers
+                    Where C.MayContact = True
+                    Group By C.Email, C.MayContact Into G = Group
+                    Select G
+                Dim Banks = From BG In BankGroups.ToList() Select BG.First()
+                Return New List(Of ClearingNumber)(Banks)
             End Get
         End Property
 

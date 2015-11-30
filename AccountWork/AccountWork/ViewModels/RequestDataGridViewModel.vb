@@ -14,7 +14,7 @@ Public Class RequestDataGridViewModel
                            .EbNumber = R.EbNumber,
                            .Prosecutor = R.Prosecutor,
                            .RequestId = R.Id,
-                           .BankName = R.BankName,
+                           .BankName = R.Bank.Name,
                            .TypeId = R.TypeId,
                            .TypeString = R.TypeString,
                            .Timestamp = R.Timestamp,

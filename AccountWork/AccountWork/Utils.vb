@@ -21,8 +21,14 @@ Public Class Utils
 
     Public Shared Function GetUserCity() As String
         Dim SysInfo = CreateObject("ADSystemInfo")
-        Dim AdUser = GetObject("LDAP://" & SysInfo.UserName)
-        Return AdUser.l
+        Dim City = ""
+        Try
+            Dim AdUser = GetObject("LDAP://" & SysInfo.UserName)
+            City = AdUser.l
+        Catch ex As Exception
+            City = "okand"
+        End Try
+        Return City
     End Function
 
     Public Shared Function RemoveAccentMarks(S As String) As String
