@@ -32,7 +32,7 @@ Public Class WordGenerator
         Paragraph = Doc.Paragraphs.Add()
         With Paragraph
             .Range.Text = "I pågående förundersökning " & ReqObj.EbNumber &
-                " begär åklagare att uppgifter enligt 11 § lag (2004:297) om" &
+                " begär förundersökningsledare att uppgifter enligt 11 § lag (2004:297) om" &
                 " bank- och finansieringsrörelse om enskildes förhållanden lämnas ut enligt följande:"
             .Range.Font.Bold = False
             .Format.SpaceAfter = 12
@@ -45,6 +45,11 @@ Public Class WordGenerator
             If ReqObj.TypeId = 1 Then
                 .Range.Text = "Begäran om engagemangsförfrågan (frågetyp 1)." & vbNewLine
                 ParameterString = "Personnummer:" & vbTab & ReqObj.IdNumber
+                If (ReqObj.IncludeStatements = True) Then
+                    ParameterString &= vbNewLine & "Inkludera kontoutdrag:" & vbTab & "Ja"
+                Else
+                    ParameterString &= vbNewLine & "Inkludera kontoutdrag:" & vbTab & "Nej"
+                End If
             ElseIf ReqObj.TypeId = 2 Then
                 .Range.Text = "Begäran om kontotecknarförfrågan (frågetyp 2)." & vbNewLine
                 ParameterString = "Kontonummer:" & vbTab & ReqObj.AccountNumber
@@ -63,11 +68,36 @@ Public Class WordGenerator
                 vbNewLine & "Period, startdatum: " & vbTab & ReqObj.PeriodStartDate &
                 vbNewLine & "Period, slutdatum: " & vbTab & ReqObj.PeriodEndDate &
                 vbNewLine
-            .Range.Text &= "På uppdrag av åklagare " & ReqObj.Prosecutor & "." & vbNewLine
+            .Range.Font.Bold = False
+            .Format.SpaceAfter = 12
+            .Range.InsertParagraphAfter()
+        End With
+
+        If (Not ReqObj.SecrecyDate = Nothing) Then
+            Paragraph = Doc.Paragraphs.Add()
+            With Paragraph
+                .Range.Text = "Åklagaren har enligt 12 § lag (2004:297) om bank- och " &
+                    "finansieringsrörelse, förordnat att kreditinstitutet samt dess " &
+                    "styrelseledamöter och anställda inte får röja för kunden eller " &
+                    "för någon utomstående att uppgifterna ha lämnats enligt 11 § eller " &
+                    "att det pågår en förundersökning eller ett ärende om rättslig " &
+                    "hjälp i brottmål. Förbudet gäller tills vidare dock längst till " &
+                    "och med den " & ReqObj.SecrecyDate.ToString("d") & "."
+                .Range.Font.Bold = False
+                .Format.SpaceAfter = 12
+                .Range.InsertParagraphAfter()
+            End With
+        End If
+
+        Paragraph = Doc.Paragraphs.Add()
+        With Paragraph
+            .Range.Text = "Om uppgifterna inte kan lämnas till Ekobrottsmyndigheten inom tre till fem " &
+                "arbetsdagar vänligen kontakta den utredare som begär uppgifterna."
             .Range.Text &= "Svar önskas till " & ReqObj.Contact &
-                " med CC till " & Utils.GetUserRegEmail() & ". Vid frågor kontakta mig på mail " &
+                " med CC till " & Utils.GetUserRegEmail() & ". Frågor kan ställas via mail " &
                 ReqObj.Contact & " eller telefon " & Utils.GetUserPhoneNo() & "." & vbNewLine
             .Range.Text &= "Med vänlig hälsning, " & Utils.GetUserFullName()
+            .Range.Text &= "På uppdrag av förundersökningsledare " & ReqObj.Prosecutor & "." & vbNewLine
             .Range.Font.Bold = False
             .Format.SpaceAfter = 12
             .Range.InsertParagraphAfter()

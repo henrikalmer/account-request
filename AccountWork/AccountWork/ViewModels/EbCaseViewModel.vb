@@ -8,6 +8,28 @@ Namespace Domain
 
         Public Property EbNumber As String
         Public Property Prosecutor As String
+        Private _Secrecy As Boolean = False
+        Private _SecrecyDate As Date = Date.Today.AddMonths(3)
+        Public Property Secrecy As Boolean
+            Get
+                Return _Secrecy
+            End Get
+            Set(value As Boolean)
+                _Secrecy = value
+                OnPropertyChanged("Secrecy")
+                OnPropertyChanged("SecrecyDate")
+            End Set
+        End Property
+        Public Property SecrecyDate As Date
+            Get
+                Return _SecrecyDate
+            End Get
+            Set(value As Date)
+                _SecrecyDate = value
+                OnPropertyChanged("Secrecy")
+                OnPropertyChanged("SecrecyDate")
+            End Set
+        End Property
 
         Private ReadOnly EbRegex As New Regex("^(EB)[- ]*([\d]+)[- ]*([\d]{2})$", RegexOptions.IgnoreCase)
         Private Errors As New Dictionary(Of String, String)
@@ -32,6 +54,13 @@ Namespace Domain
         Private Function ValidateProsecutor() As String
             If (String.IsNullOrEmpty(Prosecutor)) Then
                 Return "Ange åklagarens namn"
+            End If
+            Return String.Empty
+        End Function
+
+        Private Function ValidateSecrecyDate() As String
+            If (Secrecy = True And SecrecyDate = Nothing) Then
+                Return "Om du vill begära meddelandeförbud måste du ange ett datum när det ska sluta gälla"
             End If
             Return String.Empty
         End Function
@@ -81,6 +110,11 @@ Namespace Domain
                         Exit Select
                     Case "Prosecutor"
                         validationResult = ValidateProsecutor()
+                        Exit Select
+                    Case "SecrecyDate"
+                        validationResult = ValidateSecrecyDate()
+                        Exit Select
+                    Case "Secrecy"
                         Exit Select
                     Case Else
                         Throw New ApplicationException("Unknown Property being validated on EbCase.")

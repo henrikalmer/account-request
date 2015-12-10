@@ -2,7 +2,6 @@
 
 Public Class OutlookCommunicator
     WithEvents Momentary_session As Outlook.Application
-    Public Event eBankAnswer()
 
     Public Sub Generate(Recipient As String, CC As String, WordFile As String, XmlFile As String, JsonFile As String, Type As String)
         Dim App As New Outlook.Application
@@ -18,7 +17,7 @@ Public Class OutlookCommunicator
             Dim CCRecipient = Recipients.Add(CC)
             CCRecipient.Type = Outlook.OlMailRecipientType.olCC
             Dim RetVal = Recipients.ResolveAll()
-            Email.Subject = "Beställning av kontoutdrag/engagemang"
+            Email.Subject = "Pilot: Begäran om uppgift"
             Email.Body = "Vi beställer härmed in " & LCase(Type) & " enligt bifogad fil." & vbNewLine
             Email.BodyFormat = Outlook.OlBodyFormat.olFormatRichText
             Dim Attachments As Outlook.Attachments = Email.Attachments

@@ -1,4 +1,3 @@
-Imports System.ComponentModel
 Imports AccountWork.Domain
 
 Public Class BankFinder

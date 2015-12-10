@@ -41,10 +41,10 @@ Public Class MainWindowViewModel
         OnPropertyChanged("TransactionFormIsValid")
     End Sub
 
-    Public Function CreateRequest(TypeId As Integer, TypeString As String, Bank As ClearingNumber, Pnr As String, AccNr As String, StartDate As Date, EndDate As Date) As Request
+    Public Function CreateRequest(TypeId As Integer, TypeString As String, SecrecyDate As Date, Bank As ClearingNumber, Pnr As String, AccNr As String, StartDate As Date, EndDate As Date, IncludeStatements As Boolean) As Request
         Dim EbNo = CurrentCase.EbNumber
         Dim P = CurrentCase.Prosecutor
-        Dim Req As New Request(EbNo, P, Bank, TypeId, TypeString, Pnr, AccNr, StartDate, EndDate)
+        Dim Req As New Request(EbNo, P, SecrecyDate, Bank, TypeId, TypeString, Pnr, AccNr, StartDate, EndDate, IncludeStatements)
         Db.Requests.Add(Req)
         Db.SaveChanges()
         ' Update request id in child request object

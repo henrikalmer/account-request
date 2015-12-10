@@ -72,5 +72,11 @@
                     SelectedDate="{Binding PeriodEndDate,
                                    ValidatesOnDataErrors=True,
                                    NotifyOnValidationError=True}" />
+        <CheckBox x:Name="requestStatementsCheckBox"
+                  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
+                  Content="Beställ även kontoutdrag för samma period"
+                  HorizontalAlignment="Left" VerticalAlignment="Top"
+                  Margin="0,10" IsChecked="{Binding RequestStatements,
+                                            UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 </local:BaseControl>

@@ -26,17 +26,18 @@ Namespace Domain
 
         Public Sub New()
         End Sub
-        Public Sub New(EbNo As String, P As String, B As ClearingNumber, tId As Integer, tString As String, IdNumber As String, AccountNumber As String, PeriodStartDate As Date, PeriodEndDate As Date)
+        Public Sub New(EbNo As String, P As String, SecrecyDate As Date, B As ClearingNumber, tId As Integer, tString As String, IdNumber As String, AccountNumber As String, PeriodStartDate As Date, PeriodEndDate As Date, IncludeStatements As Boolean)
             EbNumber = EbNo
             Prosecutor = P
             UserId = Utils.GetUserName()
-            Dim UserEmail = Utils.GetUserEmail()
+            Dim UserEmail = LCase(Utils.GetUserEmail())
             Bank = B
             TypeId = tId
             TypeString = tString
             Dim rObj = New RequestObject()
             rObj.EbNumber = EbNumber
             rObj.Prosecutor = Prosecutor
+            rObj.SecrecyDate = SecrecyDate
             rObj.Contact = UserEmail
             rObj.TypeId = TypeId
             rObj.TypeString = TypeString
@@ -44,6 +45,7 @@ Namespace Domain
             rObj.AccountNumber = AccountNumber
             rObj.PeriodStartDate = PeriodStartDate
             rObj.PeriodEndDate = PeriodEndDate
+            rObj.IncludeStatements = IncludeStatements
             SerializedRequest = rObj.ToJson()
             Timestamp = Now
         End Sub

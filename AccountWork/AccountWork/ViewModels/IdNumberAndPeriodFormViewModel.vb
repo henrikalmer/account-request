@@ -45,6 +45,7 @@ Public Class IdNumberAndPeriodFormViewModel
             OnPropertyChanged("PeriodEndDate")
         End Set
     End Property
+    Public Property RequestStatements As Boolean = True
     Public Property Errors As New Dictionary(Of String, String)
 #End Region
 
@@ -122,6 +123,8 @@ Public Class IdNumberAndPeriodFormViewModel
                     validationResult = ValidatePeriod()
                     errorKey = "Period"
                     Exit Select
+                Case "RequestStatements"
+                    Return String.Empty
                 Case "Error"
                     Return String.Empty
                 Case Else

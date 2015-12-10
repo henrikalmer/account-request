@@ -17,18 +17,20 @@ Class MainWindow
     Private Sub engagementButton_Click(sender As Object, e As RoutedEventArgs) Handles engagementButton.Click
         Dim TypeId As Integer = 1
         Dim TypeString As String = "Engagemangsförfrågan"
+        Dim SecrecyDate = If(layoutRoot.DataContext.CurrentCase.Secrecy, layoutRoot.DataContext.CurrentCase.SecrecyDate, Nothing)
         Dim Bank As ClearingNumber = engagementForm.layoutRoot.DataContext.Bank
         Dim Pnr As String = engagementForm.pnrTextBox.Text
         Dim PeriodStart As Date = engagementForm.dateStartDatePicker.DisplayDate
         Dim PeriodEnd As Date = engagementForm.dateEndDatePicker.DisplayDate
+        Dim IncludeStatements As Boolean = engagementForm.requestStatementsCheckBox.IsChecked
         Dim Req As Request
         If (Bank Is Nothing) Then
             For Each B In layoutRoot.DataContext.AllBanks
-                Req = layoutRoot.DataContext.CreateRequest(TypeId, TypeString, B, Pnr, Nothing, PeriodStart, PeriodEnd)
+                Req = layoutRoot.DataContext.CreateRequest(TypeId, TypeString, SecrecyDate, B, Pnr, Nothing, PeriodStart, PeriodEnd, IncludeStatements)
                 GenerateEmail(Req)
             Next
         Else
-            Req = layoutRoot.DataContext.CreateRequest(TypeId, TypeString, Bank, Pnr, Nothing, PeriodStart, PeriodEnd)
+            Req = layoutRoot.DataContext.CreateRequest(TypeId, TypeString, SecrecyDate, Bank, Pnr, Nothing, PeriodStart, PeriodEnd, IncludeStatements)
             GenerateEmail(Req)
         End If
     End Sub
@@ -36,22 +38,24 @@ Class MainWindow
     Private Sub accountButton_Click(sender As Object, e As RoutedEventArgs) Handles accountButton.Click
         Dim TypeId As Integer = 2
         Dim TypeString As String = "Kontotecknarförfrågan"
+        Dim SecrecyDate = If(layoutRoot.DataContext.CurrentCase.Secrecy, layoutRoot.DataContext.CurrentCase.SecrecyDate, Nothing)
         Dim Bank As ClearingNumber = accountHolderForm.layoutRoot.DataContext.Bank
         Dim AccNo As String = accountHolderForm.bankFinder.clearingTextBox.Text
         Dim PeriodStart As Date = accountHolderForm.dateStartDatePicker.DisplayDate
         Dim PeriodEnd As Date = accountHolderForm.dateEndDatePicker.DisplayDate
-        Dim Req As Request = layoutRoot.DataContext.CreateRequest(TypeId, TypeString, Bank, Nothing, AccNo, PeriodStart, PeriodEnd)
+        Dim Req As Request = layoutRoot.DataContext.CreateRequest(TypeId, TypeString, SecrecyDate, Bank, Nothing, AccNo, PeriodStart, PeriodEnd, False)
         GenerateEmail(Req)
     End Sub
 
     Private Sub transactionButton_Click(sender As Object, e As RoutedEventArgs) Handles transactionButton.Click
         Dim TypeId As Integer = 3
         Dim TypeString As String = "Förenklat kontoutdrag"
+        Dim SecrecyDate = If(layoutRoot.DataContext.CurrentCase.Secrecy, layoutRoot.DataContext.CurrentCase.SecrecyDate, Nothing)
         Dim Bank As ClearingNumber = transactionForm.layoutRoot.DataContext.Bank
         Dim AccNo As String = transactionForm.bankFinder.clearingTextBox.Text
         Dim PeriodStart As Date = transactionForm.dateStartDatePicker.DisplayDate
         Dim PeriodEnd As Date = transactionForm.dateEndDatePicker.DisplayDate
-        Dim Req As Request = layoutRoot.DataContext.CreateRequest(TypeId, TypeString, Bank, Nothing, AccNo, PeriodStart, PeriodEnd)
+        Dim Req As Request = layoutRoot.DataContext.CreateRequest(TypeId, TypeString, SecrecyDate, Bank, Nothing, AccNo, PeriodStart, PeriodEnd, False)
         GenerateEmail(Req)
     End Sub
 

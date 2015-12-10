@@ -16,6 +16,16 @@ Namespace Domain
         Public Property Prosecutor As String
         <DataMember>
         Public Property RequestId As Integer
+        <DataMember(Name:="SecrecyDate")>
+        Private Property _SecrecyDate As String
+        Public Property SecrecyDate As Date
+            Get
+                Return Date.Parse(_SecrecyDate)
+            End Get
+            Set(value As Date)
+                _SecrecyDate = value.ToString("O")
+            End Set
+        End Property
         <DataMember>
         Public Property Contact As String
         <DataMember>
@@ -46,6 +56,8 @@ Namespace Domain
                 _PeriodEndDate = value.ToString("O")
             End Set
         End Property
+        <DataMember>
+        Public Property IncludeStatements As Boolean
 
         Public Sub New()
         End Sub
@@ -85,6 +97,7 @@ Namespace Domain
         Public Sub FromObject(obj As RequestObject)
             EbNumber = obj.EbNumber
             Prosecutor = obj.Prosecutor
+            SecrecyDate = obj.SecrecyDate
             RequestId = obj.RequestId
             Contact = obj.Contact
             TypeId = obj.TypeId
@@ -93,6 +106,7 @@ Namespace Domain
             AccountNumber = obj.AccountNumber
             PeriodStartDate = obj.PeriodStartDate
             PeriodEndDate = obj.PeriodEndDate
+            IncludeStatements = obj.IncludeStatements
         End Sub
 
         Public Function ToXml() As String

@@ -27,6 +27,12 @@
                 Else
                     response = "Tom fråga"
                 End If
+                If (Not rObj.SecrecyDate = Nothing) Then
+                    response &= vbNewLine & "Meddelandeförbud t.o.m. " & rObj.SecrecyDate.ToString("d")
+                End If
+                If (rObj.IncludeStatements = True) Then
+                    response &= vbNewLine & "Även kontoutdrag är efterfrågade"
+                End If
                 response &= vbNewLine & "Från " & rObj.PeriodStartDate.ToString("d")
                 response &= vbNewLine & "Till " & rObj.PeriodEndDate.ToString("d")
                 Return response

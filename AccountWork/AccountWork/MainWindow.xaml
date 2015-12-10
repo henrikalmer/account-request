@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:AccountWork"
         xmlns:controls="clr-namespace:AccountWork"
         xmlns:res="clr-namespace:AccountWork.My.Resources"
@@ -11,6 +12,8 @@
         Height="780" Width="840" MinWidth="840">
     <Grid x:Name="layoutRoot" Margin="5">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -42,8 +45,29 @@
                  Text="{Binding Path=CurrentCase.Prosecutor, ValidatesOnDataErrors=True,
                         NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
                  Style="{StaticResource Validatable}" />
+        <CheckBox x:Name="secrecyCheckBox" Grid.Row="1" Grid.Column="0"
+                  Content="Begär meddelandeförbud till datum:"
+                  IsChecked="{Binding CurrentCase.Secrecy,
+                              ValidatesOnDataErrors=True,
+                              NotifyOnValidationError=True,
+                              UpdateSourceTrigger=PropertyChanged}"
+                  Margin="10,5" />
+        <DatePicker x:Name="secrecyPeriodDatePicker"
+                    Grid.Row="1" Grid.Column="1"
+                    SelectedDate="{Binding CurrentCase.SecrecyDate,
+                                   ValidatesOnDataErrors=True,
+                                   NotifyOnValidationError=True,
+                                   UpdateSourceTrigger=PropertyChanged}"
+                    IsEnabled="{Binding CurrentCase.Secrecy}"
+                    HorizontalAlignment="Left" VerticalAlignment="Top"
+                    Margin="20,0" Width="200" FirstDayOfWeek="Monday"
+                     >
+            <DatePicker.BlackoutDates>
+                <CalendarDateRange End="{x:Static sys:DateTime.Today}"/>
+            </DatePicker.BlackoutDates>
+        </DatePicker>
         <TabControl Grid.Column="0" Grid.ColumnSpan="3" x:Name="tabControl" HorizontalAlignment="Stretch"
-                    Height="Auto" VerticalAlignment="Stretch" Margin="10,20,10,0" Width="Auto" Grid.Row="1">
+                    Height="Auto" VerticalAlignment="Stretch" Margin="10,20,10,0" Width="Auto" Grid.Row="3">
             <TabItem Header="Engagemangsförfrågan">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -166,7 +190,7 @@
                 <local:BankDataGrid x:Name="bankAdminDataGrid" />
             </TabItem>
         </TabControl>
-        <Label x:Name="bylineLabel" Grid.Row="2" Grid.Column="2"
+        <Label x:Name="bylineLabel" Grid.Row="4" Grid.Column="2"
                Content="Av Henrik Almér och Axel Thor för EBM"
                HorizontalAlignment="Right" Margin="0,0,10,0"
                VerticalAlignment="Bottom" FontStyle="Italic"
