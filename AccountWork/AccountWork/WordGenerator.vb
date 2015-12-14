@@ -54,7 +54,10 @@ Public Class WordGenerator
                 .Range.Text = "Begäran om kontotecknarförfrågan (frågetyp 2)." & vbNewLine
                 ParameterString = "Kontonummer:" & vbTab & ReqObj.AccountNumber
             ElseIf ReqObj.TypeId = 3 Then
-                .Range.Text = "Begäran om förenklat kontoutdrag (frågetyp 3)." & vbNewLine
+                .Range.Text = "Begäran om kontoutdrag small (frågetyp 3)." & vbNewLine
+                ParameterString = "Kontonummer:" & vbTab & ReqObj.AccountNumber
+            ElseIf ReqObj.TypeId = 4 Then
+                .Range.Text = "Begäran om kontoutdrag medium (frågetyp 4)." & vbNewLine
                 ParameterString = "Kontonummer:" & vbTab & ReqObj.AccountNumber
             End If
             .Range.Font.Bold = False
@@ -76,8 +79,8 @@ Public Class WordGenerator
         If (Not ReqObj.SecrecyDate = Nothing) Then
             Paragraph = Doc.Paragraphs.Add()
             With Paragraph
-                .Range.Text = "Åklagaren har enligt 12 § lag (2004:297) om bank- och " &
-                    "finansieringsrörelse, förordnat att kreditinstitutet samt dess " &
+                .Range.Text = "Förundersökningsledaren har enligt 1 kap. 12 § lag (2004:297) " &
+                    "om bank- och finansieringsrörelse, förordnat att kreditinstitutet samt dess " &
                     "styrelseledamöter och anställda inte får röja för kunden eller " &
                     "för någon utomstående att uppgifterna ha lämnats enligt 11 § eller " &
                     "att det pågår en förundersökning eller ett ärende om rättslig " &
@@ -91,7 +94,7 @@ Public Class WordGenerator
 
         Paragraph = Doc.Paragraphs.Add()
         With Paragraph
-            .Range.Text = "Om uppgifterna inte kan lämnas till Ekobrottsmyndigheten inom tre till fem " &
+            .Range.Text = "Om uppgifterna inte kan lämnas inom tre till fem " &
                 "arbetsdagar vänligen kontakta den utredare som begär uppgifterna."
             .Range.Text &= "Svar önskas till " & ReqObj.Contact &
                 " med CC till " & Utils.GetUserRegEmail() & ". Frågor kan ställas via mail " &

@@ -47,14 +47,26 @@ Class MainWindow
         GenerateEmail(Req)
     End Sub
 
-    Private Sub transactionButton_Click(sender As Object, e As RoutedEventArgs) Handles transactionButton.Click
+    Private Sub transactionSmallButton_Click(sender As Object, e As RoutedEventArgs) Handles transactionSmallButton.Click
         Dim TypeId As Integer = 3
-        Dim TypeString As String = "Förenklat kontoutdrag"
+        Dim TypeString As String = "Kontoutdrag small"
         Dim SecrecyDate = If(layoutRoot.DataContext.CurrentCase.Secrecy, layoutRoot.DataContext.CurrentCase.SecrecyDate, Nothing)
-        Dim Bank As ClearingNumber = transactionForm.layoutRoot.DataContext.Bank
-        Dim AccNo As String = transactionForm.bankFinder.clearingTextBox.Text
-        Dim PeriodStart As Date = transactionForm.dateStartDatePicker.DisplayDate
-        Dim PeriodEnd As Date = transactionForm.dateEndDatePicker.DisplayDate
+        Dim Bank As ClearingNumber = transactionSmallForm.layoutRoot.DataContext.Bank
+        Dim AccNo As String = transactionSmallForm.bankFinder.clearingTextBox.Text
+        Dim PeriodStart As Date = transactionSmallForm.dateStartDatePicker.DisplayDate
+        Dim PeriodEnd As Date = transactionSmallForm.dateEndDatePicker.DisplayDate
+        Dim Req As Request = layoutRoot.DataContext.CreateRequest(TypeId, TypeString, SecrecyDate, Bank, Nothing, AccNo, PeriodStart, PeriodEnd, False)
+        GenerateEmail(Req)
+    End Sub
+
+    Private Sub transactionMediumButton_Click(sender As Object, e As RoutedEventArgs) Handles transactionMediumButton.Click
+        Dim TypeId As Integer = 4
+        Dim TypeString As String = "Kontoutdrag medium"
+        Dim SecrecyDate = If(layoutRoot.DataContext.CurrentCase.Secrecy, layoutRoot.DataContext.CurrentCase.SecrecyDate, Nothing)
+        Dim Bank As ClearingNumber = transactionMediumForm.layoutRoot.DataContext.Bank
+        Dim AccNo As String = transactionMediumForm.bankFinder.clearingTextBox.Text
+        Dim PeriodStart As Date = transactionMediumForm.dateStartDatePicker.DisplayDate
+        Dim PeriodEnd As Date = transactionMediumForm.dateEndDatePicker.DisplayDate
         Dim Req As Request = layoutRoot.DataContext.CreateRequest(TypeId, TypeString, SecrecyDate, Bank, Nothing, AccNo, PeriodStart, PeriodEnd, False)
         GenerateEmail(Req)
     End Sub

@@ -16,9 +16,14 @@ Public Class MainWindowViewModel
             Return CurrentCase.IsValid And Control.accountHolderForm.ErrorMessage = String.Empty
         End Get
     End Property
-    Public ReadOnly Property TransactionFormIsValid As Boolean
+    Public ReadOnly Property TransactionSmallFormIsValid As Boolean
         Get
-            Return CurrentCase.IsValid And Control.transactionForm.ErrorMessage = String.Empty
+            Return CurrentCase.IsValid And Control.transactionSmallForm.ErrorMessage = String.Empty
+        End Get
+    End Property
+    Public ReadOnly Property TransactionMediumFormIsValid As Boolean
+        Get
+            Return CurrentCase.IsValid And Control.transactionMediumForm.ErrorMessage = String.Empty
         End Get
     End Property
 
@@ -38,7 +43,8 @@ Public Class MainWindowViewModel
     Public Sub ListenForValidationChanges(m As Message)
         OnPropertyChanged("EngagementFormIsValid")
         OnPropertyChanged("AccountFormIsValid")
-        OnPropertyChanged("TransactionFormIsValid")
+        OnPropertyChanged("TransactionSmallFormIsValid")
+        OnPropertyChanged("TransactionMediumFormIsValid")
     End Sub
 
     Public Function CreateRequest(TypeId As Integer, TypeString As String, SecrecyDate As Date, Bank As ClearingNumber, Pnr As String, AccNr As String, StartDate As Date, EndDate As Date, IncludeStatements As Boolean) As Request
