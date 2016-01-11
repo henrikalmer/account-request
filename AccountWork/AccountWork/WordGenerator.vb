@@ -19,91 +19,74 @@ Public Class WordGenerator
         End Using
         ' Write document
         Dim WordApp As Word.Application = CreateObject("Word.Application")
+
         Dim Documents As Word.Documents = WordApp.Documents
         Dim Doc As Word.Document = Documents.Add(TmpPath)
-        Dim Paragraph As Word.Paragraph = Doc.Paragraphs.Add()
-        With Paragraph
-            .Range.Text = "Begäran om uppgifter enligt 11 § lag (2004: 297) om bank- och finansieringsrörelse"
-            .Range.Font.Bold = True
-            .Format.SpaceAfter = 24
-            .Range.InsertParagraphAfter()
-        End With
+        Doc.Activate()
 
-        Paragraph = Doc.Paragraphs.Add()
-        With Paragraph
-            .Range.Text = "I pågående förundersökning " & ReqObj.EbNumber &
-                " begär förundersökningsledare att uppgifter enligt 11 § lag (2004:297) om" &
-                " bank- och finansieringsrörelse om enskildes förhållanden lämnas ut enligt följande:"
-            .Range.Font.Bold = False
-            .Format.SpaceAfter = 12
-            .Range.InsertParagraphAfter()
-        End With
+        FindAndReplace(WordApp, "<%EbNo%>", ReqObj.EbNumber)
+        FindAndReplace(WordApp, "<%ReqType%>", ReqObj.TypeId & ". " & ReqObj.TypeString)
+        FindAndReplace(WordApp, "<%IdNo%>", ReqObj.IdNumber)
+        FindAndReplace(WordApp, "<%AccNo%>", ReqObj.AccountNumber)
+        FindAndReplace(WordApp, "<%RequestStatements%>", ReqObj.IncludeStatements)
+        FindAndReplace(WordApp, "<%PeriodStart%>", ReqObj.PeriodStartDate.ToString("d"))
+        FindAndReplace(WordApp, "<%PeriodEnd%>", ReqObj.PeriodEndDate.ToString("d"))
 
-        Dim ParameterString As String = String.Empty
-        Paragraph = Doc.Paragraphs.Add()
-        With Paragraph
-            If ReqObj.TypeId = 1 Then
-                .Range.Text = "Begäran om engagemangsförfrågan (frågetyp 1)." & vbNewLine
-                ParameterString = "Personnummer:" & vbTab & ReqObj.IdNumber
-                ParameterString &= vbNewLine & "Inkludera kontoutdrag:" & vbTab & ReqObj.IncludeStatements
-            ElseIf ReqObj.TypeId = 2 Then
-                .Range.Text = "Begäran om kontotecknarförfrågan (frågetyp 2)." & vbNewLine
-                ParameterString = "Kontonummer:" & vbTab & ReqObj.AccountNumber
-            ElseIf ReqObj.TypeId = 3 Then
-                .Range.Text = "Begäran om kontoutdrag medium (frågetyp 3)." & vbNewLine
-                ParameterString = "Kontonummer:" & vbTab & ReqObj.AccountNumber
-            ElseIf ReqObj.TypeId = 4 Then
-                .Range.Text = "Begäran om kontoutdrag small (frågetyp 4)." & vbNewLine
-                ParameterString = "Kontonummer:" & vbTab & ReqObj.AccountNumber
-            End If
-            .Range.Font.Bold = False
-            .Format.SpaceAfter = 0
-            .Range.InsertParagraphAfter()
-        End With
-
-        Paragraph = Doc.Paragraphs.Add()
-        With Paragraph
-            .Range.Text = ParameterString &
-                vbNewLine & "Period, startdatum: " & vbTab & ReqObj.PeriodStartDate &
-                vbNewLine & "Period, slutdatum: " & vbTab & ReqObj.PeriodEndDate &
-                vbNewLine
-            .Range.Font.Bold = False
-            .Format.SpaceAfter = 12
-            .Range.InsertParagraphAfter()
-        End With
-
+        Dim SecrecyText As String = ""
         If (Not ReqObj.SecrecyDate = Nothing) Then
-            Paragraph = Doc.Paragraphs.Add()
-            With Paragraph
-                .Range.Text = "Förundersökningsledaren har enligt 1 kap. 12 § lag (2004:297) " &
-                    "om bank- och finansieringsrörelse, förordnat att kreditinstitutet samt dess " &
-                    "styrelseledamöter och anställda inte får röja för kunden eller " &
-                    "för någon utomstående att uppgifterna ha lämnats enligt 11 § eller " &
-                    "att det pågår en förundersökning eller ett ärende om rättslig " &
-                    "hjälp i brottmål. Förbudet gäller tills vidare dock längst till " &
-                    "och med den " & ReqObj.SecrecyDate.ToString("d") & "."
-                .Range.Font.Bold = False
-                .Format.SpaceAfter = 12
-                .Range.InsertParagraphAfter()
-            End With
+            SecrecyText = "Förundersökningsledaren har enligt 1 kap. 12 § lag (2004:297) " &
+                "om bank- och finansieringsrörelse, förordnat att kreditinstitutet samt dess " &
+                "styrelseledamöter och anställda inte får röja för kunden eller " &
+                "för någon utomstående att uppgifterna ha lämnats enligt 11 § eller " &
+                "att det pågår en förundersökning eller ett ärende om rättslig " &
+                "hjälp i brottmål. Förbudet gäller tills vidare dock längst till " &
+                "och med den " & ReqObj.SecrecyDate.ToString("d") & "."
         End If
+        Doc.Paragraphs(28).Range.InsertParagraphBefore()
+        Doc.Paragraphs(28).Range.Text = SecrecyText
+        'FindAndReplace(WordApp, "<%Secrecy%>", SecrecyText)
 
-        Paragraph = Doc.Paragraphs.Add()
-        With Paragraph
-            .Range.Text = "Om uppgifterna inte kan lämnas inom tre till fem " &
-                "arbetsdagar vänligen kontakta den utredare som begär uppgifterna."
-            .Range.Text &= "Svar önskas till " & ReqObj.Contact &
-                " med CC till " & Utils.GetUserRegEmail() & ". Frågor kan ställas via mail " &
-                ReqObj.Contact & " eller telefon " & Utils.GetUserPhoneNo() & "." & vbNewLine
-            .Range.Text &= "Med vänlig hälsning, " & Utils.GetUserFullName()
-            .Range.Text &= "På uppdrag av förundersökningsledare " & ReqObj.Prosecutor & "." & vbNewLine
-            .Range.Font.Bold = False
-            .Format.SpaceAfter = 12
-            .Range.InsertParagraphAfter()
-        End With
+
+        Dim i As Integer = 0
+        For Each aPar As Word.Paragraph In Doc.Paragraphs
+            Dim parRng As Word.Range = aPar.Range
+            Dim sText As String = parRng.Text
+            Dim sList As String = parRng.ListFormat.ListString
+            Dim nLevel As Integer = parRng.ListFormat.ListLevelNumber
+            Console.WriteLine((Convert.ToString((Convert.ToString("Text = ") & sText) + " - List = ") & i) + " - Level " + nLevel.ToString())
+            i += 1
+        Next
+
+        FindAndReplace(WordApp, "<%Name%>", Utils.GetUserFullName)
+        FindAndReplace(WordApp, "<%Email%>", ReqObj.Contact)
+        FindAndReplace(WordApp, "<%Prosecutor%>", ReqObj.Prosecutor)
 
         Doc.SaveAs2(AttachmentPath)
         WordApp.Quit()
         Return AttachmentPath
     End Function
+
+    Private Sub FindAndReplace(doc As Word.Application, findText As Object, replaceWithText As Object)
+        ' Define options
+        Dim matchCase As Object = False
+        Dim matchWholeWord As Object = True
+        Dim matchWildCards As Object = False
+        Dim matchSoundsLike As Object = False
+        Dim matchAllWordForms As Object = False
+        Dim forward As Object = True
+        Dim format As Object = False
+        Dim matchKashida As Object = False
+        Dim matchDiacritics As Object = False
+        Dim matchAlefHamza As Object = False
+        Dim matchControl As Object = False
+        Dim read_only As Object = False
+        Dim visible As Object = True
+        Dim replace As Object = 2
+        Dim wrap As Object = 1
+        ' Execute find and replace
+        doc.Selection.Find.Execute(findText, matchCase, matchWholeWord, matchWildCards,
+                                   matchSoundsLike, matchAllWordForms, forward, wrap,
+                                   format, replaceWithText, replace, matchKashida,
+                                   matchDiacritics, matchAlefHamza, matchControl)
+    End Sub
 End Class
