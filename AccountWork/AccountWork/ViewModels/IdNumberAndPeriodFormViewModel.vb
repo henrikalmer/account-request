@@ -58,15 +58,17 @@ Public Class IdNumberAndPeriodFormViewModel
 
     Private Function ValidateIdNumber() As String
         If (String.IsNullOrEmpty(IdNumber)) Then
-            Return "Ange ett 12-siffrigt person- eller organisationsnummer utan bindestreck."
+            Return "Ange ett 12-siffrigt personnummer eller 10-siffrigt organisationsnummer utan bindestreck."
         ElseIf (Not IsNumeric(IdNumber)) Then
             Return "Ange person- eller organisationsnummret utan bindestreck eller andra tecken utöver siffror."
-        ElseIf (IdNumber.Length <> 12) Then
-            Return "Ange ett 12-siffrigt person- eller organisationsnummer utan bindestreck."
+        ElseIf (IdNumber.Length <> 10 And IdNumber.Length <> 12) Then
+            Return "Ange ett 12-siffrigt personnummer eller 10-siffrigt organisationsnummer utan bindestreck."
+        ElseIf (IdNumber.Length = 10 And IdNumber.Substring(2, 2) < 20) Then
+            Return "Ange personnummer med 12 siffror."
         Else
             Dim LC = New LuhnCheck(IdNumber)
             If (Not LC.VerifyChecksum() Or Not LC.VerifyControlDigit()) Then
-                Return "Det angivna personnumret verkar inte vara giltigt."
+                Return "Det angivna numret verkar inte vara giltigt."
             End If
         End If
         Return String.Empty

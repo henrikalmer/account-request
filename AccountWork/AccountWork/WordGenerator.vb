@@ -32,30 +32,17 @@ Public Class WordGenerator
         FindAndReplace(WordApp, "<%PeriodStart%>", ReqObj.PeriodStartDate.ToString("d"))
         FindAndReplace(WordApp, "<%PeriodEnd%>", ReqObj.PeriodEndDate.ToString("d"))
 
-        Dim SecrecyText As String = ""
         If (Not ReqObj.SecrecyDate = Nothing) Then
-            SecrecyText = "Förundersökningsledaren har enligt 1 kap. 12 § lag (2004:297) " &
+            Dim SecrecyText As String = "Förundersökningsledaren har enligt 1 kap. 12 § lag (2004:297) " &
                 "om bank- och finansieringsrörelse, förordnat att kreditinstitutet samt dess " &
                 "styrelseledamöter och anställda inte får röja för kunden eller " &
                 "för någon utomstående att uppgifterna ha lämnats enligt 11 § eller " &
                 "att det pågår en förundersökning eller ett ärende om rättslig " &
                 "hjälp i brottmål. Förbudet gäller tills vidare dock längst till " &
                 "och med den " & ReqObj.SecrecyDate.ToString("d") & "."
+            Doc.Paragraphs(28).Range.InsertParagraphBefore()
+            Doc.Paragraphs(28).Range.Text = SecrecyText
         End If
-        Doc.Paragraphs(28).Range.InsertParagraphBefore()
-        Doc.Paragraphs(28).Range.Text = SecrecyText
-        'FindAndReplace(WordApp, "<%Secrecy%>", SecrecyText)
-
-
-        Dim i As Integer = 0
-        For Each aPar As Word.Paragraph In Doc.Paragraphs
-            Dim parRng As Word.Range = aPar.Range
-            Dim sText As String = parRng.Text
-            Dim sList As String = parRng.ListFormat.ListString
-            Dim nLevel As Integer = parRng.ListFormat.ListLevelNumber
-            Console.WriteLine((Convert.ToString((Convert.ToString("Text = ") & sText) + " - List = ") & i) + " - Level " + nLevel.ToString())
-            i += 1
-        Next
 
         FindAndReplace(WordApp, "<%Name%>", Utils.GetUserFullName)
         FindAndReplace(WordApp, "<%Email%>", ReqObj.Contact)
@@ -63,6 +50,7 @@ Public Class WordGenerator
 
         Doc.SaveAs2(AttachmentPath)
         WordApp.Quit()
+
         Return AttachmentPath
     End Function
 

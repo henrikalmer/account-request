@@ -2,10 +2,13 @@
     Private Property Number As String
 
     Public Sub New(num As String)
-        If (num.Length <> 12 Or Not IsNumeric(num)) Then
-            Throw New ArgumentException("Argument must be exactly 12 digits.")
+        If ((num.Length <> 10 And num.Length <> 12) Or Not IsNumeric(num)) Then
+            Throw New ArgumentException("Argument must be either 10 or 12 digits.")
         End If
-        Number = num.Substring(2)
+        Number = num
+        If (num.Length = 12) Then
+            Number = num.Substring(2)
+        End If
     End Sub
 
     ' Verifies the checksum of a personal ID number or organization number.
