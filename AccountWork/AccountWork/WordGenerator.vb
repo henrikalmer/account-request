@@ -45,11 +45,7 @@ Public Class WordGenerator
             If ReqObj.TypeId = 1 Then
                 .Range.Text = "Begäran om engagemangsförfrågan (frågetyp 1)." & vbNewLine
                 ParameterString = "Personnummer:" & vbTab & ReqObj.IdNumber
-                If (ReqObj.IncludeStatements = True) Then
-                    ParameterString &= vbNewLine & "Inkludera kontoutdrag:" & vbTab & "Ja"
-                Else
-                    ParameterString &= vbNewLine & "Inkludera kontoutdrag:" & vbTab & "Nej"
-                End If
+                ParameterString &= vbNewLine & "Inkludera kontoutdrag:" & vbTab & ReqObj.IncludeStatements
             ElseIf ReqObj.TypeId = 2 Then
                 .Range.Text = "Begäran om kontotecknarförfrågan (frågetyp 2)." & vbNewLine
                 ParameterString = "Kontonummer:" & vbTab & ReqObj.AccountNumber

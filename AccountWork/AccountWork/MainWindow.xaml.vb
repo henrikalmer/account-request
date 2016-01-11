@@ -22,7 +22,7 @@ Class MainWindow
         Dim Pnr As String = engagementForm.pnrTextBox.Text
         Dim PeriodStart As Date = engagementForm.dateStartDatePicker.DisplayDate
         Dim PeriodEnd As Date = engagementForm.dateEndDatePicker.DisplayDate
-        Dim IncludeStatements As Boolean = engagementForm.requestStatementsCheckBox.IsChecked
+        Dim IncludeStatements As String = engagementForm.requestStatementsComboBox.SelectedValue
         Dim Req As Request
         If (Bank Is Nothing) Then
             For Each B In layoutRoot.DataContext.AllBanks

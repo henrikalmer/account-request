@@ -47,7 +47,7 @@ Public Class MainWindowViewModel
         OnPropertyChanged("TransactionMediumFormIsValid")
     End Sub
 
-    Public Function CreateRequest(TypeId As Integer, TypeString As String, SecrecyDate As Date, Bank As ClearingNumber, Pnr As String, AccNr As String, StartDate As Date, EndDate As Date, IncludeStatements As Boolean) As Request
+    Public Function CreateRequest(TypeId As Integer, TypeString As String, SecrecyDate As Date, Bank As ClearingNumber, Pnr As String, AccNr As String, StartDate As Date, EndDate As Date, IncludeStatements As String) As Request
         Dim EbNo = CurrentCase.EbNumber
         Dim P = CurrentCase.Prosecutor
         Dim Req As New Request(EbNo, P, SecrecyDate, Bank, TypeId, TypeString, Pnr, AccNr, StartDate, EndDate, IncludeStatements)

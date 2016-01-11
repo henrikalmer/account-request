@@ -26,7 +26,7 @@ Namespace Domain
 
         Public Sub New()
         End Sub
-        Public Sub New(EbNo As String, P As String, SecrecyDate As Date, B As ClearingNumber, tId As Integer, tString As String, IdNumber As String, AccountNumber As String, PeriodStartDate As Date, PeriodEndDate As Date, IncludeStatements As Boolean)
+        Public Sub New(EbNo As String, P As String, SecrecyDate As Date, B As ClearingNumber, tId As Integer, tString As String, IdNumber As String, AccountNumber As String, PeriodStartDate As Date, PeriodEndDate As Date, IncludeStatements As String)
             EbNumber = EbNo
             Prosecutor = P
             UserId = Utils.GetUserName()

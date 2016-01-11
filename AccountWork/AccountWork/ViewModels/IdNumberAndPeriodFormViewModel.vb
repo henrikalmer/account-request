@@ -45,7 +45,7 @@ Public Class IdNumberAndPeriodFormViewModel
             OnPropertyChanged("PeriodEndDate")
         End Set
     End Property
-    Public Property RequestStatements As Boolean = True
+    Public Property RequestStatementChoices As New List(Of String)(New String() {"Nej", "Ja, Medium", "Ja, Small"})
     Public Property Errors As New Dictionary(Of String, String)
 #End Region
 

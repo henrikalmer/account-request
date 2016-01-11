@@ -57,7 +57,7 @@ Namespace Domain
             End Set
         End Property
         <DataMember>
-        Public Property IncludeStatements As Boolean
+        Public Property IncludeStatements As String
 
         Public Sub New()
         End Sub
