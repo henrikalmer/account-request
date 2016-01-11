@@ -147,40 +147,6 @@
                                         UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Kontoutdrag small">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <GroupBox x:Name="groupBoxTransactionSmall"
-                              Grid.Row="0" Header="Parametrar"
-                              HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                              Height="Auto" Width="Auto" Margin="10">
-                        <controls:AccountAndPeriodForm x:Name="transactionSmallForm" />
-                    </GroupBox>
-                    <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                                Margin="10,0,0,0">
-                        <TextBlock x:Name="errorMessageTextBlockTab3"
-                                   Text="{Binding CurrentCase.Error,
-                                          UpdateSourceTrigger=PropertyChanged}"
-                                   HorizontalAlignment="Left" Foreground="Gray"
-                                   Height="Auto" Width="Auto" Margin="0" Padding="0" />
-                        <TextBlock x:Name="transactionSmallFormErrorMessageTextBlock"
-                                   Text="{Binding Path=ErrorMessage,
-                                          ElementName=transactionSmallForm,
-                                          UpdateSourceTrigger=PropertyChanged}"
-                                   HorizontalAlignment="Left" Foreground="Gray"
-                                   Height="Auto" Width="Auto" Margin="0" Padding="0" />
-                    </StackPanel>
-                    <Button x:Name="transactionSmallButton"
-                            Grid.Row="1" Content="Beställ"
-                            VerticalAlignment="Top" HorizontalAlignment="Right"
-                            Margin="10" Padding="5" Width="200"
-                            IsEnabled="{Binding TransactionSmallFormIsValid,
-                                        UpdateSourceTrigger=PropertyChanged}"/>
-                </Grid>
-            </TabItem>
             <TabItem Header="Kontoutdrag medium">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -212,6 +178,40 @@
                             VerticalAlignment="Top" HorizontalAlignment="Right"
                             Margin="10" Padding="5" Width="200"
                             IsEnabled="{Binding TransactionMediumFormIsValid,
+                                        UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Kontoutdrag small">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <GroupBox x:Name="groupBoxTransactionSmall"
+                              Grid.Row="0" Header="Parametrar"
+                              HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                              Height="Auto" Width="Auto" Margin="10">
+                        <controls:AccountAndPeriodForm x:Name="transactionSmallForm" />
+                    </GroupBox>
+                    <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                Margin="10,0,0,0">
+                        <TextBlock x:Name="errorMessageTextBlockTab3"
+                                   Text="{Binding CurrentCase.Error,
+                                          UpdateSourceTrigger=PropertyChanged}"
+                                   HorizontalAlignment="Left" Foreground="Gray"
+                                   Height="Auto" Width="Auto" Margin="0" Padding="0" />
+                        <TextBlock x:Name="transactionSmallFormErrorMessageTextBlock"
+                                   Text="{Binding Path=ErrorMessage,
+                                          ElementName=transactionSmallForm,
+                                          UpdateSourceTrigger=PropertyChanged}"
+                                   HorizontalAlignment="Left" Foreground="Gray"
+                                   Height="Auto" Width="Auto" Margin="0" Padding="0" />
+                    </StackPanel>
+                    <Button x:Name="transactionSmallButton"
+                            Grid.Row="1" Content="Beställ"
+                            VerticalAlignment="Top" HorizontalAlignment="Right"
+                            Margin="10" Padding="5" Width="200"
+                            IsEnabled="{Binding TransactionSmallFormIsValid,
                                         UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
             </TabItem>

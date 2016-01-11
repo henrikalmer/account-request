@@ -54,10 +54,10 @@ Public Class WordGenerator
                 .Range.Text = "Begäran om kontotecknarförfrågan (frågetyp 2)." & vbNewLine
                 ParameterString = "Kontonummer:" & vbTab & ReqObj.AccountNumber
             ElseIf ReqObj.TypeId = 3 Then
-                .Range.Text = "Begäran om kontoutdrag small (frågetyp 3)." & vbNewLine
+                .Range.Text = "Begäran om kontoutdrag medium (frågetyp 3)." & vbNewLine
                 ParameterString = "Kontonummer:" & vbTab & ReqObj.AccountNumber
             ElseIf ReqObj.TypeId = 4 Then
-                .Range.Text = "Begäran om kontoutdrag medium (frågetyp 4)." & vbNewLine
+                .Range.Text = "Begäran om kontoutdrag small (frågetyp 4)." & vbNewLine
                 ParameterString = "Kontonummer:" & vbTab & ReqObj.AccountNumber
             End If
             .Range.Font.Bold = False
