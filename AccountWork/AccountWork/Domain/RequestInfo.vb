@@ -30,7 +30,7 @@
                 If (Not rObj.SecrecyDate = Nothing) Then
                     response &= vbNewLine & "Meddelandeförbud t.o.m. " & rObj.SecrecyDate.ToString("d")
                 End If
-                If (rObj.IncludeStatements = True) Then
+                If (rObj.IncludeStatements <> "Nej") Then
                     response &= vbNewLine & "Även kontoutdrag är efterfrågade"
                 End If
                 response &= vbNewLine & "Från " & rObj.PeriodStartDate.ToString("d")

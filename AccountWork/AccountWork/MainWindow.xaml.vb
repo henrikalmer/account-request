@@ -43,7 +43,7 @@ Class MainWindow
         Dim AccNo As String = accountHolderForm.bankFinder.clearingTextBox.Text
         Dim PeriodStart As Date = accountHolderForm.dateStartDatePicker.DisplayDate
         Dim PeriodEnd As Date = accountHolderForm.dateEndDatePicker.DisplayDate
-        Dim Req As Request = layoutRoot.DataContext.CreateRequest(TypeId, TypeString, SecrecyDate, Bank, Nothing, AccNo, PeriodStart, PeriodEnd, False)
+        Dim Req As Request = layoutRoot.DataContext.CreateRequest(TypeId, TypeString, SecrecyDate, Bank, Nothing, AccNo, PeriodStart, PeriodEnd, "Nej")
         GenerateEmail(Req)
     End Sub
 
@@ -55,7 +55,7 @@ Class MainWindow
         Dim AccNo As String = transactionMediumForm.bankFinder.clearingTextBox.Text
         Dim PeriodStart As Date = transactionMediumForm.dateStartDatePicker.DisplayDate
         Dim PeriodEnd As Date = transactionMediumForm.dateEndDatePicker.DisplayDate
-        Dim Req As Request = layoutRoot.DataContext.CreateRequest(TypeId, TypeString, SecrecyDate, Bank, Nothing, AccNo, PeriodStart, PeriodEnd, False)
+        Dim Req As Request = layoutRoot.DataContext.CreateRequest(TypeId, TypeString, SecrecyDate, Bank, Nothing, AccNo, PeriodStart, PeriodEnd, "Nej")
         GenerateEmail(Req)
     End Sub
 
@@ -67,7 +67,7 @@ Class MainWindow
         Dim AccNo As String = transactionSmallForm.bankFinder.clearingTextBox.Text
         Dim PeriodStart As Date = transactionSmallForm.dateStartDatePicker.DisplayDate
         Dim PeriodEnd As Date = transactionSmallForm.dateEndDatePicker.DisplayDate
-        Dim Req As Request = layoutRoot.DataContext.CreateRequest(TypeId, TypeString, SecrecyDate, Bank, Nothing, AccNo, PeriodStart, PeriodEnd, False)
+        Dim Req As Request = layoutRoot.DataContext.CreateRequest(TypeId, TypeString, SecrecyDate, Bank, Nothing, AccNo, PeriodStart, PeriodEnd, "Nej")
         GenerateEmail(Req)
     End Sub
 
