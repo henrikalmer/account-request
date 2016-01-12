@@ -10,6 +10,7 @@ Public Class RequestDataGridViewModel
             Dim UserId = Utils.GetUserName()
             Dim Reqs = From R In Db.Requests
                        Where R.UserId = UserId
+                       Order By R.Timestamp Descending
                        Select New RequestInfo With {
                            .EbNumber = R.EbNumber,
                            .Prosecutor = R.Prosecutor,
