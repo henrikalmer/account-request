@@ -17,7 +17,7 @@ Public Class OutlookCommunicator
             Dim CCRecipient = Recipients.Add(CC)
             CCRecipient.Type = Outlook.OlMailRecipientType.olCC
             Dim RetVal = Recipients.ResolveAll()
-            Email.Subject = "Pilot: Begäran om uppgift"
+            Email.Subject = "Pilot: Begäran om uppgift i ärende"
             Email.Body = "Vi beställer härmed in " & LCase(Type) & " enligt bifogad fil." & vbNewLine
             Email.BodyFormat = Outlook.OlBodyFormat.olFormatRichText
             Dim Attachments As Outlook.Attachments = Email.Attachments
