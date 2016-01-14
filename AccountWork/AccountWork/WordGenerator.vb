@@ -85,9 +85,9 @@ Public Class WordGenerator
         Dim unchecked As New List(Of Integer) From {25, 31, 43}
         If (ReqObj.IncludeStatements = "Nej") Then
             checkedIndex = 25
-        ElseIf (ReqObj.IncludeStatements = "Ja, Medium") Then
-            checkedIndex = 31
         ElseIf (ReqObj.IncludeStatements = "Ja, Small") Then
+            checkedIndex = 31
+        ElseIf (ReqObj.IncludeStatements = "Ja, Medium") Then
             checkedIndex = 43
         End If
         unchecked.Remove(checkedIndex)
