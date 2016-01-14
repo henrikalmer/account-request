@@ -3,7 +3,7 @@
 Public Class OutlookCommunicator
     WithEvents Momentary_session As Outlook.Application
 
-    Public Sub Generate(Recipient As String, CC As String, WordFile As String, XmlFile As String, JsonFile As String, Type As String)
+    Public Sub Generate(Recipient As String, CC As String, WordFile As String, XmlFile As String, JsonFile As String, Type As String, EbNumber As String)
         Dim App As New Outlook.Application
         Dim Email As Outlook.MailItem
         ' Find users outbox
@@ -14,10 +14,12 @@ Public Class OutlookCommunicator
             Email = App.CreateItem(Outlook.OlItemType.olMailItem)
             Dim Recipients As Outlook.Recipients = Email.Recipients
             Recipients.Add(Recipient)
-            Dim CCRecipient = Recipients.Add(CC)
-            CCRecipient.Type = Outlook.OlMailRecipientType.olCC
+            If (CC <> "") Then
+                Dim CCRecipient = Recipients.Add(CC)
+                CCRecipient.Type = Outlook.OlMailRecipientType.olCC
+            End If
             Dim RetVal = Recipients.ResolveAll()
-            Email.Subject = "Pilot: Begäran om uppgift i ärende"
+            Email.Subject = "Pilot: Begäran om uppgift i ärende " & EbNumber
             Email.Body = "Vi beställer härmed in " & LCase(Type) & " enligt bifogad fil." & vbNewLine
             Email.BodyFormat = Outlook.OlBodyFormat.olFormatRichText
             Dim Attachments As Outlook.Attachments = Email.Attachments

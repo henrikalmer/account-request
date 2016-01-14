@@ -86,8 +86,8 @@ Class MainWindow
         Else
             Recipient = Req.Bank.Email
         End If
-        Dim CC = Utils.GetUserRegEmail()
-        OutlookCommunicator.Generate(Recipient, CC, WordAttachment, XmlAttachment, JsonAttachment, ReqObj.TypeString)
+        Dim CC = "" 'Utils.GetUserRegEmail()
+        OutlookCommunicator.Generate(Recipient, CC, WordAttachment, XmlAttachment, JsonAttachment, ReqObj.TypeString, ReqObj.EbNumber)
     End Sub
 
     Private Sub ebNumberTextBox_LostFocus(sender As Object, e As RoutedEventArgs) Handles ebNumberTextBox.LostFocus
