@@ -20,8 +20,8 @@ Class MainWindow
         Dim SecrecyDate = If(layoutRoot.DataContext.CurrentCase.Secrecy, layoutRoot.DataContext.CurrentCase.SecrecyDate, Nothing)
         Dim Bank As ClearingNumber = engagementForm.layoutRoot.DataContext.Bank
         Dim Pnr As String = engagementForm.pnrTextBox.Text
-        Dim PeriodStart As Date = engagementForm.dateStartDatePicker.DisplayDate
-        Dim PeriodEnd As Date = engagementForm.dateEndDatePicker.DisplayDate
+        Dim PeriodStart As Date = engagementForm.dateStartDatePicker.SelectedDate
+        Dim PeriodEnd As Date = engagementForm.dateEndDatePicker.SelectedDate
         Dim IncludeStatements As String = engagementForm.requestStatementsComboBox.SelectedValue
         Dim Req As Request
         If (Bank Is Nothing) Then
@@ -41,8 +41,8 @@ Class MainWindow
         Dim SecrecyDate = If(layoutRoot.DataContext.CurrentCase.Secrecy, layoutRoot.DataContext.CurrentCase.SecrecyDate, Nothing)
         Dim Bank As ClearingNumber = accountHolderForm.layoutRoot.DataContext.Bank
         Dim AccNo As String = accountHolderForm.bankFinder.clearingTextBox.Text
-        Dim PeriodStart As Date = accountHolderForm.dateStartDatePicker.DisplayDate
-        Dim PeriodEnd As Date = accountHolderForm.dateEndDatePicker.DisplayDate
+        Dim PeriodStart As Date = accountHolderForm.dateStartDatePicker.SelectedDate
+        Dim PeriodEnd As Date = accountHolderForm.dateEndDatePicker.SelectedDate
         Dim Req As Request = layoutRoot.DataContext.CreateRequest(TypeId, TypeString, SecrecyDate, Bank, Nothing, AccNo, PeriodStart, PeriodEnd, "Nej")
         GenerateEmail(Req)
     End Sub
@@ -53,8 +53,8 @@ Class MainWindow
         Dim SecrecyDate = If(layoutRoot.DataContext.CurrentCase.Secrecy, layoutRoot.DataContext.CurrentCase.SecrecyDate, Nothing)
         Dim Bank As ClearingNumber = transactionMediumForm.layoutRoot.DataContext.Bank
         Dim AccNo As String = transactionMediumForm.bankFinder.clearingTextBox.Text
-        Dim PeriodStart As Date = transactionMediumForm.dateStartDatePicker.DisplayDate
-        Dim PeriodEnd As Date = transactionMediumForm.dateEndDatePicker.DisplayDate
+        Dim PeriodStart As Date = transactionMediumForm.dateStartDatePicker.SelectedDate
+        Dim PeriodEnd As Date = transactionMediumForm.dateEndDatePicker.SelectedDate
         Dim Req As Request = layoutRoot.DataContext.CreateRequest(TypeId, TypeString, SecrecyDate, Bank, Nothing, AccNo, PeriodStart, PeriodEnd, "Nej")
         GenerateEmail(Req)
     End Sub
@@ -65,8 +65,8 @@ Class MainWindow
         Dim SecrecyDate = If(layoutRoot.DataContext.CurrentCase.Secrecy, layoutRoot.DataContext.CurrentCase.SecrecyDate, Nothing)
         Dim Bank As ClearingNumber = transactionSmallForm.layoutRoot.DataContext.Bank
         Dim AccNo As String = transactionSmallForm.bankFinder.clearingTextBox.Text
-        Dim PeriodStart As Date = transactionSmallForm.dateStartDatePicker.DisplayDate
-        Dim PeriodEnd As Date = transactionSmallForm.dateEndDatePicker.DisplayDate
+        Dim PeriodStart As Date = transactionSmallForm.dateStartDatePicker.SelectedDate
+        Dim PeriodEnd As Date = transactionSmallForm.dateEndDatePicker.SelectedDate
         Dim Req As Request = layoutRoot.DataContext.CreateRequest(TypeId, TypeString, SecrecyDate, Bank, Nothing, AccNo, PeriodStart, PeriodEnd, "Nej")
         GenerateEmail(Req)
     End Sub
