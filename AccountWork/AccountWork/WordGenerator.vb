@@ -82,13 +82,13 @@ Public Class WordGenerator
 
         ' replace include statements checkboxes with x:es
         checkedIndex = -1
-        Dim unchecked As New List(Of Integer) From {25, 31, 43}
+        Dim unchecked As New List(Of Integer) From {25, 39, 59}
         If (ReqObj.IncludeStatements = "Nej") Then
             checkedIndex = 25
         ElseIf (ReqObj.IncludeStatements = "Ja, Small") Then
-            checkedIndex = 31
+            checkedIndex = 39
         ElseIf (ReqObj.IncludeStatements = "Ja, Medium") Then
-            checkedIndex = 43
+            checkedIndex = 59
         End If
         unchecked.Remove(checkedIndex)
         ' add x to mark checked choice

@@ -24,8 +24,8 @@ Public Class OutlookCommunicator
             Email.BodyFormat = Outlook.OlBodyFormat.olFormatRichText
             Dim Attachments As Outlook.Attachments = Email.Attachments
             Attachments.Add(WordFile)
-            Attachments.Add(XmlFile)
-            Attachments.Add(JsonFile)
+            'Attachments.Add(XmlFile)  'Uncomment to attach xml file
+            'Attachments.Add(JsonFile) 'Uncomment to attach json file
             Email.Save()
             Email.Move(Drafts)
             MsgBox("Mail är nu placerat i din utkorg redo att skickas. Ångrar du dig, ta helt enkelt bort mailet från utkorgen.", MsgBoxStyle.OkOnly)
