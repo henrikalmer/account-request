@@ -9,6 +9,7 @@
     <Grid x:Name="layoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -33,5 +34,9 @@
                 <DataGridTextColumn Header="Skapad" Binding="{Binding Timestamp}" IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="dataGridDeleteButton"
+                Grid.Row="1" Content="Ta bort markerade"
+                HorizontalAlignment="Right" Width="Auto"
+                Margin="10" Padding="5" />
     </Grid>
 </local:BaseControl>

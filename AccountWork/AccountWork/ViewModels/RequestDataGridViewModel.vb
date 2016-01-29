@@ -30,6 +30,13 @@ Public Class RequestDataGridViewModel
         VMMediator.Register(Me)
     End Sub
 
+    Public Sub Remove(rowId As String)
+        Dim req As Request = (From R In Db.Requests Where R.Id = rowId Select R).First()
+        Db.Requests.Remove(req)
+        Db.SaveChanges()
+        OnPropertyChanged("Requests")
+    End Sub
+
     <MediatorMessageSink(MediatorMessages.RequestAdded, ParameterType:=GetType(Message))>
     Public Sub ListenForDbUpdates(m As Message)
         OnPropertyChanged("Requests")
